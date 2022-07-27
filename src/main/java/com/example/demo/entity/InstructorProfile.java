@@ -1,9 +1,17 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "instructorProfiles")
+@Getter
+@Setter
+@NoArgsConstructor
 public class InstructorProfile {
     @Id
     @Column
@@ -19,18 +27,6 @@ public class InstructorProfile {
     @OneToOne(mappedBy = "instructorProfile")
     private  Instructor instructor;
 
-    public Instructor getInstructor() {
-        return instructor;
-    }
-
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
-    }
-
-    public InstructorProfile() {
-    }
-
     public InstructorProfile(String linkedin, String youtube) {
         this.linkedin = linkedin;
         this.youtube = youtube;
@@ -42,31 +38,7 @@ public class InstructorProfile {
                 "id=" + id +
                 ", linkedin='" + linkedin + '\'' +
                 ", youtube='" + youtube + '\'' +
-                ", instructor=" + instructor.getFirstName()+" "+instructor.getLastName() +
+                ", instructor=" + instructor.getFirstName() +instructor.getLastName()+
                 '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLinkedin() {
-        return linkedin;
-    }
-
-    public void setLinkedin(String linkedin) {
-        this.linkedin = linkedin;
-    }
-
-    public String getYoutube() {
-        return youtube;
-    }
-
-    public void setYoutube(String youtube) {
-        this.youtube = youtube;
     }
 }

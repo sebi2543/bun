@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
 import com.example.demo.service.CourseService;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -10,6 +14,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "instructors")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Instructor {
 
     @Id
@@ -32,9 +40,6 @@ public class Instructor {
 
 
 
-    public Instructor() {
-    }
-
     public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,56 +49,5 @@ public class Instructor {
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public InstructorProfile getInstructorProfile() {
-        return instructorProfile;
-    }
-
-    public void setInstructorProfile(InstructorProfile instructorProfile) {
-        this.instructorProfile = instructorProfile;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    @Override
-    public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", instructorProfile=" + instructorProfile +
-                ", courses=" + courses +
-                '}';
     }
 }
