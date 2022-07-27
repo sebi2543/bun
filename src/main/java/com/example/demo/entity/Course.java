@@ -16,11 +16,41 @@ public class Course {
         return id;
     }
 
+    @ManyToOne( cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
+
     public Course() {
+    }
+
+    public Course(Long id, String title, Instructor instructor) {
+        this.id = id;
+        this.title = title;
+        this.instructor = instructor;
     }
 
     public Course(String title) {
         this.title = title;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     @Override
@@ -28,6 +58,7 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", instructor=" + instructor +
                 '}';
     }
 }

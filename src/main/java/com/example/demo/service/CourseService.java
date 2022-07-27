@@ -37,7 +37,10 @@ public class CourseService {
     }
     public void updateCourseTitle(String title,int id){
         courseRepository.updateTitle(title,id);
+    }
 
+    public void deleteCourse(Course course){
+        courseRepository.delete(course);
     }
 
 
