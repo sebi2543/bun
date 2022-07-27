@@ -26,15 +26,4 @@ public interface InstructorRepository extends JpaRepository<Instructor,Long>
   @Query(value = "SELECT * FROM instructors WHERE last_name = :lastName",nativeQuery = true)
   ArrayList<Instructor> findAllByLastName(String lastName);
 
-  @Modifying
-  @Transactional
-  @Query(value = "UPDATE instructors SET first_name= :firstName WHERE instructor_id = :id ",nativeQuery = true)
-  int  updateInstructorFirstName(String firstName,int id );
-
-  @Modifying
-  @Transactional
-  @Query(value = "UPDATE instructors SET last_name= :lastName WHERE instructor_id = :id ",nativeQuery = true)
-  int  updateInstructorLastName(String lastName,int id );
-
-
 }

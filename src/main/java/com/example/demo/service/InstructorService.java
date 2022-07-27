@@ -23,29 +23,8 @@ public class InstructorService {
             System.out.println(instructor);
     }
 
-    public void  findById(int id){
-        Instructor instructor=instructorRepository.findById(id);
-        System.out.println(instructor);
-    }
 
-    public void findAllByFirstName(String firstName){
-        System.out.println(instructorRepository.findAllByFirstName(firstName));
-    }
 
-    public void findAllByLastName(String lastName){
-        System.out.println(instructorRepository.findAllByLastName(lastName));
-    }
 
-    public void updateInstructorFirstName(String firstName,int id ){
-       instructorRepository.updateInstructorFirstName(firstName,id);
-    }
-
-    public void updateInstructorLastName(String lastName,int id ){
-        instructorRepository.updateInstructorLastName(lastName,id);
-    }
-
-    public void deleteInstructor(Instructor instructor){
-        instructorRepository.delete(instructor);
-    }
 
 }

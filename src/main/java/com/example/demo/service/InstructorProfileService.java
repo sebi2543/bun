@@ -13,14 +13,7 @@ public class InstructorProfileService {
     @Autowired
     InstructorProfileRepository instructorProfileRepository;
 
-    public void insertInstructorProfile(InstructorProfile instructorProfile){
-        instructorProfileRepository.save(instructorProfile);
-    }
-    public void showInstructorsProfiles(){
-        List<InstructorProfile> profiles =instructorProfileRepository.findAll();
-        for (InstructorProfile profile : profiles)
-            System.out.println(profile);
-    }
+
 
 
 }
