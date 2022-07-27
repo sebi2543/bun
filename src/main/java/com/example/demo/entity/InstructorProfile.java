@@ -6,14 +6,14 @@ import javax.persistence.*;
 @Table(name = "instructorProfiles")
 public class InstructorProfile {
     @Id
-    @Column(name = "instructor_profile_id")
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "instructor_profile_linkedin")
+    @Column
     private String linkedin;
 
-    @Column(name = "instructor_profile_youtube")
+    @Column
     private String youtube;
 
     @OneToOne(mappedBy = "instructorProfile")

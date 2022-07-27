@@ -17,14 +17,14 @@ public class Instructor {
     @Column(name = "instructor_id")
     public  Long id;
 
-    @Column(name = "first_name")
+    @Column
     private String firstName;
 
-    @Column(name="last_name")
+    @Column
     private String lastName;
 
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)
-    @JoinColumn(name = "instructor_profile_id")
+    @JoinColumn
     private InstructorProfile instructorProfile;
 
     @OneToMany(mappedBy = "instructor",cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)

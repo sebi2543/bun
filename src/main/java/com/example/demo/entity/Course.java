@@ -7,17 +7,17 @@ import javax.persistence.*;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "course_id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "course_title")
+    @Column(name = "title")
     private String title;
     public Long getId() {
         return id;
     }
 
     @ManyToOne( cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn
     private Instructor instructor;
 
     public Course() {
