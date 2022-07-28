@@ -14,6 +14,18 @@ public class CourseService {
     @Autowired
     CourseRepository courseRepository;
 
+    public void save(Course course){
+        courseRepository.save(course);
+    }
+
+    public void show(){
+        System.out.println(courseRepository.findAll());
+    }
+
+    public List<Course> findTheHighestRatingCourses(){
+        return courseRepository.findByRatingGreaterThan(7);
+    }
+
 
 
 

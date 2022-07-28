@@ -31,11 +31,11 @@ public class Instructor {
     @Column
     private String lastName;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(mappedBy = "instructor",cascade = {CascadeType.PERSIST,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "instructor",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private List<Course> courses=new ArrayList<>();
 
 

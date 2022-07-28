@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
@@ -15,14 +17,6 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     @Query( value = "SELECT * FROM courses WHERE course_id = :id",nativeQuery = true)
     Course findById(int id);
 
-    @Query(value = "SELECT * FROM courses WHERE course_title = :title",nativeQuery = true)
-    Course findByTitle(String title);
+    public List<Course> findByRatingGreaterThan(int x);
 
-    @Query(value = "SELECT * FROM courses WHERE  course_title IN :titles ",nativeQuery = true)
-    ArrayList<Course> findByAnyTitle(ArrayList<String> titles);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE courses SET course_title =:title WHERE course_id = :id ",nativeQuery = true)
-    int updateTitle(String title,int id);
 }

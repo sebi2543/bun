@@ -22,12 +22,15 @@ public class Course {
         return id;
     }
 
-    @ManyToOne( cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn
     private Instructor instructor;
+    @Column
+    private  int rating;
 
 
-    public Course(String title) {
+    public Course(String title, int rating) {
         this.title = title;
+        this.rating = rating;
     }
 }
