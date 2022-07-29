@@ -5,6 +5,7 @@ import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CourseManager {
     @Autowired
     CourseService courseService;
+
     @GetMapping("/loadcourses")
     public void  loadCourses(){
         List<Course> courses= Arrays.asList(
@@ -30,11 +32,17 @@ public class CourseManager {
            courseService.save(course);
        courseService.show();
     }
+
     @GetMapping("/showcourses")
     public void findTheHighestRatingCourses(){
 
-        System.err.println(courseService.findTheHighestRatingCourses());
+        System.err.println(courseService.findTheHighestRatingCourses(7));
 
+    }
+
+    @GetMapping("/search/{title}")
+    public void findByTitle(@PathVariable  String title){
+        System.err.println(courseService.findByTitle(title));
     }
 
 }

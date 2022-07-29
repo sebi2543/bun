@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CourseService {
@@ -22,8 +23,16 @@ public class CourseService {
         System.out.println(courseRepository.findAll());
     }
 
-    public List<Course> findTheHighestRatingCourses(){
-        return courseRepository.findByRatingGreaterThan(7);
+    public List<Course> findTheHighestRatingCourses(int rating){
+        return courseRepository.findByRatingGreaterThan(rating);
+    }
+
+    public String  findByTitle(String title){
+       Course course =courseRepository.findByTitle(title);
+        if (course != null)
+            return course.toString();
+        else
+        return "dosn't exist such a course";
     }
 
 

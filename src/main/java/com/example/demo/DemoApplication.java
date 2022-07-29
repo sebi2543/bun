@@ -28,7 +28,7 @@ public class DemoApplication {
                 ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
                 CourseService courseService=context.getBean(CourseService.class);
 
-                courseService.show();
+//                courseService.show();
 
 
         }
