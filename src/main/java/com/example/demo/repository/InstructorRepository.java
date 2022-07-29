@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.tags.form.SelectTag;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -20,10 +21,9 @@ public interface InstructorRepository extends JpaRepository<Instructor,Long>
   @Query(value = "SELECT * FROM instructors  WHERE instructor_id = :id", nativeQuery = true)
     Instructor findById(int  id);
 
-  @Query(value = "SELECT * FROM instructors WHERE first_name = :firstName",nativeQuery = true)
-  ArrayList<Instructor> findAllByFirstName(String firstName);
-
-  @Query(value = "SELECT * FROM instructors WHERE last_name = :lastName",nativeQuery = true)
-  ArrayList<Instructor> findAllByLastName(String lastName);
-
+  @Query(value = "SELECT * FROM instructors ORDER BY rating DESC",nativeQuery = true)
+  ArrayList<Instructor> selectTheBestInstructors();
+  @Query(value = "SELECT * FROM instructors WHERE firstname = :firstname OR lastname= :lastname ",nativeQuery = true)
+  ArrayList<Instructor> findByFirstnameOrLastname(String firstname,String lastname);
 }
+

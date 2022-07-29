@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
+
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +23,8 @@ public class Course {
         return id;
     }
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne()
+    @JoinColumn()
     private Instructor instructor;
     @Column
     private  int rating;
@@ -32,5 +33,21 @@ public class Course {
     public Course(String title, int rating) {
         this.title = title;
         this.rating = rating;
+    }
+
+    public Course(String title, Instructor instructor, int rating) {
+        this.title = title;
+        this.instructor = instructor;
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", instructor=" + instructor.getLastName() +instructor.getFirstName()+
+                ", rating=" + rating +
+                '}';
     }
 }

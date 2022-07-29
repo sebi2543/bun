@@ -17,7 +17,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Instructor {
 
     @Id
@@ -35,19 +34,31 @@ public class Instructor {
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(mappedBy = "instructor",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor")
     private List<Course> courses=new ArrayList<>();
 
+    @Column
+    private int rating;
 
-
-    public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
+    public Instructor(String firstName, String lastName, int rating) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.instructorProfile = instructorProfile;
+        this.rating = rating;
     }
 
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", instructorProfile=" + instructorProfile +
+                ", rating=" + rating +
+                '}';
     }
 }

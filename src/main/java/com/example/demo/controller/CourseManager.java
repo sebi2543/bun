@@ -18,21 +18,6 @@ public class CourseManager {
     @Autowired
     CourseService courseService;
 
-    @GetMapping("/loadcourses")
-    public void  loadCourses(){
-        List<Course> courses= Arrays.asList(
-                new Course("JAVA",8),
-                new Course("PHP",5),
-                new Course("JAVASCRIPT",10),
-                new Course("PERL",2),
-                new Course("GO",8),
-                new Course("HTML/CSS",2)
-        );
-       for(Course course:courses)
-           courseService.save(course);
-       courseService.show();
-    }
-
     @GetMapping("/showcourses")
     public void findTheHighestRatingCourses(){
 
