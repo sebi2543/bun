@@ -24,10 +24,9 @@ public class InstructorManager {
         System.err.println(instructorService.selectTheBestInstructors());
     }
 
-    @PostMapping(value = "/search")
-    public void findBy(@RequestParam String firstName,@RequestParam String lastName){
-//        System.err.println(instructorService.findBy(firstName,lastName));
-        System.err.println(firstName+lastName);
+    @PostMapping(value = "/search/{params}")
+    public void findBy(@MatrixVariable (pathVar = "params") List<String> firstName ){
+        System.err.println(firstName);
     }
     @RequestMapping
     public void defautMapping(){
