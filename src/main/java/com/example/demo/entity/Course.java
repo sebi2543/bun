@@ -26,6 +26,7 @@ public class Course {
     @ManyToOne()
     @JoinColumn()
     private Instructor instructor;
+
     @Column
     private  int rating;
 

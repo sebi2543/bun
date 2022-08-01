@@ -28,6 +28,10 @@ public class InstructorManager {
     public void findBy(@RequestParam String firstName,@RequestParam String lastName){
 //        System.err.println(instructorService.findBy(firstName,lastName));
         System.err.println(firstName+lastName);
+    }
+    @RequestMapping
+    public void defautMapping(){
+        System.err.println("this is the default instructor page");
 
     }
 

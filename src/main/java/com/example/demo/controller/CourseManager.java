@@ -29,5 +29,9 @@ public class CourseManager {
     public void findByTitle(@PathVariable  String title){
         System.err.println(courseService.findByTitle(title));
     }
+    @RequestMapping
+    public void defautMapping(){
+        System.err.println("this is the default course page");
+    }
 
 }
