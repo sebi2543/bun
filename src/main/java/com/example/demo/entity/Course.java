@@ -9,19 +9,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 
 
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
+    @Column
     private String title;
-    public Long getId() {
-        return id;
-    }
 
     @ManyToOne()
     @JoinColumn()
@@ -29,26 +29,4 @@ public class Course {
 
     @Column
     private  int rating;
-
-
-    public Course(String title, int rating) {
-        this.title = title;
-        this.rating = rating;
-    }
-
-    public Course(String title, Instructor instructor, int rating) {
-        this.title = title;
-        this.instructor = instructor;
-        this.rating = rating;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", instructor=" + instructor.getLastName() +instructor.getFirstName()+
-                ", rating=" + rating +
-                '}';
-    }
 }

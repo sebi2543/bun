@@ -1,10 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.service.CourseService;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -17,11 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
 public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "instructor_id")
     public  Long id;
 
     @Column
@@ -34,31 +33,10 @@ public class Instructor {
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor")
+    @OneToMany()
     private List<Course> courses=new ArrayList<>();
 
     @Column
     private int rating;
 
-    public Instructor(String firstName, String lastName, int rating) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.rating = rating;
-    }
-
-    public Instructor(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", instructorProfile=" + instructorProfile +
-                ", rating=" + rating +
-                '}';
-    }
 }
