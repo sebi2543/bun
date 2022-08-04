@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.service.InstructorRepositoryService;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 
 @Entity

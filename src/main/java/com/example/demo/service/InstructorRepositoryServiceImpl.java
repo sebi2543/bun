@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,5 +52,8 @@ public class InstructorRepositoryServiceImpl implements InstructorRepositoryServ
                 courseRepository.save(course);
             }
     }
+   public  ArrayList<Instructor> findByFullName(String firstname, String lastname){
+       return instructorRepository.findByFullName(firstname,lastname);
+   }
 }
 

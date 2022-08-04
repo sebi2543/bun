@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +20,11 @@ import java.util.Optional;
 @ToString
 @Service
 public class CourseRepositoryServiceImpl implements CourseRepositoryService{
+
     @Autowired
     CourseRepository courseRepository;
     @Autowired
     InstructorRepositoryService instructorRepositoryService;
-
 
     public void save(Course course){
         courseRepository.save(course);
@@ -38,15 +37,9 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
     public void delete(Course course){
         courseRepository.delete(course);
     }
-
     public List<Course> showAll(){
         return courseRepository.findAll();
     }
-
-
-//    public void populateDataBase(){
-//
-//    }
 
    public Optional<Instructor> findById (int id){
       Optional<Instructor> instructor= instructorRepositoryService.findById(id);
@@ -56,7 +49,7 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
           throw  new IllegalArgumentException("NOT SUCH INSTRUCTOR");
    }
 
-
-
-
+   public List<Course> findByTitle(String title){
+        return courseRepository.findByTitle(title);
+   }
 }
