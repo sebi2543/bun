@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 
 public class InstructorProfile {
 
@@ -25,6 +25,8 @@ public class InstructorProfile {
     @Column
     private String youtube;
 
-    @OneToOne(mappedBy = "instructorProfile")
-    private  Instructor instructor;
+    public InstructorProfile(String linkedin, String youtube) {
+        this.linkedin = linkedin;
+        this.youtube = youtube;
+    }
 }

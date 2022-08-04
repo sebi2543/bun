@@ -1,11 +1,10 @@
 package com.example.demo.entity;
 
-import com.example.demo.service.CourseService;
+import com.example.demo.service.CourseRepositoryService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 
 public class Instructor {
 
@@ -29,7 +29,7 @@ public class Instructor {
     @Column
     private String lastName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
     private InstructorProfile instructorProfile;
 
@@ -38,5 +38,16 @@ public class Instructor {
 
     @Column
     private int rating;
+
+    public Instructor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.instructorProfile = instructorProfile;
+    }
 
 }
