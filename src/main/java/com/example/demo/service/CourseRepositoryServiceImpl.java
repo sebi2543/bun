@@ -44,9 +44,9 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
     }
 
 
-    public void populateDataBase(){
-
-    }
+//    public void populateDataBase(){
+//
+//    }
 
    public Optional<Instructor> findById (int id){
       Optional<Instructor> instructor= instructorRepositoryService.findById(id);
@@ -55,6 +55,7 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
       else
           throw  new IllegalArgumentException("NOT SUCH INSTRUCTOR");
    }
+
 
 
 

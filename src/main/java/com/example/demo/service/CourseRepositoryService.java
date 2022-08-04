@@ -11,6 +11,6 @@ public interface CourseRepositoryService {
 
   void  save(Course course);
   void  delete(Course course);
-  void populateDataBase();
+//  void populateDataBase();
   List<Course> showAll();
 }

@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
+
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.entity.InstructorProfile;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,13 +44,12 @@ public class InstructorRepositoryServiceImpl implements InstructorRepositoryServ
         return instructorRepository.findById((long) id);
     }
 
-    public void populateDataBase() {
-        List<Instructor> courses = Arrays.asList(
-                new Instructor("JOHN", "MILNER", new InstructorProfile("milnerlinkedin", "milneryoutub")),
-                new Instructor("HARRY", "MILNER", new InstructorProfile("harrylinkedin", "harryyoutub")),
-                new Instructor("JOHN", "SMITH", new InstructorProfile("johnlinkedin", "johnyoutub")));
-        instructorRepository.saveAll(courses);
+    public void addCourse(Course course,Instructor instructor) throws  InvalidDataAccessApiUsageException {
+        Optional<Instructor> instructorOptional = instructorRepository.findById(instructor.getId());
+            if (instructorOptional.isPresent()) {
+                course.setInstructor(instructorOptional.get());
+                courseRepository.save(course);
+            }
     }
-
 }
 

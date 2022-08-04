@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Instructor;
+import com.example.demo.entity.InstructorProfile;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.CourseRepositoryService;
 import com.example.demo.service.InstructorRepositoryService;
@@ -16,13 +18,11 @@ import java.util.List;
 @SpringBootApplication
 public class DemoApplication {
 
-        public static void main(String[] args) {
-            ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-            CourseRepositoryService courseRepositoryService=context.getBean(CourseRepositoryService.class);
-            InstructorRepositoryService instructorRepositoryService=context.getBean(InstructorRepositoryService.class);
-            instructorRepositoryService.populateDataBase();
-            courseRepositoryService.populateDataBase();
+    public static void main(String[] args)  {
+        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+        CourseRepositoryService courseRepositoryService=context.getBean(CourseRepositoryService.class);
+        InstructorRepositoryService instructorRepositoryService=context.getBean(InstructorRepositoryService.class);
 
 
-        }
+    }
 }

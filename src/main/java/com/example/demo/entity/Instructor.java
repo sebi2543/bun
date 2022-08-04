@@ -33,7 +33,7 @@ public class Instructor {
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Course> courses=new ArrayList<>();
 
     @Column

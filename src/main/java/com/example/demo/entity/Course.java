@@ -26,15 +26,14 @@ public class Course {
     @Column
     private String title;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn()
     private Instructor instructor;
 
     @Column
     private  int rating;
 
-    public Course(String title, Instructor instructor) {
+    public Course(String title) {
         this.title = title;
-        this.instructor = instructor;
     }
 }
