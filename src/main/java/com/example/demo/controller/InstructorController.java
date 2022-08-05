@@ -5,7 +5,6 @@ import com.example.demo.entity.Instructor;
 import com.example.demo.entity.InstructorProfile;
 import com.example.demo.service.InstructorRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,12 +39,12 @@ public class InstructorController {
         instructorRepositoryService.save(inst3);
         instructorRepositoryService.save(inst4);
         instructorRepositoryService.save(inst4);
-        instructorRepositoryService.save(inst4);
+        instructorRepositoryService.save(inst5);
         instructorRepositoryService.addCourse(course,inst1);
-        instructorRepositoryService.addCourse(course1,inst1);
-        instructorRepositoryService.addCourse(course2,inst1);
-        instructorRepositoryService.addCourse(course3,inst1);
-        instructorRepositoryService.addCourse(course4,inst1);
+        instructorRepositoryService.addCourse(course1,inst2);
+        instructorRepositoryService.addCourse(course2,inst3);
+        instructorRepositoryService.addCourse(course3,inst4);
+        instructorRepositoryService.addCourse(course4,inst5);
         return course;
     }
 
