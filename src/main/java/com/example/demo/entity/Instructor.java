@@ -1,14 +1,7 @@
 package com.example.demo.entity;
 
-import com.example.demo.service.CourseService;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import lombok.*;
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +10,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
+
 public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "instructor_id")
     public  Long id;
 
     @Column
@@ -30,35 +26,25 @@ public class Instructor {
     @Column
     private String lastName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Course> courses=new ArrayList<>();
 
     @Column
     private int rating;
-
-    public Instructor(String firstName, String lastName, int rating) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.rating = rating;
-    }
 
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", instructorProfile=" + instructorProfile +
-                ", rating=" + rating +
-                '}';
+    public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.instructorProfile = instructorProfile;
     }
+
 }
