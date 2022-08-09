@@ -29,11 +29,11 @@ public class InstructorController {
         Instructor inst3=new Instructor("TEODOR","PATTERSON",new InstructorProfile("linkedin","youtub"));
         Instructor inst4=new Instructor("DAVID","GATE",new InstructorProfile("linkedin","youtub"));
         Instructor inst5=new Instructor("HARYY","BUFFET",new InstructorProfile("linkedin","youtub"));
-        Course course=new Course("java");
-        Course course1=new Course("javascript");
-        Course course2=new Course("python");
-        Course course3=new Course("ruby");
-        Course course4=new Course("JAVA");
+        Course course=new Course("beginner-java");
+        Course course1=new Course("master-java");
+        Course course2=new Course("introduction-java");
+        Course course3=new Course("introduction-python");
+        Course course4=new Course("master-php");
         instructorRepositoryService.save(inst1);
         instructorRepositoryService.save(inst2);
         instructorRepositoryService.save(inst3);

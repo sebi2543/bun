@@ -14,4 +14,5 @@ public interface CourseRepositoryService {
   List<Course> showAll();
   Optional<Instructor> findById (int id);
   List<Course> findByTitle(String title);
+  List<Course>findSuggestion(String title);
 }

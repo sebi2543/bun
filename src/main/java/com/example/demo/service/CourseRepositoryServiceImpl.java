@@ -34,6 +34,7 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
     public void delete(Course course){
         courseRepository.delete(course);
     }
+
     public List<Course> showAll(){
         return courseRepository.findAll();
     }
@@ -48,5 +49,9 @@ public class CourseRepositoryServiceImpl implements CourseRepositoryService{
 
    public List<Course> findByTitle(String title){
         return courseRepository.findByTitle(title);
+   }
+
+   public List<Course>findSuggestion(String title){
+        return courseRepository.findByTitleLike(title);
    }
 }

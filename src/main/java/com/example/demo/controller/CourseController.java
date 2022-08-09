@@ -29,4 +29,10 @@ public class CourseController {
             return courseRepositoryService.findByTitle(title);
     }
 
+    @PostMapping("/auto-suggestion")
+    public List<Course>showAutoSuggestion(@RequestParam String title){
+            return courseRepositoryService.findSuggestion(title);
+
+    }
+
 }
