@@ -22,9 +22,11 @@ public class InstructorController {
 
     }
 
-    @GetMapping("/add")
-    public Course add(){
-        return new Course();
+    @PostMapping("/add")
+    public Instructor add(@RequestParam String firstName,@RequestParam String lastName){
+        Instructor instructor= new Instructor(firstName,lastName);
+        instructorRepositoryService.save(instructor);
+        return  instructor;
     }
 
     @PostMapping("/search")
