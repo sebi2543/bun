@@ -39,12 +39,12 @@ public class Instructor {
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.instructorProfile = instructorProfile;
     }
 
     public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.instructorProfile = instructorProfile;
     }
 
 }
