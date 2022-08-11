@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Course;
-import com.example.demo.exceptions.InvalidTitle;
+import com.example.demo.exception.InvalidTitle;
 import com.example.demo.service.CourseRepositoryService;
 import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,6 @@ public class CourseController {
     @PostMapping("/auto-suggestion")
     public List<Course>showAutoSuggestion(@RequestParam String title){
             return courseRepositoryService.findSuggestion(title);
-
     }
 
 }

@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.entity.InstructorProfile;
-import com.example.demo.exceptions.InvalidName;
+import com.example.demo.exception.InvalidName;
 import com.example.demo.service.InstructorRepositoryService;
 import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
