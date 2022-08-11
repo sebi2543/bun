@@ -16,24 +16,24 @@ public class InstructorController {
     @Autowired
     InstructorRepositoryService instructorRepositoryService;
 
-    @GetMapping(value ={"/all"})
-    public List<Instructor> showMainPage(){
+    @GetMapping(value = {"/all"})
+    public List<Instructor> showMainPage() {
         return instructorRepositoryService.showAll();
 
     }
 
     @PostMapping("/add")
-    public Instructor add(@RequestParam String firstName,@RequestParam String lastName){
-        Instructor instructor= new Instructor(firstName,lastName);
+    public Instructor add(@RequestParam String firstName, @RequestParam String lastName) {
+        Instructor instructor = new Instructor(firstName, lastName);
         instructorRepositoryService.save(instructor);
-        return  instructor;
+        return instructor;
     }
 
     @PostMapping("/search")
-    public List<Instructor> showSuitableInstructors(@RequestParam String firstname,@RequestParam String lastname){
-        System.err.println(firstname+lastname);
-        return instructorRepositoryService.findByFullName(firstname,lastname);
+    public List<Instructor> showSuitableInstructors(@RequestParam String firstname, @RequestParam String lastname) {
+        System.err.println(firstname + lastname);
+        return instructorRepositoryService.findByFullName(firstname, lastname);
     }
-
-
 }
+
+
