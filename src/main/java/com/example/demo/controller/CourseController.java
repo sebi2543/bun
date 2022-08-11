@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RequestMapping(value = "courses")
+@RequestMapping(value = "course")
 @RestController
 public class CourseController {
 
@@ -18,7 +18,7 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
-    @GetMapping(value = {"/","",})
+    @GetMapping(value = {"/all"})
     public List<Course>  showMainPage(){
        return courseRepositoryService.showAll();
     }
