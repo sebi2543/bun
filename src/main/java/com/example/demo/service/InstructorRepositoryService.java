@@ -16,6 +16,6 @@ public interface InstructorRepositoryService {
     void delete(Instructor instructor);
     Optional<Instructor> findById(int id);
     void addCourse(Course course, Instructor instructor);
-    ArrayList<Instructor> findByFullName(String firstname, String lastname);
+    ArrayList<Instructor> findByFullName(Instructor instructor);
 
 }

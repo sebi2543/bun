@@ -24,13 +24,13 @@ public class CourseController {
     }
 
     @PostMapping("/search")
-    public List<Course>showSuitableCourses(@RequestParam String title) throws InvalidTitle {
+    public List<Course>showSuitableCourses(@RequestBody String title) throws InvalidTitle {
             courseService.checkTitle(title);
             return courseRepositoryService.findByTitle(title);
     }
 
     @PostMapping("/auto-suggestion")
-    public List<Course>showAutoSuggestion(@RequestParam String title){
+    public List<Course>showAutoSuggestion(@RequestBody String title){
             return courseRepositoryService.findSuggestion(title);
     }
 

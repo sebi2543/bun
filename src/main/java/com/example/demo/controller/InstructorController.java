@@ -42,9 +42,8 @@ public class InstructorController {
     }
 
     @PostMapping("/search")
-    public List<Instructor> showSuitableInstructors(@RequestParam String firstname, @RequestParam String lastname) {
-        System.err.println(firstname + lastname);
-        return instructorRepositoryService.findByFullName(firstname, lastname);
+    public List<Instructor> showSuitableInstructors(@RequestBody Instructor instructor) {
+        return instructorRepositoryService.findByFullName(instructor);
     }
 }
 
