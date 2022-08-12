@@ -1,14 +1,14 @@
 package com.example.demo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CourseDTO {
-    private String title;
 
-    public CourseDTO(String title) {
-        this.title = title;
-    }
+    private String title;
 }
+

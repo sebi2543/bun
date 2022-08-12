@@ -7,11 +7,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "instructors")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
 public class Instructor {
 
@@ -47,3 +45,4 @@ public class Instructor {
     }
 
 }
+

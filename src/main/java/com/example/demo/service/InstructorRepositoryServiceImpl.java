@@ -4,10 +4,6 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
@@ -16,10 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Getter
-@Setter
-@AllArgsConstructor
-@ToString
 public class InstructorRepositoryServiceImpl implements InstructorRepositoryService{
 
     @Autowired

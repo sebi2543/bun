@@ -6,7 +6,6 @@ import com.example.demo.exception.InvalidName;
 import com.example.demo.mapper.InstructorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,8 @@ import java.util.List;
 public class InstructorServiceImpl implements InstructorService{
 
     @Autowired
-    InstructorRepositoryService instructorRepositoryService;
-
-    @Autowired
     InstructorMapper instructorMapper;
+
     @Override
     public void checkInstructor(Instructor instructor) throws InvalidName {
         if (instructor.getLastName().length()==0 || instructor.getFirstName().length()==0)

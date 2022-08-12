@@ -5,13 +5,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "courses")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-
 public class Course {
 
     @Id
