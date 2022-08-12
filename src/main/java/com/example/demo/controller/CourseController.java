@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CourseDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.service.CourseRepositoryService;
@@ -20,19 +21,22 @@ public class CourseController {
     CourseService courseService;
 
     @GetMapping(value = {"/all"})
-    public HttpEntity<List<Course>> showMainPage(){
-       return new HttpEntity<>(courseRepositoryService.showAll());
+    public HttpEntity<List<CourseDTO>> showMainPage(){
+        List<Course>courses = courseRepositoryService.showAll();
+        return  new HttpEntity<>(courseService.CourseToDOS(courses));
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<Course>> showSuitableCourses(@RequestBody String title) throws InvalidTitle {
-            courseService.checkTitle(title);
-            return new HttpEntity<>(courseRepositoryService.findByTitle(title));
+    public HttpEntity<List<CourseDTO>> showSuitableCourses(@RequestBody String title) throws InvalidTitle {
+        courseService.checkTitle(title);
+        List<Course>courses = courseRepositoryService.findByTitle(title);
+        return new HttpEntity<>(courseService.CourseToDOS(courses));
     }
 
     @PostMapping("/auto-suggestion")
-    public HttpEntity<List<Course>>showAutoSuggestion(@RequestBody String title){
-            return new HttpEntity<>(courseRepositoryService.findSuggestion(title));
+    public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody String title){
+        List<Course>courses = courseRepositoryService.findSuggestion(title);
+        return new HttpEntity<>(courseService.CourseToDOS(courses));
     }
-
 }
+
