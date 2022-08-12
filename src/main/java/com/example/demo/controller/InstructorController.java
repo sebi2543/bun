@@ -28,9 +28,9 @@ public class InstructorController {
     InstructorMapper instructorMapper;
 
     @GetMapping(value = {"/all"})
-    public List<Instructor> showMainPage() {
-        return instructorRepositoryService.showAll();
-
+    public HttpEntity<List<InstructorDTO>> showMainPage() {
+        List<Instructor>instructors=instructorRepositoryService.showAll();
+        return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }
 
     @PostMapping("/add")
@@ -38,12 +38,13 @@ public class InstructorController {
         instructorService.checkInstructor(instructor);
         instructorRepositoryService.save(instructor);
         InstructorDTO instructorDTO= instructorMapper.InstructorToDTO(instructor);
-        return new HttpEntity<InstructorDTO>(instructorDTO);
+        return new HttpEntity<>(instructorDTO);
     }
 
     @PostMapping("/search")
-    public List<Instructor> showSuitableInstructors(@RequestBody Instructor instructor) {
-        return instructorRepositoryService.findByFullName(instructor);
+    public HttpEntity<List<InstructorDTO>> showSuitableInstructors(@RequestBody Instructor instructor) {
+      List<Instructor> instructors=instructorRepositoryService.findByFullName(instructor);
+      return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }
 }
 

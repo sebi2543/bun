@@ -1,5 +1,6 @@
 package com.example.demo;
 import com.example.demo.dto.InstructorDTO;
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseRepositoryService;
@@ -17,11 +18,17 @@ public class DemoApplication {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
         CourseRepositoryService courseRepositoryService=context.getBean(CourseRepositoryService.class);
         InstructorRepositoryService instructorRepositoryService=context.getBean(InstructorRepositoryService.class);
-        InstructorMapper instructorMapper= context.getBean(InstructorMapper.class);
 
-        Instructor instructor = new Instructor("Vasile","MURE");
-        InstructorDTO instructorDTO =instructorMapper.InstructorToDTO(instructor);
-        System.err.println(instructorDTO);
+
+        instructorRepositoryService.save(new Instructor("JOHN","SMITH"));
+        instructorRepositoryService.save(new Instructor("HARRY","KEAN"));
+        instructorRepositoryService.save(new Instructor("JOE","HARD"));
+        instructorRepositoryService.save(new Instructor("JACK","MILLER"));
+
+        courseRepositoryService.save(new Course("JAVA"));
+        courseRepositoryService.save(new Course("PYTHON"));
+        courseRepositoryService.save(new Course("RUBY"));
+        courseRepositoryService.save(new Course("GO"));
 
     }
 }

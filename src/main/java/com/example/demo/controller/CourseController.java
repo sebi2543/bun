@@ -5,6 +5,7 @@ import com.example.demo.exception.InvalidTitle;
 import com.example.demo.service.CourseRepositoryService;
 import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,19 +20,19 @@ public class CourseController {
     CourseService courseService;
 
     @GetMapping(value = {"/all"})
-    public List<Course>  showMainPage(){
-       return courseRepositoryService.showAll();
+    public HttpEntity<List<Course>> showMainPage(){
+       return new HttpEntity<>(courseRepositoryService.showAll());
     }
 
     @PostMapping("/search")
-    public List<Course>showSuitableCourses(@RequestBody String title) throws InvalidTitle {
+    public HttpEntity<List<Course>> showSuitableCourses(@RequestBody String title) throws InvalidTitle {
             courseService.checkTitle(title);
-            return courseRepositoryService.findByTitle(title);
+            return new HttpEntity<>(courseRepositoryService.findByTitle(title));
     }
 
     @PostMapping("/auto-suggestion")
-    public List<Course>showAutoSuggestion(@RequestBody String title){
-            return courseRepositoryService.findSuggestion(title);
+    public HttpEntity<List<Course>>showAutoSuggestion(@RequestBody String title){
+            return new HttpEntity<>(courseRepositoryService.findSuggestion(title));
     }
 
 }
