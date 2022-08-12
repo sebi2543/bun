@@ -6,7 +6,6 @@ import com.example.demo.service.InstructorRepositoryService;
 import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -19,7 +18,6 @@ public class InstructorController {
     @Autowired
     InstructorRepositoryService instructorRepositoryService;
 
-
     @GetMapping(value = {"/all"})
     public List<Instructor> showMainPage() {
         return instructorRepositoryService.showAll();
@@ -27,8 +25,7 @@ public class InstructorController {
     }
 
     @PostMapping("/add")
-    public Instructor add(@RequestParam String firstName, @RequestParam String lastName) throws InvalidName {
-        Instructor instructor = new Instructor(firstName, lastName);
+    public Instructor add(@RequestBody Instructor instructor) throws InvalidName {
         instructorService.checkInstructor(instructor);
         instructorRepositoryService.save(instructor);
         return instructor;
