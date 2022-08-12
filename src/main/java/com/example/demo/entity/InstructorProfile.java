@@ -5,13 +5,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "instructorProfiles")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-
 public class InstructorProfile {
 
     @Id

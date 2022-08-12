@@ -9,14 +9,11 @@ import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "instructor")
-public class InstructorController {
+public class InstructorController{
 
     @Autowired
     InstructorService instructorService;
@@ -28,13 +25,13 @@ public class InstructorController {
     InstructorMapper instructorMapper;
 
     @GetMapping(value = {"/all"})
-    public HttpEntity<List<InstructorDTO>> showMainPage() {
+    public HttpEntity<List<InstructorDTO>>showMainPage() {
         List<Instructor>instructors=instructorRepositoryService.showAll();
         return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }
 
     @PostMapping("/add")
-    public HttpEntity<InstructorDTO> add(@RequestBody Instructor instructor) throws InvalidName {
+    public HttpEntity<InstructorDTO>add(@RequestBody Instructor instructor) throws InvalidName {
         instructorService.checkInstructor(instructor);
         instructorRepositoryService.save(instructor);
         InstructorDTO instructorDTO= instructorMapper.InstructorToDTO(instructor);
@@ -42,7 +39,7 @@ public class InstructorController {
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<InstructorDTO>> showSuitableInstructors(@RequestBody Instructor instructor) {
+    public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody Instructor instructor) {
       List<Instructor> instructors=instructorRepositoryService.findByFullName(instructor);
       return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }

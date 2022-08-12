@@ -6,7 +6,6 @@ import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDTO> CourseToDOS(List<Course> courses) {
+    public List<CourseDTO>CourseToDOS(List<Course> courses) {
        List<CourseDTO> courseDTOS=new ArrayList<>();
        for (Course course : courses)
            courseDTOS.add(courseMapper.courseToDTO(course));

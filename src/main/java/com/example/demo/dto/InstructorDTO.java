@@ -1,14 +1,14 @@
 package com.example.demo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class InstructorDTO {
 
-    private String firstName;
-    private String lastName;
-
-    public InstructorDTO(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    public  String firstName;
+    public  String lastName;
 }

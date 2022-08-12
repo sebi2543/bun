@@ -21,13 +21,13 @@ public class CourseController {
     CourseService courseService;
 
     @GetMapping(value = {"/all"})
-    public HttpEntity<List<CourseDTO>> showMainPage(){
+    public HttpEntity<List<CourseDTO>>showMainPage(){
         List<Course>courses = courseRepositoryService.showAll();
         return  new HttpEntity<>(courseService.CourseToDOS(courses));
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<CourseDTO>> showSuitableCourses(@RequestBody String title) throws InvalidTitle {
+    public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody String title) throws InvalidTitle {
         courseService.checkTitle(title);
         List<Course>courses = courseRepositoryService.findByTitle(title);
         return new HttpEntity<>(courseService.CourseToDOS(courses));
