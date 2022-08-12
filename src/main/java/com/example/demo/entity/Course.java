@@ -12,7 +12,6 @@ import javax.persistence.*;
 @ToString
 @EqualsAndHashCode
 
-
 public class Course {
 
     @Id
