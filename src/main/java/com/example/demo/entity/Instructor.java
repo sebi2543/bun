@@ -27,7 +27,7 @@ public class Instructor {
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor")
+    @OneToMany(mappedBy = "instructor")
     private List<Course>courses = new ArrayList<>();
 
     @Column
@@ -37,5 +37,10 @@ public class Instructor {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public void addCourse(Course course){
+        this.courses.add(course);
+    }
+
 }
 

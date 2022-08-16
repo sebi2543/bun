@@ -12,14 +12,14 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column
     private Long id;
 
     @Column
     private String title;
 
-    @ManyToOne()
-    @JoinColumn()
+    @ManyToOne
+    @JoinColumn
     private Instructor instructor;
 
     @Column
@@ -27,5 +27,9 @@ public class Course {
 
     public Course(String title) {
         this.title = title;
+    }
+
+    public String showInfo(){
+        return this.title+" "+this.rating;
     }
 }

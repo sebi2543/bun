@@ -3,10 +3,13 @@ package com.example.demo.mapper;
 import com.example.demo.dto.InstructorDTO;
 import com.example.demo.entity.Instructor;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface InstructorMapper {
 
-//    InstructorMapper INSTANCE = Mappers.getMapper(InstructorMapper.class);
-    InstructorDTO InstructorToDTO(Instructor instructor);
+    InstructorDTO instructorToDTO(Instructor instructor);
+    List<InstructorDTO>instructorsToDTOS(List<Instructor>instructor);
 }
