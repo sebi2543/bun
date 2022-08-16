@@ -19,16 +19,29 @@ public class DemoApplication {
         CourseRepositoryService courseRepositoryService=context.getBean(CourseRepositoryService.class);
         InstructorRepositoryService instructorRepositoryService=context.getBean(InstructorRepositoryService.class);
 
+        Instructor inst1=new Instructor("JOHN","SMITH");
+        Instructor inst2=new Instructor("HARRY","KEAN");
+        Instructor inst3=new Instructor("JOE","HARD");
+        Instructor inst4=new Instructor("JACK","MILLER");
 
-        instructorRepositoryService.save(new Instructor("JOHN","SMITH"));
-        instructorRepositoryService.save(new Instructor("HARRY","KEAN"));
-        instructorRepositoryService.save(new Instructor("JOE","HARD"));
-        instructorRepositoryService.save(new Instructor("JACK","MILLER"));
+        instructorRepositoryService.save(inst1);
+        instructorRepositoryService.save(inst2);
+        instructorRepositoryService.save(inst3);
+        instructorRepositoryService.save(inst4);
 
-        courseRepositoryService.save(new Course("JAVA"));
-        courseRepositoryService.save(new Course("PYTHON"));
-        courseRepositoryService.save(new Course("RUBY"));
-        courseRepositoryService.save(new Course("GO"));
+        Course course1=new Course("JAVA");
+        Course course2=new Course("PYTHON");
+        Course course3=new Course("RUBY");
+        Course course4=new Course("GO");
 
+        course1.setInstructor(inst1);
+        course2.setInstructor(inst2);
+        course3.setInstructor(inst3);
+        course4.setInstructor(inst4);
+
+        courseRepositoryService.save(course1);
+        courseRepositoryService.save(course2);
+        courseRepositoryService.save(course3);
+        courseRepositoryService.save(course4);
     }
 }

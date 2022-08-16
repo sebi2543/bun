@@ -4,6 +4,7 @@ import com.example.demo.dto.InstructorDTO;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
 import com.example.demo.mapper.InstructorMapper;
+import com.example.demo.service.CourseRepositoryService;
 import com.example.demo.service.InstructorRepositoryService;
 import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class InstructorController{
         List<Instructor> instructors=instructorRepositoryService.findByFullName(instructor);
         return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }
+
 }
 
 
