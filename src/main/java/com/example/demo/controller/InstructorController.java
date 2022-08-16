@@ -17,10 +17,8 @@ public class InstructorController{
 
     @Autowired
     InstructorService instructorService;
-
     @Autowired
     InstructorRepositoryService instructorRepositoryService;
-
     @Autowired
     InstructorMapper instructorMapper;
 
@@ -40,8 +38,8 @@ public class InstructorController{
 
     @PostMapping("/search")
     public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody Instructor instructor) {
-      List<Instructor> instructors=instructorRepositoryService.findByFullName(instructor);
-      return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
+        List<Instructor> instructors=instructorRepositoryService.findByFullName(instructor);
+        return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
     }
 }
 

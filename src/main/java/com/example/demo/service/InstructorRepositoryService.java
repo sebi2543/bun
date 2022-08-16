@@ -16,5 +16,4 @@ public interface InstructorRepositoryService {
     Optional<Instructor> findById(int id);
     void addCourse(Course course, Instructor instructor);
     ArrayList<Instructor> findByFullName(Instructor instructor);
-
 }

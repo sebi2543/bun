@@ -14,11 +14,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseMapper courseMapper;
+
     public  void checkTitle(String title) throws InvalidTitle {
-            if (title.length()==0)
-                throw new InvalidTitle();
-            if (title.length()>1 && title.length()<=3)
-                throw  new InvalidTitle();
+        if (title.length()==0)
+            throw new InvalidTitle();
+        if (title.length()>1 && title.length()<=3)
+            throw  new InvalidTitle();
     }
 
     @Override
@@ -28,6 +29,4 @@ public class CourseServiceImpl implements CourseService {
            courseDTOS.add(courseMapper.courseToDTO(course));
        return courseDTOS;
     }
-
-
 }

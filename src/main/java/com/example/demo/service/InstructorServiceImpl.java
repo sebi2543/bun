@@ -28,5 +28,4 @@ public class InstructorServiceImpl implements InstructorService{
             instructorDTOs.add(instructorMapper.InstructorToDTO(instructor));
         return instructorDTOs;
     }
-
 }

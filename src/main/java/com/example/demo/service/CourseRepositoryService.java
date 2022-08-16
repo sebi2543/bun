@@ -9,10 +9,10 @@ import java.util.Optional;
 @Service
 public interface CourseRepositoryService {
 
-  void  save(Course course);
-  void  delete(Course course);
+  void save(Course course);
+  void delete(Course course);
   List<Course> showAll();
-  Optional<Instructor> findById (int id);
-  List<Course> findByTitle(String title);
+  Optional<Instructor>findById(int id);
+  List<Course>findByTitle(String title);
   List<Course>findSuggestion(String title);
 }

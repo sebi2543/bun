@@ -16,7 +16,6 @@ public class CourseController {
 
     @Autowired
     CourseRepositoryService courseRepositoryService;
-
     @Autowired
     CourseService courseService;
 
