@@ -15,8 +15,6 @@ public class CourseController {
 
     @Autowired
     CourseService courseService;
-    @Autowired
-    CourseService courseService;
 
     @GetMapping(value = {"/all"})
     public HttpEntity<List<CourseDTO>>showMainPage(){

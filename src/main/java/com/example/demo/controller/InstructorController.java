@@ -16,8 +16,7 @@ public class InstructorController{
 
     @Autowired
     InstructorService instructorService;
-    @Autowired
-    InstructorService instructorService;
+
     @Autowired
     InstructorMapper instructorMapper;
 
