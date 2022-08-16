@@ -12,4 +12,6 @@ public interface InstructorMapper {
 
     InstructorDTO instructorToDTO(Instructor instructor);
     List<InstructorDTO>instructorsToDTOS(List<Instructor>instructor);
+    Instructor DTOToInstructor(InstructorDTO instructor);
+    List<Instructor>DTOStoInstructors(List<InstructorDTO>instructorDTOS);
 }
