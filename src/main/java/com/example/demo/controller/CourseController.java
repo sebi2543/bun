@@ -27,16 +27,15 @@ public class CourseController {
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO courseDTO) throws InvalidTitle {
-        courseService.checkTitle(courseDTO.getTitle());
-        List<Course>courses = courseService.findByTitle(courseDTO.getTitle());
+    public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO course) throws InvalidTitle {
+        courseService.checkTitle(course.getTitle());
+        List<Course>courses = courseService.findByTitle(course.getTitle());
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/auto-suggestion")
-    public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO courseDTO){
-        List<Course>courses = courseService.findSuggestion(courseDTO.getTitle());
-        System.err.println(courseDTO.getTitle());
+    public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
+        List<Course>courses = courseService.findSuggestion(course.getTitle());
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 }

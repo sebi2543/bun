@@ -12,4 +12,5 @@ public interface CourseMapper {
 
     CourseDTO courseToDTO(Course course);
     List<CourseDTO>coursesToDTOS(List<Course> courses);
+    Course DTOToCourse(CourseDTO course);
 }
