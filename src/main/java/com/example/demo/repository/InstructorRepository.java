@@ -8,6 +8,5 @@ import java.util.ArrayList;
 
 public interface InstructorRepository extends JpaRepository<Instructor,Long> {
 
-    @Query( value = "SELECT * FROM instructors WHERE (first_name = :firstname OR last_name = :lastname)",nativeQuery = true)
-    ArrayList<Instructor> findByFullName(String firstname,String lastname);
+    ArrayList<Instructor>findByFirstNameAndLastName(String firstName,String lastName);
 }

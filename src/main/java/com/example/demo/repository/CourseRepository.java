@@ -9,9 +9,6 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
 
-//    @Query( value = "SELECT * FROM courses WHERE title = :title",nativeQuery = true)
-    List<Course> findByTitle(String title);
-
-//    @Query( value = "SELECT * FROM courses WHERE title LIKE %:title%",nativeQuery = true)
-    List<Course> findByTitleLike(String title);
+    List<Course>findByTitle(String title);
+    List<Course>findByTitleLike(String title);
 }

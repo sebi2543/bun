@@ -48,7 +48,7 @@ public class InstructorServiceImpl implements InstructorService {
         }
     }
    public  ArrayList<Instructor> findByFullName(Instructor instructor){
-       return instructorRepository.findByFullName(instructor.getFirstName(),instructor.getLastName());
+       return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(),instructor.getLastName());
    }
 
     @Override
