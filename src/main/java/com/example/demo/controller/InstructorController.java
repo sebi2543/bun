@@ -27,15 +27,14 @@ public class InstructorController{
     }
 
     @PostMapping("/add")
-    public HttpEntity<InstructorDTO>add(@RequestBody Instructor instructor) throws InvalidName {
+    public HttpEntity<InstructorDTO>add(@RequestBody InstructorDTO instructor) throws InvalidName {
         instructorService.checkInstructor(instructor);
-        instructorService.save(instructor);
-        InstructorDTO instructorDTO= instructorMapper.instructorToDTO(instructor);
-        return new HttpEntity<>(instructorDTO);
+        instructorService.save(instructorMapper.DTOToInstructor(instructor));
+        return new HttpEntity<>(instructor);
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody Instructor instructor) {
+    public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody InstructorDTO instructor) {
         List<Instructor> instructors= instructorService.findByFullName(instructor);
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
     }
