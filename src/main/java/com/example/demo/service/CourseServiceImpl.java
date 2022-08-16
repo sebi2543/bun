@@ -62,10 +62,4 @@ public class CourseServiceImpl implements CourseService {
             throw  new InvalidTitle();
     }
 
-    public List<CourseDTO>CourseToDOS(List<Course> courses) {
-        List<CourseDTO> courseDTOS=new ArrayList<>();
-        for (Course course : courses)
-            courseDTOS.add(courseMapper.courseToDTO(course));
-        return courseDTOS;
-    }
 }

@@ -5,7 +5,11 @@ import com.example.demo.entity.Instructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface InstructorMapper {
-    InstructorDTO InstructorToDTO(Instructor instructor);
+
+    InstructorDTO instructorToDTO(Instructor instructor);
+    List<InstructorDTO>instructorsToDTOS(List<Instructor>instructor);
 }

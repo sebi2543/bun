@@ -19,5 +19,4 @@ public interface InstructorService {
     void addCourse(Course course, Instructor instructor);
     ArrayList<Instructor> findByFullName(Instructor instructor);
     void checkInstructor(Instructor instructor) throws InvalidName;
-    List<InstructorDTO> InstructorsToDTOS(List<Instructor> instructors);
 }

@@ -56,13 +56,5 @@ public class InstructorServiceImpl implements InstructorService {
         if (instructor.getLastName().length()==0 || instructor.getFirstName().length()==0)
             throw new InvalidName();
     }
-
-    @Override
-    public List<InstructorDTO> InstructorsToDTOS(List<Instructor> instructors) {
-        List<InstructorDTO> instructorDTOs = new ArrayList<>();
-        for (Instructor instructor : instructors)
-            instructorDTOs.add(instructorMapper.InstructorToDTO(instructor));
-        return instructorDTOs;
-    }
 }
 

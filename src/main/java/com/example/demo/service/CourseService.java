@@ -18,5 +18,4 @@ public interface CourseService {
   List<Course>findByTitle(String title);
   List<Course>findSuggestion(String title);
   void checkTitle(String title) throws InvalidTitle;
-  List<CourseDTO> CourseToDOS (List<Course> course);
 }

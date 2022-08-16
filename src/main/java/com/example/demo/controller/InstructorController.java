@@ -23,21 +23,21 @@ public class InstructorController{
     @GetMapping(value = {"/all"})
     public HttpEntity<List<InstructorDTO>>showMainPage() {
         List<Instructor>instructors= instructorService.showAll();
-        return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
+        return new HttpEntity<>( instructorMapper.instructorsToDTOS(instructors));
     }
 
     @PostMapping("/add")
     public HttpEntity<InstructorDTO>add(@RequestBody Instructor instructor) throws InvalidName {
         instructorService.checkInstructor(instructor);
         instructorService.save(instructor);
-        InstructorDTO instructorDTO= instructorMapper.InstructorToDTO(instructor);
+        InstructorDTO instructorDTO= instructorMapper.instructorToDTO(instructor);
         return new HttpEntity<>(instructorDTO);
     }
 
     @PostMapping("/search")
     public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody Instructor instructor) {
         List<Instructor> instructors= instructorService.findByFullName(instructor);
-        return new HttpEntity<>(instructorService.InstructorsToDTOS(instructors));
+        return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
     }
 
 }
