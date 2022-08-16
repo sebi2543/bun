@@ -37,10 +37,10 @@ public class InstructorRepositoryServiceImpl implements InstructorRepositoryServ
 
     public void addCourse(Course course,Instructor instructor) throws  InvalidDataAccessApiUsageException {
         Optional<Instructor> instructorOptional = instructorRepository.findById(instructor.getId());
-            if (instructorOptional.isPresent()) {
-                course.setInstructor(instructorOptional.get());
-                courseRepository.save(course);
-            }
+        if (instructorOptional.isPresent()) {
+            course.setInstructor(instructorOptional.get());
+            courseRepository.save(course);
+        }
     }
    public  ArrayList<Instructor> findByFullName(Instructor instructor){
        return instructorRepository.findByFullName(instructor.getFirstName(),instructor.getLastName());

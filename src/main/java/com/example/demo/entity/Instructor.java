@@ -27,8 +27,8 @@ public class Instructor {
     @JoinColumn
     private InstructorProfile instructorProfile;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Course> courses=new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor")
+    private List<Course>courses = new ArrayList<>();
 
     @Column
     private int rating;
@@ -36,13 +36,6 @@ public class Instructor {
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.instructorProfile = instructorProfile;
     }
-
-    public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
 }
 
