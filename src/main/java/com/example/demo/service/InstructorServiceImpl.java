@@ -27,7 +27,6 @@ public class InstructorServiceImpl implements InstructorService {
     public void save(Instructor instructor){
         instructorRepository.save(instructor);
     }
-
     public List<Instructor> showAll(){
          return  instructorRepository.findAll();
     }
@@ -47,12 +46,12 @@ public class InstructorServiceImpl implements InstructorService {
             courseRepository.save(course);
         }
     }
-   public  ArrayList<Instructor> findByFullName(Instructor instructor){
+   public  ArrayList<Instructor> findByFullName(InstructorDTO instructor){
        return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(),instructor.getLastName());
    }
 
     @Override
-    public void checkInstructor(Instructor instructor) throws InvalidName {
+    public void checkInstructor(InstructorDTO instructor) throws InvalidName {
         if (instructor.getLastName().length()==0 || instructor.getFirstName().length()==0)
             throw new InvalidName();
     }

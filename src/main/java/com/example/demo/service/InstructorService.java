@@ -17,6 +17,6 @@ public interface InstructorService {
     void delete(Instructor instructor);
     Optional<Instructor> findById(int id);
     void addCourse(Course course, Instructor instructor);
-    ArrayList<Instructor> findByFullName(Instructor instructor);
-    void checkInstructor(Instructor instructor) throws InvalidName;
+    ArrayList<Instructor> findByFullName(InstructorDTO instructor);
+    void checkInstructor(InstructorDTO instructor) throws InvalidName;
 }
