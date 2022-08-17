@@ -28,14 +28,14 @@ public class CourseController {
 
     @PostMapping("/search")
     public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO course) throws InvalidTitle {
-        courseService.checkTitle(course.getTitle());
-        List<Course>courses = courseService.getByTitle(course.getTitle());
+        courseService.checkTitle(course);
+        List<Course>courses = courseService.getByTitle(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/suggestion")
     public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
-        List<Course>courses = courseService.getByTitleLike(course.getTitle());
+        List<Course>courses = courseService.getByTitleLike(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 }

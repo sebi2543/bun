@@ -28,8 +28,4 @@ public class Course {
     public Course(String title) {
         this.title = title;
     }
-
-    public String showInfo(){
-        return this.title+" "+this.rating;
-    }
 }

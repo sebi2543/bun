@@ -37,10 +37,5 @@ public class Instructor {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public void addCourse(Course course){
-        this.courses.add(course);
-    }
-
 }
 

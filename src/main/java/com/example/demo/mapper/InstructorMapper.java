@@ -3,8 +3,6 @@ package com.example.demo.mapper;
 import com.example.demo.dto.InstructorDTO;
 import com.example.demo.entity.Instructor;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")

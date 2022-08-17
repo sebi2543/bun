@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.InstructorDTO;
+import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
@@ -8,11 +9,8 @@ import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
-
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +19,6 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Autowired
     InstructorRepository instructorRepository;
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    InstructorMapper instructorMapper;
 
     public void save(Instructor instructor){
         instructorRepository.save(instructor);
@@ -40,8 +34,8 @@ public class InstructorServiceImpl implements InstructorService {
        return  Optional.of(instructorRepository.findAll());
     }
 
-    public Optional<Instructor>findById(int id){
-        return  instructorRepository.findById((long) id);
+    public Optional<Instructor>findById(InstructorDTOId instructor){
+        return  instructorRepository.findById(instructor.getId());
     }
 
     public Optional<List<Instructor>>findByFullName(InstructorDTO instructor){
@@ -52,8 +46,8 @@ public class InstructorServiceImpl implements InstructorService {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Instructor getById(int id){
-        return this.findById(id).orElseThrow(InvalidParameterException::new);
+    public Instructor getById(InstructorDTOId instructor){
+        return this.findById(instructor).orElseThrow(InvalidParameterException::new);
     }
 
     public List<Instructor>getByFullName(InstructorDTO instructor){
