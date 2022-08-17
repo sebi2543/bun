@@ -17,38 +17,44 @@ public class InstructorServiceImpl implements InstructorService {
     @Autowired
     InstructorRepository instructorRepository;
 
-    public void save(Instructor instructor){
+    public void save(Instructor instructor) {
         instructorRepository.save(instructor);
+    }
+
+
+    public Optional<List<Instructor>> findAll() {
+        return Optional.of(instructorRepository.findAll());
+    }
+
+    public Optional<Instructor> findById(InstructorDTOId instructor) {
+        return instructorRepository.findById(instructor.getId());
+    }
+
+    public Optional<List<Instructor>> findByFullName(InstructorDTO instructor) {
+        return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
+    }
+
+    public List<Instructor> getAll() {
+        return this.findAll().orElseThrow(InvalidParameterException::new);
+    }
+
+    public Instructor getById(InstructorDTOId instructor) {
+        return this.findById(instructor).orElseThrow(InvalidParameterException::new);
+    }
+
+    public List<Instructor> getByFullName(InstructorDTO instructor) {
+        return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
+    }
+
+    @Override
+    public void delete(Instructor instructor) {
+        instructorRepository.delete(instructor);
     }
 
     @Override
     public void checkInstructor(InstructorDTO instructor) throws InvalidName {
-        if (instructor.getLastName().length()==0 || instructor.getFirstName().length()==0)
+        if (instructor.getLastName().length() == 0 || instructor.getFirstName().length() == 0)
             throw new InvalidName();
-    }
-
-    public Optional<List<Instructor>>findAll(){
-       return  Optional.of(instructorRepository.findAll());
-    }
-
-    public Optional<Instructor>findById(InstructorDTOId instructor){
-        return  instructorRepository.findById(instructor.getId());
-    }
-
-    public Optional<List<Instructor>>findByFullName(InstructorDTO instructor){
-        return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(),instructor.getLastName());
-    }
-
-    public List<Instructor>getAll(){
-        return this.findAll().orElseThrow(InvalidParameterException::new);
-    }
-
-    public Instructor getById(InstructorDTOId instructor){
-        return this.findById(instructor).orElseThrow(InvalidParameterException::new);
-    }
-
-    public List<Instructor>getByFullName(InstructorDTO instructor){
-        return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
     }
 }
 

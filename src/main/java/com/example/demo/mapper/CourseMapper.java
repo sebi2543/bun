@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.dto.CourseDTO;
+import com.example.demo.dto.CourseDTOId;
 import com.example.demo.entity.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,4 +23,7 @@ public interface CourseMapper {
     @Mapping(target = "title",source = "title")
     @Mapping(target = "id",source = "id")
     Course DTOToCourse(CourseDTO course);
+
+    @Mapping(target = "id",source = "id")
+    Course courseDTOIdTOCourse(CourseDTOId course);
 }
