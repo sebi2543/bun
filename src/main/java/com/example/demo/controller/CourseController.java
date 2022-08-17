@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CourseDTO;
+import com.example.demo.dto.CourseDTOId;
 import com.example.demo.entity.Course;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
@@ -37,6 +38,12 @@ public class CourseController {
     public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
         List<Course>courses = courseService.getByTitleLike(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<CourseDTO>showIdCourse(@PathVariable int id){
+        Course course = courseService.getById(new CourseDTOId((long) id));
+        return new HttpEntity<CourseDTO>(courseMapper.courseToDTO(course));
     }
 }
 

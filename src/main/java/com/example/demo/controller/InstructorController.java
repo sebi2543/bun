@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.InstructorDTO;
+import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
 import com.example.demo.mapper.InstructorMapper;
@@ -37,6 +38,12 @@ public class InstructorController{
     public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody InstructorDTO instructor) {
         List<Instructor>instructors=instructorService.getByFullName(instructor);
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<InstructorDTO>showIdInstructor(@PathVariable int id){
+        Instructor instructor=instructorService.getById(new InstructorDTOId((long) id));
+        return new HttpEntity<InstructorDTO>(instructorMapper.instructorToDTO(instructor));
     }
 
 }
