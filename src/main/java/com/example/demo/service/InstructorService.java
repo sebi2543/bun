@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public interface InstructorService {
+
     List<Instructor> getAll();
     Instructor getById(InstructorDTOId instructor);
     List<Instructor> getByFullName(InstructorDTO instructor);

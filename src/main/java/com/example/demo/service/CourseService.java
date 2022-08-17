@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.dto.CourseDTO;
 import com.example.demo.dto.CourseDTOId;
 import com.example.demo.entity.Course;
-import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidTitle;
 import org.springframework.stereotype.Service;
 import java.util.List;

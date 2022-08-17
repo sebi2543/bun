@@ -3,15 +3,12 @@ package com.example.demo.service;
 import com.example.demo.dto.CourseDTO;
 import com.example.demo.dto.CourseDTOId;
 import com.example.demo.entity.Course;
-import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

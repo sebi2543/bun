@@ -9,11 +9,8 @@ import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
-
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +19,6 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Autowired
     InstructorRepository instructorRepository;
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    InstructorMapper instructorMapper;
 
     public void save(Instructor instructor){
         instructorRepository.save(instructor);
