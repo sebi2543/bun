@@ -11,4 +11,5 @@ public class InstructorDTO {
 
     public  String firstName;
     public  String lastName;
+    public Long id;
 }
