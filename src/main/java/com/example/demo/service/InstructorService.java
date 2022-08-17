@@ -11,12 +11,12 @@ import java.util.Optional;
 
 @Service
 public interface InstructorService {
-
-    void save(Instructor instructor);
-    List<Instructor> showAll();
-    void delete(Instructor instructor);
+    List<Instructor> getAll();
+    Instructor getById(int id);
+    List<Instructor> getByFullName(InstructorDTO instructor);
+    Optional<List<Instructor>>findAll();
     Optional<Instructor> findById(int id);
-    void addCourse(Course course, Instructor instructor);
-    ArrayList<Instructor> findByFullName(InstructorDTO instructor);
+    Optional<List<Instructor>>findByFullName(InstructorDTO instructor);
     void checkInstructor(InstructorDTO instructor) throws InvalidName;
+    void save(Instructor instructor);
 }
