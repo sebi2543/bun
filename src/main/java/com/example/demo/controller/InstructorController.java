@@ -23,7 +23,7 @@ public class InstructorController{
     @GetMapping(value = {"/all"})
     public HttpEntity<List<InstructorDTO>>showMainPage() {
         List<Instructor>instructors= instructorService.getAll();
-        return new HttpEntity<>( instructorMapper.instructorsToDTOS(instructors));
+        return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
     }
 
     @PostMapping("/add")
@@ -35,7 +35,7 @@ public class InstructorController{
 
     @PostMapping("/search")
     public HttpEntity<List<InstructorDTO>>showSuitableInstructors(@RequestBody InstructorDTO instructor) {
-        List<Instructor> instructors= instructorService.getByFullName(instructor);
+        List<Instructor>instructors=instructorService.getByFullName(instructor);
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
     }
 

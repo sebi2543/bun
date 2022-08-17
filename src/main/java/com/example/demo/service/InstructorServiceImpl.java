@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.InstructorDTO;
+import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
@@ -40,8 +41,8 @@ public class InstructorServiceImpl implements InstructorService {
        return  Optional.of(instructorRepository.findAll());
     }
 
-    public Optional<Instructor>findById(int id){
-        return  instructorRepository.findById((long) id);
+    public Optional<Instructor>findById(InstructorDTOId instructor){
+        return  instructorRepository.findById(instructor.getId());
     }
 
     public Optional<List<Instructor>>findByFullName(InstructorDTO instructor){
@@ -52,8 +53,8 @@ public class InstructorServiceImpl implements InstructorService {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Instructor getById(int id){
-        return this.findById(id).orElseThrow(InvalidParameterException::new);
+    public Instructor getById(InstructorDTOId instructor){
+        return this.findById(instructor).orElseThrow(InvalidParameterException::new);
     }
 
     public List<Instructor>getByFullName(InstructorDTO instructor){
