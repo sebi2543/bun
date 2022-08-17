@@ -53,8 +53,5 @@ public class InstructorServiceImpl implements InstructorService {
     public List<Instructor>getByFullName(InstructorDTO instructor){
         return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
     }
-
-
-
 }
 
