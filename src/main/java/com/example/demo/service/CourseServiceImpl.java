@@ -23,6 +23,7 @@ public class CourseServiceImpl implements CourseService {
     InstructorService instructorService;
     @Autowired
     CourseMapper courseMapper;
+
     public void save(Course course){
         courseRepository.save(course);
     }
@@ -53,9 +54,11 @@ public class CourseServiceImpl implements CourseService {
     public Optional<List<Course>>findByTitleLike(String title){
         return courseRepository.findByTitleLike(title);
     }
+
     public Optional<List<Course>>findByTitle(String title){
         return courseRepository.findByTitle(title);
     }
+
     public List<Course> getAll(){
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }

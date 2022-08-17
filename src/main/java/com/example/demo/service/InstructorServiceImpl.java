@@ -10,6 +10,8 @@ import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
+
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,33 +29,38 @@ public class InstructorServiceImpl implements InstructorService {
     public void save(Instructor instructor){
         instructorRepository.save(instructor);
     }
-    public List<Instructor> showAll(){
-         return  instructorRepository.findAll();
-    }
-
-    public void delete(Instructor instructor){
-        instructorRepository.delete(instructor);
-    }
-
-    public Optional<Instructor> findById(int id){
-        return instructorRepository.findById((long) id);
-    }
-
-    public void addCourse(Course course,Instructor instructor) throws  InvalidDataAccessApiUsageException {
-        Optional<Instructor> instructorOptional = instructorRepository.findById(instructor.getId());
-        if (instructorOptional.isPresent()) {
-            course.setInstructor(instructorOptional.get());
-            courseRepository.save(course);
-        }
-    }
-   public  ArrayList<Instructor> findByFullName(InstructorDTO instructor){
-       return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(),instructor.getLastName());
-   }
 
     @Override
     public void checkInstructor(InstructorDTO instructor) throws InvalidName {
         if (instructor.getLastName().length()==0 || instructor.getFirstName().length()==0)
             throw new InvalidName();
     }
+
+    public Optional<List<Instructor>>findAll(){
+       return  Optional.of(instructorRepository.findAll());
+    }
+
+    public Optional<Instructor>findById(int id){
+        return  instructorRepository.findById((long) id);
+    }
+
+    public Optional<List<Instructor>>findByFullName(InstructorDTO instructor){
+        return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(),instructor.getLastName());
+    }
+
+    public List<Instructor>getAll(){
+        return this.findAll().orElseThrow(InvalidParameterException::new);
+    }
+
+    public Instructor getById(int id){
+        return this.findById(id).orElseThrow(InvalidParameterException::new);
+    }
+
+    public List<Instructor>getByFullName(InstructorDTO instructor){
+        return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
+    }
+
+
+
 }
 

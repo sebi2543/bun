@@ -11,8 +11,6 @@ import java.util.Optional;
 @Service
 public interface CourseService {
 
-  void save(Course course);
-  void delete(Course course);
   Optional<List<Course>>findAll();
   Optional<Course>findById(int id);
   Optional<List<Course>>findByTitle(String title);
@@ -22,4 +20,6 @@ public interface CourseService {
   List<Course>getByTitleLike(String title);
   List<Course>getByTitle(String title);
   void checkTitle(String title) throws InvalidTitle;
+  void save(Course course);
+  void delete(Course course);
 }

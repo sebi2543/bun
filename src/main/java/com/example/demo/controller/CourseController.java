@@ -33,7 +33,7 @@ public class CourseController {
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
-    @PostMapping("/auto-suggestion")
+    @PostMapping("/suggestion")
     public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
         List<Course>courses = courseService.getByTitleLike(course.getTitle());
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
