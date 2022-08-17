@@ -22,20 +22,20 @@ public class CourseController {
 
     @GetMapping(value = {"/all"})
     public HttpEntity<List<CourseDTO>>showMainPage(){
-        List<Course>courses = courseService.showAll();
+        List<Course>courses = courseService.getAll();
         return  new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/search")
     public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO course) throws InvalidTitle {
         courseService.checkTitle(course.getTitle());
-        List<Course>courses = courseService.findByTitle(course.getTitle());
+        List<Course>courses = courseService.getByTitle(course.getTitle());
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/auto-suggestion")
     public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
-        List<Course>courses = courseService.findSuggestion(course.getTitle());
+        List<Course>courses = courseService.getByTitleLike(course.getTitle());
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 }

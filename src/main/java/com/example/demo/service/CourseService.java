@@ -13,9 +13,13 @@ public interface CourseService {
 
   void save(Course course);
   void delete(Course course);
-  List<Course> showAll();
-  Optional<Instructor>findById(int id);
-  List<Course>findByTitle(String title);
-  List<Course>findSuggestion(String title);
+  Optional<List<Course>>findAll();
+  Optional<Course>findById(int id);
+  Optional<List<Course>>findByTitle(String title);
+  Optional<List<Course>>findByTitleLike(String title);
+  List<Course>getAll();
+  Course getById(int id);
+  List<Course>getByTitleLike(String title);
+  List<Course>getByTitle(String title);
   void checkTitle(String title) throws InvalidTitle;
 }
