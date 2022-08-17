@@ -2,11 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dto.InstructorDTO;
 import com.example.demo.dto.InstructorDTOId;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
-import com.example.demo.mapper.InstructorMapper;
-import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
