@@ -24,9 +24,6 @@ public class InstructorController {
     InstructorMapper instructorMapper;
 
     @Autowired
-    CourseMapper courseMapper;
-
-    @Autowired
     CourseService courseService;
 
     @GetMapping(value = {"/all"})
@@ -73,6 +70,14 @@ public class InstructorController {
         System.err.println(instructorService.getById(instructorDTOId));
     }
 
+    @PostMapping("/{id}/update")
+    public HttpEntity<List<Instructor>>update(@PathVariable int id,@RequestBody InstructorDTO instructorDTO){
+        Instructor instructor=instructorService.getById(new InstructorDTOId((long) id));
+        instructor.setFirstName(instructorDTO.getFirstName());
+        instructor.setLastName(instructorDTO.getLastName());
+        instructorService.save(instructor);
+        return new HttpEntity<>(instructorService.getAll());
+    }
 }
 
 

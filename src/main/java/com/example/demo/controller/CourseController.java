@@ -29,9 +29,6 @@ public class CourseController {
     @Autowired
     InstructorService instructorService;
 
-    @Autowired
-    InstructorMapper instructorMapper;
-
     @GetMapping(value = {"/all"})
     public HttpEntity<List<CourseDTO>>showMainPage(){
         List<Course>courses = courseService.getAll();
@@ -73,6 +70,12 @@ public class CourseController {
         courseService.save(course);
         return new HttpEntity<>(courseService.getById(courseDTOId));
     }
-
+    @PostMapping("/{id}/update")
+    public HttpEntity<List<Course>>update(@PathVariable int id,@RequestBody CourseDTO courseDTO){
+        Course course=courseService.getById(new CourseDTOId((long) id));
+        course.setTitle(courseDTO.getTitle());
+        courseService.save(course);
+        return new HttpEntity<>(courseService.getAll());
+    }
 }
 
