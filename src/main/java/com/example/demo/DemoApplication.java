@@ -21,6 +21,11 @@ public class DemoApplication {
         Instructor inst2=new Instructor("HARRY","KEAN");
         Instructor inst3=new Instructor("JOE","HARD");
         Instructor inst4=new Instructor("JACK","MILLER");
+        inst1.setRating(9);
+        inst2.setRating(1);
+        inst3.setRating(7);
+        inst4.setRating(4);
+
 
         instructorService.save(inst1);
         instructorService.save(inst2);
@@ -28,9 +33,13 @@ public class DemoApplication {
         instructorService.save(inst4);
 
         Course course1=new Course("JAVA");
+        course1.setRating(10);
         Course course2=new Course("PYTHON");
+        course2.setRating(1);
         Course course3=new Course("RUBY");
+        course3.setRating(6);
         Course course4=new Course("GO");
+        course4.setRating(8);
 
 
         courseService.save(course1);

@@ -34,6 +34,11 @@ public class InstructorServiceImpl implements InstructorService {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
     }
 
+    @Override
+    public List<Instructor> getAllOrderByRating() {
+       return instructorRepository.findAllOrderByRating();
+    }
+
     public List<Instructor> getAll() {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }

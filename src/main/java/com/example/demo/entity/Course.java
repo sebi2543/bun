@@ -1,12 +1,13 @@
 package com.example.demo.entity;
 
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "courses")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Course {
 
@@ -25,8 +26,13 @@ public class Course {
     @Column
     private  int rating;
 
+
     public Course(String title) {
         this.title = title;
+    }
+
+
+    public Course() {
     }
 
     @Override

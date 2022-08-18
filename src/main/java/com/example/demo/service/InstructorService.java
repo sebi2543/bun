@@ -17,6 +17,7 @@ public interface InstructorService {
     Optional<List<Instructor>>findAll();
     Optional<Instructor> findById(InstructorDTOId instructor);
     Optional<List<Instructor>>findByFullName(InstructorDTO instructor);
+    List<Instructor>getAllOrderByRating();
     void checkInstructor(InstructorDTO instructor) throws InvalidName;
     void save(Instructor instructor);
     void delete(Instructor instructor);
