@@ -32,5 +32,5 @@ public interface InstructorMapper {
 
     @Mapping(source ="id",target = "id")
     @Mapping(source = "rating",target = "rating")
-   List<InstructorDTORating> instructorsToInstructorDTOSRating(List<Instructor> instructor);
+    List<InstructorDTORating> instructorsToInstructorDTOSRating(List<Instructor> instructor);
 }

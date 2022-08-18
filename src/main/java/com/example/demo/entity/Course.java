@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "courses")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Course {
 
     @Id
@@ -26,13 +27,8 @@ public class Course {
     @Column
     private  int rating;
 
-
     public Course(String title) {
         this.title = title;
-    }
-
-
-    public Course() {
     }
 
     @Override

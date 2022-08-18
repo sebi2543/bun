@@ -11,16 +11,16 @@ import java.util.Optional;
 @Service
 public interface CourseService {
 
-  Optional<List<Course>>findAll();
-  Optional<Course>findById(CourseDTOId course);
-  Optional<List<Course>>findByTitle(CourseDTO courseDTO);
-  Optional<List<Course>>findByTitleLike(CourseDTO courseDTO);
-  List<Course>getAll();
-  Course getById(CourseDTOId course);
-  List<Course>getByTitleLike(CourseDTO courseDTO);
-  List<Course>getByTitle(CourseDTO courseDTO);
-  List<Course>getAllOrderByRatingDesc();
-  Course save(Course course);
-  void delete(Course course);
-  void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
+    Optional<List<Course>>findAll();
+    Optional<Course>findById(CourseDTOId course);
+    Optional<List<Course>>findByTitle(CourseDTO courseDTO);
+    Optional<List<Course>>findByTitleLike(CourseDTO courseDTO);
+    List<Course>getAll();
+    Course getById(CourseDTOId course);
+    List<Course>getByTitleLike(CourseDTO courseDTO);
+    List<Course>getByTitle(CourseDTO courseDTO);
+    List<Course>getAllOrderByRatingDesc();
+    Course save(Course course);
+    void delete(Course course);
+    void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
 }
