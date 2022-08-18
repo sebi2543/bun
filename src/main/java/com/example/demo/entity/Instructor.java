@@ -37,5 +37,23 @@ public class Instructor {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public void addCourse(Course course){
+        List<Course>old =courses;
+        this.courses=new ArrayList<>(old);
+        courses.add(course);
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", instructorProfile=" + instructorProfile +
+                ", courses=" + courses +
+                ", rating=" + rating +
+                '}';
+    }
 }
 

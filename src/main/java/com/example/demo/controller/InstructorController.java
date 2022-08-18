@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CourseDTO;
-import com.example.demo.dto.CourseDTOId;
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
+import com.example.demo.dto.*;
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
+import com.example.demo.mapper.CourseMapper;
 import com.example.demo.mapper.InstructorMapper;
+import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -22,6 +22,12 @@ public class InstructorController {
 
     @Autowired
     InstructorMapper instructorMapper;
+
+    @Autowired
+    CourseMapper courseMapper;
+
+    @Autowired
+    CourseService courseService;
 
     @GetMapping(value = {"/all"})
     public HttpEntity<List<InstructorDTO>> showMainPage() {
@@ -53,6 +59,20 @@ public class InstructorController {
         instructorService.delete(instructorMapper.instructorDTOIdTOInstructor(new InstructorDTOId((long) id)));
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructorService.getAll()));
     }
+
+    //NEFUNCTIONAL
+    @PostMapping("/{id}/assign-course")
+     public void add(@PathVariable int id, @RequestBody CourseDTOId courseDTOId){
+        InstructorDTOId instructorDTOId=new InstructorDTOId((long) id);
+        Instructor instructor=instructorService.getById(instructorDTOId);
+        Course course=courseService.getById(courseDTOId);
+        instructor.addCourse(course);
+        instructorService.save(instructor);
+        System.err.println(course);
+        System.err.println(instructor);
+        System.err.println(instructorService.getById(instructorDTOId));
+    }
+
 }
 
 

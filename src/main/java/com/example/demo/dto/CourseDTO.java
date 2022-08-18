@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class CourseDTO {
 
     private String title;
-    private Long id;
 }
 

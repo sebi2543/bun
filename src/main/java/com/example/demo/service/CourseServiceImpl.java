@@ -22,8 +22,8 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseMapper courseMapper;
 
-    public void save(Course course){
-        courseRepository.save(course);
+    public Course  save(Course course){
+       return  courseRepository.save(course);
     }
 
     public void saveAll(List<Course> courses){
