@@ -19,7 +19,8 @@ public interface CourseService {
   Course getById(CourseDTOId course);
   List<Course>getByTitleLike(CourseDTO courseDTO);
   List<Course>getByTitle(CourseDTO courseDTO);
-  void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
+  List<Course>getAllOrderByRatingDesc();
   Course save(Course course);
   void delete(Course course);
+  void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
 }

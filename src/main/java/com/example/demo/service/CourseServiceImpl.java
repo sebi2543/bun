@@ -71,4 +71,9 @@ public class CourseServiceImpl implements CourseService {
         return this.findByTitle(courseDTO).orElseThrow(InvalidParameterException::new);
     }
 
+    @Override
+    public List<Course> getAllOrderByRatingDesc() {
+       return courseRepository.findAllOrderByRating();
+    }
+
 }

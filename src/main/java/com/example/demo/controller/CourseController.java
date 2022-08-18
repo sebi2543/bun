@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CourseDTO;
-import com.example.demo.dto.CourseDTOId;
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidTitle;
@@ -76,6 +73,11 @@ public class CourseController {
         course.setTitle(courseDTO.getTitle());
         courseService.save(course);
         return new HttpEntity<>(courseService.getAll());
+    }
+
+    @GetMapping("/best-course")
+    public HttpEntity<List<CourseDTORating>>best(){
+        return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
     }
 }
 

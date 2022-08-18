@@ -14,4 +14,7 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
 
     @Query( value = "SELECT * FROM courses WHERE title LIKE %:title% ",nativeQuery = true)
     Optional<List<Course>>findByTitleLike(String title);
+
+    @Query( value = "SELECT * FROM courses ORDER BY rating DESC",nativeQuery = true)
+    List<Course>findAllOrderByRating();
 }
