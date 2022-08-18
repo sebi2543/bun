@@ -5,7 +5,6 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
-import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +56,7 @@ public class CourseController {
         courseService.save(courseMapper.courseDTOToCourse(courseDTO));
         return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
     }
+
     //NEFUNCTIONAL
     @PostMapping("/{id}/assign-instructor")
     public HttpEntity<Course> assignCourse(@PathVariable int id, @RequestBody InstructorDTOId instructorDTOId){
@@ -67,6 +67,7 @@ public class CourseController {
         courseService.save(course);
         return new HttpEntity<>(courseService.getById(courseDTOId));
     }
+
     @PostMapping("/{id}/update")
     public HttpEntity<List<Course>>update(@PathVariable int id,@RequestBody CourseDTO courseDTO){
         Course course=courseService.getById(new CourseDTOId((long) id));

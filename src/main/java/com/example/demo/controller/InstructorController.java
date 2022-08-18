@@ -4,7 +4,6 @@ import com.example.demo.dto.*;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidName;
-import com.example.demo.mapper.CourseMapper;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;

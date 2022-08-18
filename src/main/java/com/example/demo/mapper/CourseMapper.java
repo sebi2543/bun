@@ -6,7 +6,6 @@ import com.example.demo.dto.CourseDTORating;
 import com.example.demo.entity.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
