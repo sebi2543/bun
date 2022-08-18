@@ -28,4 +28,13 @@ public class Course {
     public Course(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 }

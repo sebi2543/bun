@@ -32,10 +32,6 @@ public class DemoApplication {
         Course course3=new Course("RUBY");
         Course course4=new Course("GO");
 
-        course1.setInstructor(inst1);
-        course2.setInstructor(inst2);
-        course3.setInstructor(inst3);
-        course4.setInstructor(inst4);
 
         courseService.save(course1);
         courseService.save(course2);

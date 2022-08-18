@@ -20,6 +20,6 @@ public interface CourseService {
   List<Course>getByTitleLike(CourseDTO courseDTO);
   List<Course>getByTitle(CourseDTO courseDTO);
   void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
-  void save(Course course);
+  Course save(Course course);
   void delete(Course course);
 }

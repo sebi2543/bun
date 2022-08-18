@@ -12,17 +12,14 @@ public interface InstructorMapper {
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    @Mapping(source ="id",target = "id")
     InstructorDTO instructorToDTO(Instructor instructor);
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    @Mapping(source ="id",target = "id")
     List<InstructorDTO>instructorsToDTOS(List<Instructor>instructor);
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    @Mapping(source ="id",target = "id")
     Instructor instructorDTOtoInstructor(InstructorDTO instructor);
 
     @Mapping(source ="id",target = "id")
