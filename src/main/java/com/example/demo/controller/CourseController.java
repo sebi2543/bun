@@ -75,7 +75,7 @@ public class CourseController {
         return new HttpEntity<>(courseService.getAll());
     }
 
-    @GetMapping("/best-course")
+    @GetMapping("/best")
     public HttpEntity<List<CourseDTORating>>best(){
         return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
     }

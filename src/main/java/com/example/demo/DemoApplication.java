@@ -21,6 +21,11 @@ public class DemoApplication {
         Instructor inst2=new Instructor("HARRY","KEAN");
         Instructor inst3=new Instructor("JOE","HARD");
         Instructor inst4=new Instructor("JACK","MILLER");
+        inst1.setRating(9);
+        inst2.setRating(1);
+        inst3.setRating(7);
+        inst4.setRating(4);
+
 
         instructorService.save(inst1);
         instructorService.save(inst2);

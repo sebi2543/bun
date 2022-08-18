@@ -78,6 +78,11 @@ public class InstructorController {
         instructorService.save(instructor);
         return new HttpEntity<>(instructorService.getAll());
     }
+
+    @GetMapping("best")
+    public HttpEntity<List<InstructorDTORating>> best(){
+        return new HttpEntity<>(instructorMapper.instructorsToInstructorDTOSRating(instructorService.getAllOrderByRating()));
+    }
 }
 
 
