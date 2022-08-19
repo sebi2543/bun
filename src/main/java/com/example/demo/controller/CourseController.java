@@ -76,6 +76,13 @@ public class CourseController {
         return new HttpEntity<>(courseService.getAll());
     }
 
+    @GetMapping("{id}/delete")
+    public HttpEntity<List<CourseDTO>>delete(@PathVariable int id){
+        Course course=courseService.getById(new CourseDTOId((long) id));
+        courseService.delete(course);
+        return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
+    }
+
     @GetMapping("/best")
     public HttpEntity<List<CourseDTORating>>best(){
         return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
