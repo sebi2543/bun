@@ -1,8 +1,6 @@
 package com.example.demo.entity;
 
 import lombok.*;
-import net.bytebuddy.implementation.bind.annotation.Default;
-
 import javax.persistence.*;
 
 @Entity
