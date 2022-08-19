@@ -78,7 +78,7 @@ public class InstructorController {
         return new HttpEntity<>(instructorService.getAll());
     }
 
-    @GetMapping("best")
+    @GetMapping("/best")
     public HttpEntity<List<InstructorDTORating>> best(){
         return new HttpEntity<>(instructorMapper.instructorsToInstructorDTOSRating(instructorService.getAllOrderByRating()));
     }
