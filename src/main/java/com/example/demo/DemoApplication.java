@@ -1,7 +1,9 @@
 package com.example.demo;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
+import com.example.demo.entity.InstructorProfile;
 import com.example.demo.service.CourseService;
+import com.example.demo.service.InstructorProfileService;
 import com.example.demo.service.InstructorService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +18,7 @@ public class DemoApplication {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
         CourseService courseService =context.getBean(CourseService.class);
         InstructorService instructorService =context.getBean(InstructorService.class);
+        InstructorProfileService instructorProfileService=context.getBean(InstructorProfileService.class);
 
         Instructor inst1=new Instructor("JOHN","SMITH");
         Instructor inst2=new Instructor("HARRY","KEAN");
@@ -41,6 +44,15 @@ public class DemoApplication {
         Course course4=new Course("GO");
         course4.setRating(8);
 
+        InstructorProfile instructorProfile1=new InstructorProfile("johnyoutub","johnlinkedin");
+        InstructorProfile instructorProfile2=new InstructorProfile("harryyoutub","harrylinkedin");
+        InstructorProfile instructorProfile3=new InstructorProfile("joeyoutub","joelinkedin");
+        InstructorProfile instructorProfile4=new InstructorProfile("jackyoutub","jacklinkedin");
+
+        instructorProfileService.save(instructorProfile1);
+        instructorProfileService.save(instructorProfile2);
+        instructorProfileService.save(instructorProfile3);
+        instructorProfileService.save(instructorProfile4);
 
         courseService.save(course1);
         courseService.save(course2);
