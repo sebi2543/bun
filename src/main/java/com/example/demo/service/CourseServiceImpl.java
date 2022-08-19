@@ -34,8 +34,8 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.delete(course);
     }
 
-    public  void checkTitle(CourseDTO courseDTO) throws InvalidTitle {
-        if (courseDTO.getTitle().length()<=3)
+    public  void checkTitle(CourseDTO courseDTO){
+        if (courseDTO.getTitle().length()==0)
             throw  new InvalidTitle();
     }
 

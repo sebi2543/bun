@@ -22,5 +22,5 @@ public interface CourseService {
     List<Course>getAllOrderByRatingDesc();
     Course save(Course course);
     void delete(Course course);
-    void checkTitle(CourseDTO courseDTO) throws InvalidTitle;
+    void checkTitle(CourseDTO courseDTO);
 }

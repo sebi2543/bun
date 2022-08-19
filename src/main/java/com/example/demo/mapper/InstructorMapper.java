@@ -1,8 +1,6 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
-import com.example.demo.dto.InstructorDTORating;
+import com.example.demo.dto.*;
 import com.example.demo.entity.Instructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -33,4 +31,16 @@ public interface InstructorMapper {
     @Mapping(source ="id",target = "id")
     @Mapping(source = "rating",target = "rating")
     List<InstructorDTORating> instructorsToInstructorDTOSRating(List<Instructor> instructor);
+
+    @Mapping(source ="firstName",target = "firstName")
+    InstructorDTOFirstName instructorToInstructorDTOFirstName(Instructor instructor);
+
+    @Mapping(source ="firstName",target = "firstName")
+    List<InstructorDTOFirstName> instructorsToInstructorDTOFirstNames(List<Instructor> instructor);
+
+    @Mapping(source ="lastName",target = "lastName")
+    InstructorDTOLastName instructorToInstructorDTOLastName(Instructor instructor);
+
+    @Mapping(source ="lastName",target = "lastName")
+   List<InstructorDTOLastName>instructorsToInstructorDTOLastNames(List<Instructor> instructor);
 }

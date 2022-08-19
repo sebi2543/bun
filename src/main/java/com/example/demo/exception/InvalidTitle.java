@@ -1,6 +1,6 @@
 package com.example.demo.exception;
 
-public class InvalidTitle extends Exception{
+public class InvalidTitle extends RuntimeException{
 
     public InvalidTitle() {
         super();

@@ -1,8 +1,8 @@
 package com.example.demo.exception;
 
-public class InvalidName extends  RuntimeException{
+public class InvalidFirstName extends  RuntimeException{
 
-    public InvalidName() {
-        super("");
+    public InvalidFirstName() {
+        super();
     }
 }
