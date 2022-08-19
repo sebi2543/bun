@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.CourseDTO;
 import com.example.demo.dto.CourseDTOId;
 import com.example.demo.entity.Course;
+import com.example.demo.exception.InvalidIdCourse;
+import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
@@ -37,6 +39,13 @@ public class CourseServiceImpl implements CourseService {
     public  void checkTitle(CourseDTO courseDTO){
         if (courseDTO.getTitle().length()==0)
             throw  new InvalidTitle();
+    }
+
+    @Override
+    public void checkId(CourseDTOId courseDTOId) {
+        Optional<Course> course =courseRepository.findById(courseDTOId.getId());
+        if (course.isEmpty())
+            throw new InvalidIdCourse();
     }
 
     public Optional<List<Course>>findAll(){

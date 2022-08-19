@@ -1,8 +1,6 @@
 package com.example.demo.exceptionHandler;
 
-import com.example.demo.exception.InvalidFirstName;
-import com.example.demo.exception.InvalidLastName;
-import com.example.demo.exception.InvalidTitle;
+import com.example.demo.exception.*;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
@@ -48,4 +46,13 @@ public class InvalidTitleHandler {
                        instructorMapper.instructorsToInstructorDTOLastNames(instructorService.getAll())));
     }
 
+    @ExceptionHandler(InvalidIdCourse.class)
+    public HttpEntity<String>invalidIdCourse(){
+        return new HttpEntity<>("Invalid id course");
+    }
+
+    @ExceptionHandler(InvalidIdInstructor.class)
+    public HttpEntity<String>invalidIdInstructor(){
+        return new HttpEntity<>("Invalid id instructor");
+    }
 }

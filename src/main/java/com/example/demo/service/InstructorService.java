@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CourseDTOId;
 import com.example.demo.dto.InstructorDTO;
 import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Instructor;
@@ -20,4 +21,5 @@ public interface InstructorService {
     void checkInstructor(InstructorDTO instructor);
     void save(Instructor instructor);
     void delete(Instructor instructor);
+    void checkId(InstructorDTOId instructorDTOId );
 }

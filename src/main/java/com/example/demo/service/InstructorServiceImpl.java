@@ -4,6 +4,8 @@ import com.example.demo.dto.InstructorDTO;
 import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidFirstName;
+import com.example.demo.exception.InvalidIdCourse;
+import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.exception.InvalidLastName;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,13 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void delete(Instructor instructor) {
         instructorRepository.delete(instructor);
+    }
+
+    @Override
+    public void checkId(InstructorDTOId instructorDTOId) {
+        Optional<Instructor> instructor=instructorRepository.findById(instructorDTOId.getId());
+        if (instructor.isEmpty())
+            throw new InvalidIdInstructor();
     }
 
     @Override
