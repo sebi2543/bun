@@ -17,4 +17,5 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
 
     @Query( value = "SELECT * FROM courses ORDER BY rating DESC",nativeQuery = true)
     List<Course>findAllOrderByRating();
+
 }

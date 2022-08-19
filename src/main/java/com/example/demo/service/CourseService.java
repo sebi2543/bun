@@ -23,4 +23,6 @@ public interface CourseService {
     Course save(Course course);
     void delete(Course course);
     void checkTitle(CourseDTO courseDTO);
+    void checkId(CourseDTOId courseDTOId);
+
 }

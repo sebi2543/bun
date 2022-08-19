@@ -46,12 +46,14 @@ public class InstructorController {
 
     @GetMapping("/{id}")
     public HttpEntity<InstructorDTO> showIdInstructor(@PathVariable int id) {
+        instructorService.checkId(new InstructorDTOId((long) id));
         Instructor instructor = instructorService.getById(new InstructorDTOId((long) id));
         return new HttpEntity<InstructorDTO>(instructorMapper.instructorToDTO(instructor));
     }
 
     @GetMapping("/{id}/delete")
     public HttpEntity<List<InstructorDTO>> deleteIdInstructor(@PathVariable int id) {
+        instructorService.checkId(new InstructorDTOId((long) id));
         instructorService.delete(instructorMapper.instructorDTOIdTOInstructor(new InstructorDTOId((long) id)));
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructorService.getAll()));
     }
@@ -71,6 +73,7 @@ public class InstructorController {
 
     @PostMapping("/{id}/update")
     public HttpEntity<List<Instructor>>update(@PathVariable int id,@RequestBody InstructorDTO instructorDTO){
+        instructorService.checkId(new InstructorDTOId((long) id));
         Instructor instructor=instructorService.getById(new InstructorDTOId((long) id));
         instructor.setFirstName(instructorDTO.getFirstName());
         instructor.setLastName(instructorDTO.getLastName());
