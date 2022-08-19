@@ -20,4 +20,9 @@ public class InstructorProfile {
 
     @Column
     private String youtube;
+
+    public InstructorProfile(String linkedin, String youtube) {
+        this.linkedin = linkedin;
+        this.youtube = youtube;
+    }
 }
