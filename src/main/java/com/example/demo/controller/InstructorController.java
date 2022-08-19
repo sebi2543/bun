@@ -50,7 +50,7 @@ public class InstructorController {
         return new HttpEntity<InstructorDTO>(instructorMapper.instructorToDTO(instructor));
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/{id}/delete")
     public HttpEntity<List<InstructorDTO>> deleteIdInstructor(@PathVariable int id) {
         instructorService.delete(instructorMapper.instructorDTOIdTOInstructor(new InstructorDTOId((long) id)));
         return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructorService.getAll()));
