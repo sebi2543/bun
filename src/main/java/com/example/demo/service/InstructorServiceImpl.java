@@ -3,7 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.InstructorDTO;
 import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Instructor;
-import com.example.demo.exception.InvalidName;
+import com.example.demo.exception.InvalidFirstName;
+import com.example.demo.exception.InvalidLastName;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,9 +58,11 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void checkInstructor(InstructorDTO instructor) throws InvalidName {
-        if (instructor.getLastName().length() == 0 || instructor.getFirstName().length() == 0)
-            throw new InvalidName();
+    public void checkInstructor(InstructorDTO instructor){
+        if (instructor.getLastName().length()==0)
+            throw new InvalidLastName();
+        if (instructor.getFirstName().length()==0)
+            throw new InvalidFirstName();
     }
 }
 

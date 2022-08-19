@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.*;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.exception.InvalidName;
+import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
@@ -32,7 +32,7 @@ public class InstructorController {
     }
 
     @PostMapping("/add")
-    public HttpEntity<InstructorDTO> add(@RequestBody InstructorDTO instructorDTO) throws InvalidName {
+    public HttpEntity<InstructorDTO> add(@RequestBody InstructorDTO instructorDTO) throws InvalidFirstName {
         instructorService.checkInstructor(instructorDTO);
         instructorService.save(instructorMapper.instructorDTOtoInstructor(instructorDTO));
         return new HttpEntity<>(instructorDTO);
