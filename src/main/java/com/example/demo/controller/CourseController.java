@@ -76,7 +76,7 @@ public class CourseController {
         return new HttpEntity<>(courseService.getAll());
     }
 
-    @GetMapping("{id}/delete")
+    @GetMapping("/{id}/delete")
     public HttpEntity<List<CourseDTO>>delete(@PathVariable int id){
         Course course=courseService.getById(new CourseDTOId((long) id));
         courseService.delete(course);
