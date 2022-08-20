@@ -31,18 +31,21 @@ public class InstructorProfileController {
 
     @GetMapping("/{id}")
     public HttpEntity<InstructorProfileDTO>all(@PathVariable int id){
+        instructorProfileService.checkId(new InstructorProfileDTOId((long) id));
         InstructorProfileDTOId instructorProfileDTOId=new InstructorProfileDTOId((long) id);
         return new HttpEntity<>(instructorProfileMapper.instructorProfileToDTO(instructorProfileService.getById(instructorProfileDTOId)));
 
     }
     @PostMapping("/add")
     public HttpEntity<List<InstructorProfileDTO>>add(@RequestBody InstructorProfileDTO instructorProfileDTO){
+        instructorProfileService.checkInstructorProfile(instructorProfileDTO);
         instructorProfileService.save(instructorProfileMapper.instructorDTOToInstructor(instructorProfileDTO));
         return new HttpEntity<>(instructorProfileMapper.instructorsProfileToDTOS(instructorProfileService.getAll()));
     }
 
     @GetMapping("/{id}/delete")
     public HttpEntity<List<InstructorProfileDTO>>delete(@PathVariable int  id){
+        instructorProfileService.checkId(new InstructorProfileDTOId((long) id));
         InstructorProfileDTOId instructorProfileDTOId=new InstructorProfileDTOId((long) id);
         InstructorProfile instructorProfile=instructorProfileService.getById(instructorProfileDTOId);
         instructorProfileService.delete(instructorProfile);
@@ -51,6 +54,7 @@ public class InstructorProfileController {
 
     @GetMapping("/{id}/update")
     public HttpEntity<List<InstructorProfileDTO>>delete(@PathVariable int  id, @RequestBody InstructorProfileDTO instructorProfileDTO ){
+        instructorProfileService.checkId(new InstructorProfileDTOId((long) id));
         InstructorProfileDTOId instructorProfileDTOId=new InstructorProfileDTOId((long) id);
         InstructorProfile instructorProfile=instructorProfileService.getById(instructorProfileDTOId);
         instructorProfile.setLinkedin(instructorProfileDTO.getLinkedin());

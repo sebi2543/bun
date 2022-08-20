@@ -1,7 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.InstructorProfileDTO;
 import com.example.demo.dto.InstructorProfileDTOId;
 import com.example.demo.entity.InstructorProfile;
+import com.example.demo.exception.InvalidInstructorProfileId;
+import com.example.demo.exception.InvalidLikedIn;
+import com.example.demo.exception.InvalidYoutube;
 import com.example.demo.repository.InstructorProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,8 +54,16 @@ public class InstructorProfileImpl implements InstructorProfileService{
     public void checkId(InstructorProfileDTOId instructorProfileDTOId) {
         Optional<InstructorProfile>instructorProfile=instructorProfileRepository.findById(instructorProfileDTOId.getId());
         if (instructorProfile.isEmpty()) {
-            throw new InvalidParameterException();
+            throw new InvalidInstructorProfileId();
         }
 
+    }
+
+    @Override
+    public void checkInstructorProfile(InstructorProfileDTO instructorProfileDTO) {
+        if (instructorProfileDTO.getLinkedin().length()==0)
+            throw new InvalidLikedIn();
+        if (instructorProfileDTO.getYoutube().length()==0)
+            throw new InvalidYoutube();
     }
 }
