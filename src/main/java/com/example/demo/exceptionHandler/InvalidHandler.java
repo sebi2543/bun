@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class InvalidTitleHandler {
+public class InvalidHandler {
 
     @Autowired
     CourseService courseService;
@@ -55,4 +55,20 @@ public class InvalidTitleHandler {
     public HttpEntity<String>invalidIdInstructor(){
         return new HttpEntity<>("Invalid id instructor");
     }
+
+    @ExceptionHandler(InvalidInstructorProfileId.class)
+    public HttpEntity<String>invalidInstructorProfileId(){
+        return new HttpEntity<>("Invalid instructor profile id ");
+    }
+
+    @ExceptionHandler(InvalidLikedIn.class)
+    public HttpEntity<String>invalidLinkedIn(){
+        return new HttpEntity<>("invalid likedIn");
+    }
+
+    @ExceptionHandler(InvalidYoutube.class)
+    public HttpEntity<String>invalidYoutube(){
+        return new HttpEntity<>("invalid youtube");
+    }
+
 }

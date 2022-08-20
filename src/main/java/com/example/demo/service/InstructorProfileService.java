@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.InstructorProfileDTO;
 import com.example.demo.dto.InstructorProfileDTOId;
 import com.example.demo.entity.InstructorProfile;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,6 @@ public interface InstructorProfileService {
     InstructorProfile save(InstructorProfile instructorProfile);
     void delete(InstructorProfile instructorProfile);
     void checkId(InstructorProfileDTOId instructorProfileDTOId);
+    void checkInstructorProfile(InstructorProfileDTO instructorProfileDTO);
 
 }
