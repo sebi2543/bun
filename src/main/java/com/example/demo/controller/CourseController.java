@@ -22,69 +22,69 @@ public class CourseController {
    final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
-    public HttpEntity<List<CourseDTO>>showMainPage(){
+    public HttpEntity<List<BasicCourseDTO>>showMainPage(){
         List<Course>courses = courseService.getAll();
         return  new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO course) throws InvalidTitle {
+    public HttpEntity<List<BasicCourseDTO>>showSuitableCourses(@RequestBody BasicCourseDTO course) throws InvalidTitle {
         courseService.checkTitle(course);
         List<Course>courses = courseService.getByTitle(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @PostMapping("/suggestion")
-    public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
+    public HttpEntity<List<BasicCourseDTO>>showAutoSuggestion(@RequestBody BasicCourseDTO course){
         List<Course>courses = courseService.getByTitleLike(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
     }
 
     @GetMapping("/{id}")
-    public HttpEntity<CourseDTO>showIdCourse(@PathVariable int id){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course = courseService.getById(new CourseDTOId((long) id));
-        return new HttpEntity<CourseDTO>(courseMapper.courseToDTO(course));
+    public HttpEntity<BasicCourseDTO>showIdCourse(@PathVariable int id){
+        courseService.checkId(new IdentificationCourseDTO((long)id));
+        Course course = courseService.getById(new IdentificationCourseDTO((long) id));
+        return new HttpEntity<BasicCourseDTO>(courseMapper.courseToDTO(course));
     }
 
     @PostMapping("/add")
-    public HttpEntity<List<CourseDTO>>add(@RequestBody CourseDTO courseDTO) throws InvalidTitle {
-        courseService.checkTitle(courseDTO);
-        courseService.save(courseMapper.courseDTOToCourse(courseDTO));
+    public HttpEntity<List<BasicCourseDTO>>add(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
+        courseService.checkTitle(basicCourseDTO);
+        courseService.save(courseMapper.courseDTOToCourse(basicCourseDTO));
         return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
     }
 
     //NEFUNCTIONAL
     @PostMapping("/{id}/assign-instructor")
-    public HttpEntity<Course> assignCourse(@PathVariable int id, @RequestBody InstructorDTOId instructorDTOId){
-        CourseDTOId courseDTOId= new CourseDTOId((long) id);
-        Course course=courseService.getById(courseDTOId);
-        Instructor instructor=instructorService.getById(instructorDTOId);
+    public HttpEntity<Course> assignCourse(@PathVariable int id, @RequestBody IdentificationInstructorDTO identificationInstructorDTO){
+        IdentificationCourseDTO identificationCourseDTO = new IdentificationCourseDTO((long) id);
+        Course course=courseService.getById(identificationCourseDTO);
+        Instructor instructor=instructorService.getById(identificationInstructorDTO);
         course.setInstructor(instructor);
         courseService.save(course);
-        return new HttpEntity<>(courseService.getById(courseDTOId));
+        return new HttpEntity<>(courseService.getById(identificationCourseDTO));
     }
 
     @PostMapping("/{id}/update")
-    public HttpEntity<List<Course>>update(@PathVariable int id,@RequestBody CourseDTO courseDTO){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course=courseService.getById(new CourseDTOId((long) id));
-        courseService.checkTitle(courseDTO);
-        course.setTitle(courseDTO.getTitle());
+    public HttpEntity<List<Course>>update(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
+        courseService.checkId(new IdentificationCourseDTO((long)id));
+        Course course=courseService.getById(new IdentificationCourseDTO((long) id));
+        courseService.checkTitle(basicCourseDTO);
+        course.setTitle(basicCourseDTO.getTitle());
         courseService.save(course);
         return new HttpEntity<>(courseService.getAll());
     }
 
     @GetMapping("/{id}/delete")
-    public HttpEntity<List<CourseDTO>>delete(@PathVariable int id){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course=courseService.getById(new CourseDTOId((long) id));
+    public HttpEntity<List<BasicCourseDTO>>delete(@PathVariable int id){
+        courseService.checkId(new IdentificationCourseDTO((long)id));
+        Course course=courseService.getById(new IdentificationCourseDTO((long) id));
         courseService.delete(course);
         return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
     }
 
     @GetMapping("/best")
-    public HttpEntity<List<CourseDTORating>>best(){
+    public HttpEntity<List<SortCourseDTO>>best(){
         return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
     }
 }

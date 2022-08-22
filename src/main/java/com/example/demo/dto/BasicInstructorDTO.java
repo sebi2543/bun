@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructorDTOId {
+public class BasicInstructorDTO {
 
-    public  Long id;
+    public  String firstName;
+    public  String lastName;
 }

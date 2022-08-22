@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructorDTOLastName {
-    public  String lastName;
+public class SortInstructorDTO {
+
+    public  Long id;
+    private int rating;
+
 }

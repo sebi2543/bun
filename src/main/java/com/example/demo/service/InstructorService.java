@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CourseDTOId;
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
+import com.example.demo.dto.BasicInstructorDTO;
+import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Instructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,14 +11,14 @@ import java.util.Optional;
 public interface InstructorService {
 
     List<Instructor> getAll();
-    Instructor getById(InstructorDTOId instructor);
-    List<Instructor> getByFullName(InstructorDTO instructor);
+    Instructor getById(IdentificationInstructorDTO instructor);
+    List<Instructor> getByFullName(BasicInstructorDTO instructor);
     Optional<List<Instructor>>findAll();
-    Optional<Instructor> findById(InstructorDTOId instructor);
-    Optional<List<Instructor>>findByFullName(InstructorDTO instructor);
+    Optional<Instructor> findById(IdentificationInstructorDTO instructor);
+    Optional<List<Instructor>>findByFullName(BasicInstructorDTO instructor);
     List<Instructor>getAllOrderByRating();
-    void checkInstructor(InstructorDTO instructor);
+    void checkInstructor(BasicInstructorDTO instructor);
     void save(Instructor instructor);
     void delete(Instructor instructor);
-    void checkId(InstructorDTOId instructorDTOId );
+    void checkId(IdentificationInstructorDTO identificationInstructorDTO);
 }

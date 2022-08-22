@@ -1,6 +1,6 @@
 package com.example.demo.exceptionHandler;
 
-import com.example.demo.dto.InstructorDTOFirstName;
+import com.example.demo.dto.FirstNameExceptionInstructorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +14,5 @@ import java.util.List;
 
 public class InvalidFirstNameContainer {
     private String message;
-    private List<InstructorDTOFirstName>firstName;
+    private List<FirstNameExceptionInstructorDTO>firstName;
 }

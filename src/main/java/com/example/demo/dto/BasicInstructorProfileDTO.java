@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseDTO {
+public class BasicInstructorProfileDTO {
 
-    private String title;
+    private String linkedin;
+    private String youtube;
 }
-

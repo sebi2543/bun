@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
+import com.example.demo.dto.BasicInstructorDTO;
+import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.exception.InvalidIdInstructor;
@@ -29,11 +29,11 @@ public class InstructorServiceImpl implements InstructorService {
         return Optional.of(instructorRepository.findAll());
     }
 
-    public Optional<Instructor> findById(InstructorDTOId instructor) {
+    public Optional<Instructor> findById(IdentificationInstructorDTO instructor) {
         return instructorRepository.findById(instructor.getId());
     }
 
-    public Optional<List<Instructor>> findByFullName(InstructorDTO instructor) {
+    public Optional<List<Instructor>> findByFullName(BasicInstructorDTO instructor) {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
     }
 
@@ -46,11 +46,11 @@ public class InstructorServiceImpl implements InstructorService {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Instructor getById(InstructorDTOId instructor) {
+    public Instructor getById(IdentificationInstructorDTO instructor) {
         return this.findById(instructor).orElseThrow(InvalidParameterException::new);
     }
 
-    public List<Instructor> getByFullName(InstructorDTO instructor) {
+    public List<Instructor> getByFullName(BasicInstructorDTO instructor) {
         return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
     }
 
@@ -60,14 +60,14 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void checkId(InstructorDTOId instructorDTOId) {
-        Optional<Instructor> instructor=instructorRepository.findById(instructorDTOId.getId());
+    public void checkId(IdentificationInstructorDTO identificationInstructorDTO) {
+        Optional<Instructor> instructor=instructorRepository.findById(identificationInstructorDTO.getId());
         if (instructor.isEmpty())
             throw new InvalidIdInstructor();
     }
 
     @Override
-    public void checkInstructor(InstructorDTO instructor){
+    public void checkInstructor(BasicInstructorDTO instructor){
         if (instructor.getLastName().length()==0)
             throw new InvalidLastName();
         if (instructor.getFirstName().length()==0)

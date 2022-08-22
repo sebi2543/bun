@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.InstructorProfileDTO;
-import com.example.demo.dto.InstructorProfileDTOId;
+import com.example.demo.dto.BasicInstructorProfileDTO;
+import com.example.demo.dto.IdentificationProfileDTO;
 import com.example.demo.entity.InstructorProfile;
 import com.example.demo.exception.InvalidInstructorProfileId;
 import com.example.demo.exception.InvalidLikedIn;
@@ -26,8 +26,8 @@ public class InstructorProfileImpl implements InstructorProfileService{
     }
 
     @Override
-    public Optional<InstructorProfile> findById(InstructorProfileDTOId instructorProfileDTOId) {
-        return instructorProfileRepository.findById(instructorProfileDTOId.getId());
+    public Optional<InstructorProfile> findById(IdentificationProfileDTO identificationProfileDTO) {
+        return instructorProfileRepository.findById(identificationProfileDTO.getId());
     }
 
     @Override
@@ -36,8 +36,8 @@ public class InstructorProfileImpl implements InstructorProfileService{
     }
 
     @Override
-    public InstructorProfile getById(InstructorProfileDTOId instructorProfileDTOId) {
-       return this.findById(instructorProfileDTOId).orElseThrow(InvalidParameterException::new);
+    public InstructorProfile getById(IdentificationProfileDTO identificationProfileDTO) {
+       return this.findById(identificationProfileDTO).orElseThrow(InvalidParameterException::new);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class InstructorProfileImpl implements InstructorProfileService{
     }
 
     @Override
-    public void checkId(InstructorProfileDTOId instructorProfileDTOId) {
-        Optional<InstructorProfile>instructorProfile=instructorProfileRepository.findById(instructorProfileDTOId.getId());
+    public void checkId(IdentificationProfileDTO identificationProfileDTO) {
+        Optional<InstructorProfile>instructorProfile=instructorProfileRepository.findById(identificationProfileDTO.getId());
         if (instructorProfile.isEmpty()) {
             throw new InvalidInstructorProfileId();
         }
@@ -60,10 +60,10 @@ public class InstructorProfileImpl implements InstructorProfileService{
     }
 
     @Override
-    public void checkInstructorProfile(InstructorProfileDTO instructorProfileDTO) {
-        if (instructorProfileDTO.getLinkedin().length()==0)
+    public void checkInstructorProfile(BasicInstructorProfileDTO basicInstructorProfileDTO) {
+        if (basicInstructorProfileDTO.getLinkedin().length()==0)
             throw new InvalidLikedIn();
-        if (instructorProfileDTO.getYoutube().length()==0)
+        if (basicInstructorProfileDTO.getYoutube().length()==0)
             throw new InvalidYoutube();
     }
 }
