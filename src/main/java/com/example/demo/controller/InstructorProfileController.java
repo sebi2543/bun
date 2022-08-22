@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.InstructorDTO;
-import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.dto.InstructorProfileDTO;
 import com.example.demo.dto.InstructorProfileDTOId;
 import com.example.demo.entity.InstructorProfile;
