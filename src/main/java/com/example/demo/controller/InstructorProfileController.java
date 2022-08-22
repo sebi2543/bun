@@ -5,6 +5,7 @@ import com.example.demo.dto.InstructorProfileDTOId;
 import com.example.demo.entity.InstructorProfile;
 import com.example.demo.mapper.InstructorProfileMapper;
 import com.example.demo.service.InstructorProfileService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +14,11 @@ import java.util.List;
 
 @RequestMapping(value = "instructor/profile")
 @RestController
+@RequiredArgsConstructor
 public class InstructorProfileController {
 
-    @Autowired
-    InstructorProfileService instructorProfileService;
-
-    @Autowired
-    InstructorProfileMapper instructorProfileMapper;
+    final InstructorProfileService instructorProfileService;
+    final InstructorProfileMapper instructorProfileMapper;
 
     @GetMapping("/all")
     public HttpEntity<List<InstructorProfileDTO>>all(){

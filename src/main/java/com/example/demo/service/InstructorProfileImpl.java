@@ -7,18 +7,18 @@ import com.example.demo.exception.InvalidInstructorProfileId;
 import com.example.demo.exception.InvalidLikedIn;
 import com.example.demo.exception.InvalidYoutube;
 import com.example.demo.repository.InstructorProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class InstructorProfileImpl implements InstructorProfileService{
 
-    @Autowired
-    InstructorProfileRepository instructorProfileRepository;
+
+    final InstructorProfileRepository instructorProfileRepository;
 
     @Override
     public Optional<List<InstructorProfile>> findAll() {

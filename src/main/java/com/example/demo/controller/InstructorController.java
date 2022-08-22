@@ -7,6 +7,7 @@ import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "instructor")
+@RequiredArgsConstructor
 public class InstructorController {
 
-    @Autowired
-    InstructorService instructorService;
-
-    @Autowired
-    InstructorMapper instructorMapper;
-
-    @Autowired
-    CourseService courseService;
+    final InstructorService instructorService;
+    final InstructorMapper instructorMapper;
+    final CourseService courseService;
 
     @GetMapping(value = {"/all"})
     public HttpEntity<List<InstructorDTO>> showMainPage() {

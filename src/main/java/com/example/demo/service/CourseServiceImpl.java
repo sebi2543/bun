@@ -8,6 +8,7 @@ import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.security.InvalidParameterException;
@@ -15,14 +16,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
 
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    InstructorService instructorService;
-    @Autowired
-    CourseMapper courseMapper;
+    final CourseRepository courseRepository;
 
     public Course  save(Course course){
        return  courseRepository.save(course);

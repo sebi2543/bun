@@ -7,23 +7,19 @@ import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping(value = "course")
 @RestController
+@RequiredArgsConstructor
 public class CourseController {
 
-    @Autowired
-    CourseService courseService;
-
-    @Autowired
-    CourseMapper courseMapper;
-
-    @Autowired
-    InstructorService instructorService;
+   final CourseService courseService;
+   final CourseMapper courseMapper;
+   final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
     public HttpEntity<List<CourseDTO>>showMainPage(){

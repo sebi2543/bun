@@ -4,21 +4,21 @@ import com.example.demo.dto.InstructorDTO;
 import com.example.demo.dto.InstructorDTOId;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidFirstName;
-import com.example.demo.exception.InvalidIdCourse;
 import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.exception.InvalidLastName;
 import com.example.demo.repository.InstructorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class InstructorServiceImpl implements InstructorService {
 
-    @Autowired
-    InstructorRepository instructorRepository;
+
+   final InstructorRepository instructorRepository;
 
     public void save(Instructor instructor) {
         instructorRepository.save(instructor);
