@@ -65,7 +65,7 @@ public class CourseController {
         return new HttpEntity<>(courseService.getById(identificationCourseDTO));
     }
 
-    @PostMapping("/{id}/update")
+    @PutMapping("/{id}/update")
     public List<Course>update(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
         courseService.checkId(new IdentificationCourseDTO((long)id));
         Course course=courseService.getById(new IdentificationCourseDTO((long) id));
@@ -75,7 +75,7 @@ public class CourseController {
         return (courseService.getAll());
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public List<BasicCourseDTO>delete(@PathVariable int id){
         courseService.checkId(new IdentificationCourseDTO((long)id));
         Course course=courseService.getById(new IdentificationCourseDTO((long) id));

@@ -39,7 +39,7 @@ public class InstructorProfileController {
         return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public List<BasicInstructorProfileDTO>delete(@PathVariable int  id){
         instructorProfileService.checkId(new IdentificationProfileDTO((long) id));
         IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);
@@ -48,7 +48,7 @@ public class InstructorProfileController {
         return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
     }
 
-    @GetMapping("/{id}/update")
+    @PutMapping("/{id}/update")
     public List<BasicInstructorProfileDTO>delete(@PathVariable int  id, @RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
         instructorProfileService.checkId(new IdentificationProfileDTO((long) id));
         IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);

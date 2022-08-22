@@ -47,7 +47,7 @@ public class InstructorController {
         return (instructorMapper.toBasic(instructor));
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public List<BasicInstructorDTO> deleteIdInstructor(@PathVariable int id) {
         instructorService.checkId(new IdentificationInstructorDTO((long) id));
         instructorService.delete(instructorMapper.toBasic(new IdentificationInstructorDTO((long) id)));
@@ -67,7 +67,7 @@ public class InstructorController {
         System.err.println(instructorService.getById(identificationInstructorDTO));
     }
 
-    @PostMapping("/{id}/update")
+    @PutMapping("/{id}/update")
     public List<Instructor>update(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
         instructorService.checkId(new IdentificationInstructorDTO((long) id));
         Instructor instructor=instructorService.getById(new IdentificationInstructorDTO((long) id));
