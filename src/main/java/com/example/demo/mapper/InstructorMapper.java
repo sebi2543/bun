@@ -11,36 +11,36 @@ public interface InstructorMapper {
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    BasicInstructorDTO instructorToDTO(Instructor instructor);
+    BasicInstructorDTO toBasic(Instructor instructor);
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    List<BasicInstructorDTO>instructorsToDTOS(List<Instructor>instructor);
+    List<BasicInstructorDTO>toBasic(List<Instructor>instructor);
 
     @Mapping(source ="firstName",target = "firstName")
     @Mapping(source ="lastName",target = "lastName")
-    Instructor instructorDTOtoInstructor(BasicInstructorDTO instructor);
+    Instructor toEntity(BasicInstructorDTO instructor);
 
     @Mapping(source ="id",target = "id")
-    Instructor instructorDTOIdTOInstructor(IdentificationInstructorDTO instructor);
-
-    @Mapping(source ="id",target = "id")
-    @Mapping(source = "rating",target = "rating")
-    SortInstructorDTO instructorToInstructorDTORating(Instructor instructor);
+    Instructor toBasic(IdentificationInstructorDTO instructor);
 
     @Mapping(source ="id",target = "id")
     @Mapping(source = "rating",target = "rating")
-    List<SortInstructorDTO> instructorsToInstructorDTOSRating(List<Instructor> instructor);
+    SortInstructorDTO toSort(Instructor instructor);
+
+    @Mapping(source ="id",target = "id")
+    @Mapping(source = "rating",target = "rating")
+    List<SortInstructorDTO> toSort(List<Instructor> instructor);
 
     @Mapping(source ="firstName",target = "firstName")
-    FirstNameExceptionInstructorDTO instructorToInstructorDTOFirstName(Instructor instructor);
+    FirstNameExceptionInstructorDTO toFirstNameException(Instructor instructor);
 
     @Mapping(source ="firstName",target = "firstName")
-    List<FirstNameExceptionInstructorDTO> instructorsToInstructorDTOFirstNames(List<Instructor> instructor);
+    List<FirstNameExceptionInstructorDTO> toFirstNameException(List<Instructor> instructor);
 
     @Mapping(source ="lastName",target = "lastName")
-    LastNameExceptionInstructorDTO instructorToInstructorDTOLastName(Instructor instructor);
+    LastNameExceptionInstructorDTO toLastNameException(Instructor instructor);
 
     @Mapping(source ="lastName",target = "lastName")
-   List<LastNameExceptionInstructorDTO>instructorsToInstructorDTOLastNames(List<Instructor> instructor);
+   List<LastNameExceptionInstructorDTO> toLastNameException(List<Instructor> instructor);
 }

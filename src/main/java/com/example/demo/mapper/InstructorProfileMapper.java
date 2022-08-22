@@ -11,15 +11,15 @@ public interface InstructorProfileMapper {
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    BasicInstructorProfileDTO instructorProfileToDTO(InstructorProfile instructorProfile);
+    BasicInstructorProfileDTO toBasic(InstructorProfile instructorProfile);
 
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    List<BasicInstructorProfileDTO> instructorsProfileToDTOS(List<InstructorProfile> instructorProfile);
+    List<BasicInstructorProfileDTO> toBasic(List<InstructorProfile> instructorProfile);
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    InstructorProfile instructorDTOToInstructor(BasicInstructorProfileDTO basicInstructorProfileDTO);
+    InstructorProfile toEntity(BasicInstructorProfileDTO basicInstructorProfileDTO);
 
 }

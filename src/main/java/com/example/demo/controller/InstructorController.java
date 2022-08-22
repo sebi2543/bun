@@ -24,34 +24,34 @@ public class InstructorController {
     @GetMapping(value = {"/all"})
     public HttpEntity<List<BasicInstructorDTO>> showMainPage() {
         List<Instructor> instructors = instructorService.getAll();
-        return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
+        return new HttpEntity<>(instructorMapper.toBasic(instructors));
     }
 
     @PostMapping("/add")
     public HttpEntity<BasicInstructorDTO> add(@RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
         instructorService.checkInstructor(basicInstructorDTO);
-        instructorService.save(instructorMapper.instructorDTOtoInstructor(basicInstructorDTO));
+        instructorService.save(instructorMapper.toEntity(basicInstructorDTO));
         return new HttpEntity<>(basicInstructorDTO);
     }
 
     @PostMapping("/search")
     public HttpEntity<List<BasicInstructorDTO>> showSuitableInstructors(@RequestBody BasicInstructorDTO instructor) {
         List<Instructor> instructors = instructorService.getByFullName(instructor);
-        return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructors));
+        return new HttpEntity<>(instructorMapper.toBasic(instructors));
     }
 
     @GetMapping("/{id}")
     public HttpEntity<BasicInstructorDTO> showIdInstructor(@PathVariable int id) {
         instructorService.checkId(new IdentificationInstructorDTO((long) id));
         Instructor instructor = instructorService.getById(new IdentificationInstructorDTO((long) id));
-        return new HttpEntity<BasicInstructorDTO>(instructorMapper.instructorToDTO(instructor));
+        return new HttpEntity<BasicInstructorDTO>(instructorMapper.toBasic(instructor));
     }
 
     @GetMapping("/{id}/delete")
     public HttpEntity<List<BasicInstructorDTO>> deleteIdInstructor(@PathVariable int id) {
         instructorService.checkId(new IdentificationInstructorDTO((long) id));
-        instructorService.delete(instructorMapper.instructorDTOIdTOInstructor(new IdentificationInstructorDTO((long) id)));
-        return new HttpEntity<>(instructorMapper.instructorsToDTOS(instructorService.getAll()));
+        instructorService.delete(instructorMapper.toBasic(new IdentificationInstructorDTO((long) id)));
+        return new HttpEntity<>(instructorMapper.toBasic(instructorService.getAll()));
     }
 
     //NEFUNCTIONAL
@@ -79,7 +79,7 @@ public class InstructorController {
 
     @GetMapping("/best")
     public HttpEntity<List<SortInstructorDTO>> best(){
-        return new HttpEntity<>(instructorMapper.instructorsToInstructorDTOSRating(instructorService.getAllOrderByRating()));
+        return new HttpEntity<>(instructorMapper.toSort(instructorService.getAllOrderByRating()));
     }
 }
 

@@ -12,23 +12,23 @@ import java.util.List;
 public interface CourseMapper {
 
     @Mapping(target = "title",source = "title")
-    BasicCourseDTO courseToDTO(Course course);
+    BasicCourseDTO toBasic(Course course);
 
     @Mapping(target = "title",source = "title")
-    List<BasicCourseDTO>coursesToDTOS(List<Course> courses);
+    List<BasicCourseDTO> toBasics(List<Course> courses);
 
     @Mapping(target = "id",source = "id")
-    Course courseDTOIdTOCourse(IdentificationCourseDTO course);
+    Course toEntity(IdentificationCourseDTO course);
 
     @Mapping(target = "title",source = "title")
-    Course courseDTOToCourse(BasicCourseDTO basicCourseDTO);
-
-    @Mapping(target = "title",source = "title")
-    @Mapping(target = "rating",source = "rating")
-    SortCourseDTO courseToCourseDTORating(Course course);
+    Course toEntity(BasicCourseDTO basicCourseDTO);
 
     @Mapping(target = "title",source = "title")
     @Mapping(target = "rating",source = "rating")
-    List<SortCourseDTO> coursesToCourseDTOSRating(List<Course> courses);
+    SortCourseDTO toSort(Course course);
+
+    @Mapping(target = "title",source = "title")
+    @Mapping(target = "rating",source = "rating")
+    List<SortCourseDTO>toSort(List<Course> courses);
 
 }

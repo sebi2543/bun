@@ -29,7 +29,7 @@ public class InvalidHandler {
     public HttpEntity<InvalidTitleContainer>invalidTitle(){
         return new HttpEntity<>(new InvalidTitleContainer(
                 "Title cannot be null,these are some valid titles",
-                courseMapper.coursesToDTOS(courseService.getAll()))
+                courseMapper.toBasics(courseService.getAll()))
         );
     }
 
@@ -37,13 +37,13 @@ public class InvalidHandler {
     public HttpEntity<InvalidFirstNameContainer>invalidFirstName(){
         return new HttpEntity<>(
                 new InvalidFirstNameContainer("firstName cannot be null",
-                instructorMapper.instructorsToInstructorDTOFirstNames(instructorService.getAll())));
+                instructorMapper.toFirstNameException(instructorService.getAll())));
     }
     @ExceptionHandler(InvalidLastName.class)
     public HttpEntity<InvalidLastNameContainer>invalidLastName(){
         return new HttpEntity<>(
                 new InvalidLastNameContainer("LastName cannot be null",
-                       instructorMapper.instructorsToInstructorDTOLastNames(instructorService.getAll())));
+                       instructorMapper.toLastNameException(instructorService.getAll())));
     }
 
     @ExceptionHandler(InvalidIdCourse.class)

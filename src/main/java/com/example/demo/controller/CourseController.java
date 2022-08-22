@@ -24,34 +24,34 @@ public class CourseController {
     @GetMapping(value = {"/all"})
     public HttpEntity<List<BasicCourseDTO>>showMainPage(){
         List<Course>courses = courseService.getAll();
-        return  new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return  new HttpEntity<>(courseMapper.toBasics(courses));
     }
 
     @PostMapping("/search")
     public HttpEntity<List<BasicCourseDTO>>showSuitableCourses(@RequestBody BasicCourseDTO course) throws InvalidTitle {
         courseService.checkTitle(course);
         List<Course>courses = courseService.getByTitle(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return new HttpEntity<>(courseMapper.toBasics(courses));
     }
 
     @PostMapping("/suggestion")
     public HttpEntity<List<BasicCourseDTO>>showAutoSuggestion(@RequestBody BasicCourseDTO course){
         List<Course>courses = courseService.getByTitleLike(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return new HttpEntity<>(courseMapper.toBasics(courses));
     }
 
     @GetMapping("/{id}")
     public HttpEntity<BasicCourseDTO>showIdCourse(@PathVariable int id){
         courseService.checkId(new IdentificationCourseDTO((long)id));
         Course course = courseService.getById(new IdentificationCourseDTO((long) id));
-        return new HttpEntity<BasicCourseDTO>(courseMapper.courseToDTO(course));
+        return new HttpEntity<BasicCourseDTO>(courseMapper.toBasic(course));
     }
 
     @PostMapping("/add")
     public HttpEntity<List<BasicCourseDTO>>add(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
         courseService.checkTitle(basicCourseDTO);
-        courseService.save(courseMapper.courseDTOToCourse(basicCourseDTO));
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
+        courseService.save(courseMapper.toEntity(basicCourseDTO));
+        return new HttpEntity<>(courseMapper.toBasics(courseService.getAll()));
     }
 
     //NEFUNCTIONAL
@@ -80,12 +80,12 @@ public class CourseController {
         courseService.checkId(new IdentificationCourseDTO((long)id));
         Course course=courseService.getById(new IdentificationCourseDTO((long) id));
         courseService.delete(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
+        return new HttpEntity<>(courseMapper.toBasics(courseService.getAll()));
     }
 
     @GetMapping("/best")
     public HttpEntity<List<SortCourseDTO>>best(){
-        return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
+        return new HttpEntity<>(courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
     }
 }
 
