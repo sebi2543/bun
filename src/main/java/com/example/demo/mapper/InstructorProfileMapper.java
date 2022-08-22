@@ -1,11 +1,9 @@
 package com.example.demo.mapper;
 
 import com.example.demo.dto.InstructorProfileDTO;
-import com.example.demo.dto.InstructorProfileDTOLinkedIn;
 import com.example.demo.entity.InstructorProfile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
