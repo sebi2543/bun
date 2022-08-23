@@ -8,6 +8,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.InstructorProfile;
 import com.example.demo.exception.InvalidIdInstructor;
+import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorProfileRepository;
 import com.example.demo.repository.InstructorRepository;
@@ -25,6 +26,7 @@ public class InstructorServiceImpl implements InstructorService {
    final InstructorRepository instructorRepository;
    final CourseRepository courseRepository;
    final InstructorProfileRepository instructorProfileRepository;
+   final InstructorMapper instructorMapper;
 
     public void save(Instructor instructor) {
         instructorRepository.save(instructor);
@@ -61,8 +63,9 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void delete(Instructor instructor) {
-        instructorRepository.delete(instructor);
+    public void delete(IdentificationInstructorDTO identificationInstructorDTO) {
+        this.checkId(identificationInstructorDTO);
+        instructorRepository.delete(instructorMapper.toEntity(identificationInstructorDTO));
     }
 
     @Override
@@ -95,6 +98,9 @@ public class InstructorServiceImpl implements InstructorService {
         instructor.setLastName(basicInstructorDTO.getLastName());
         instructorRepository.save(instructor);
     }
+
+
+
     @Override
     public void checkInstructor(BasicInstructorDTO instructor){
 //        if (instructor.getLastName().length()==0)
@@ -102,5 +108,7 @@ public class InstructorServiceImpl implements InstructorService {
 //        if (instructor.getFirstName().length()==0)
 //            throw new InvalidFirstName();
     }
+
+
 }
 

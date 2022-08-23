@@ -26,6 +26,13 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.save(course);
     }
 
+    @Override
+    public void delete(IdentificationCourseDTO identificationCourseDTO) {
+        this.checkId(identificationCourseDTO);
+        Course course=this.getById(identificationCourseDTO);
+        courseRepository.delete(course);
+    }
+
     public void saveAll(List<Course> courses) {
         courseRepository.saveAll(courses);
     }

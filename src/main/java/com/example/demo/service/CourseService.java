@@ -24,10 +24,9 @@ public interface CourseService {
     List<Course>getByTitle(BasicCourseDTO basicCourseDTO);
     List<Course>getAllOrderByRatingDesc();
     Course save(Course course);
-    void delete(Course course);
+    void delete(IdentificationCourseDTO identificationCourseDTO);
     void checkTitle(BasicCourseDTO basicCourseDTO);
     void checkId(IdentificationCourseDTO identificationCourseDTO);
     void update(IdentificationCourseDTO identificationCourseDTO,BasicCourseDTO basicCourseDTO);
     void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO);
-
 }

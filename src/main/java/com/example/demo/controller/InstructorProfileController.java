@@ -39,12 +39,8 @@ public class InstructorProfileController {
     }
 
     @DeleteMapping("/{id}/delete")
-    public List<BasicInstructorProfileDTO>delete(@PathVariable int  id){
-        instructorProfileService.checkId(new IdentificationInstructorProfileDTO((long) id));
-        IdentificationInstructorProfileDTO identificationInstructorProfileDTO =new IdentificationInstructorProfileDTO((long) id);
-        InstructorProfile instructorProfile=instructorProfileService.getById(identificationInstructorProfileDTO);
-        instructorProfileService.delete(instructorProfile);
-        return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
+    public void delete(@PathVariable int  id){
+        instructorProfileService.delete(new IdentificationInstructorProfileDTO((long) id));
     }
 
     @PutMapping("/{id}/update")

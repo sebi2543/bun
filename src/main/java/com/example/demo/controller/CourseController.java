@@ -67,11 +67,8 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}/delete")
-    public List<BasicCourseDTO>delete(@PathVariable int id){
-        courseService.checkId(new IdentificationCourseDTO((long)id));
-        Course course=courseService.getById(new IdentificationCourseDTO((long) id));
-        courseService.delete(course);
-        return (courseMapper.toBasics(courseService.getAll()));
+    public void delete(@PathVariable int id){
+        courseService.delete(new IdentificationCourseDTO((long) id));
     }
 
     @GetMapping("/best")

@@ -48,10 +48,8 @@ public class InstructorController {
     }
 
     @DeleteMapping("/{id}/delete")
-    public List<BasicInstructorDTO> deleteIdInstructor(@PathVariable int id) {
-        instructorService.checkId(new IdentificationInstructorDTO((long) id));
-        instructorService.delete(instructorMapper.toBasic(new IdentificationInstructorDTO((long) id)));
-        return (instructorMapper.toBasic(instructorService.getAll()));
+    public void deleteIdInstructor(@PathVariable int id) {
+       instructorService.delete(new IdentificationInstructorDTO((long) id));
     }
 
     @PostMapping("/{id}/assign-course")

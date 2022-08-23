@@ -15,7 +15,7 @@ public interface InstructorProfileService {
     List<InstructorProfile>getAll();
     InstructorProfile getById(IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     InstructorProfile save(InstructorProfile instructorProfile);
-    void delete(InstructorProfile instructorProfile);
+    void delete(IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     void checkId(IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     void checkInstructorProfile(BasicInstructorProfileDTO basicInstructorProfileDTO);
     void update(IdentificationInstructorProfileDTO identificationInstructorProfileDTO, BasicInstructorProfileDTO basicInstructorProfileDTO);

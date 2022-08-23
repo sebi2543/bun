@@ -46,7 +46,8 @@ public class InstructorProfileImpl implements InstructorProfileService{
     }
 
     @Override
-    public void delete(InstructorProfile instructorProfile) {
+    public void delete(IdentificationInstructorProfileDTO identificationInstructorProfileDTO) {
+        InstructorProfile instructorProfile=this.getById(identificationInstructorProfileDTO);
         instructorProfileRepository.delete(instructorProfile);
     }
 

@@ -6,6 +6,7 @@ import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.dto.IdentificationInstructorProfileDTO;
 import com.example.demo.entity.Instructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +23,10 @@ public interface InstructorService {
     List<Instructor>getAllOrderByRating();
     void checkInstructor(BasicInstructorDTO instructor);
     void save(Instructor instructor);
-    void delete(Instructor instructor);
+    void delete(IdentificationInstructorDTO identificationInstructorDTO);
     void checkId(IdentificationInstructorDTO identificationInstructorDTO);
     void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO);
     void update(IdentificationInstructorDTO identificationInstructorDTO,BasicInstructorDTO basicInstructorDTO);
+
 }

@@ -22,7 +22,7 @@ public interface InstructorMapper {
     Instructor toEntity(BasicInstructorDTO instructor);
 
     @Mapping(source ="id",target = "id")
-    Instructor toBasic(IdentificationInstructorDTO instructor);
+    Instructor toEntity(IdentificationInstructorDTO instructor);
 
     @Mapping(source ="id",target = "id")
     @Mapping(source = "rating",target = "rating")
