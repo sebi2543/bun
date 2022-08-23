@@ -39,9 +39,7 @@ public class Instructor {
     }
 
     public void addCourse(Course course){
-        List<Course>old =courses;
-        this.courses=new ArrayList<>(old);
-        courses.add(course);
+        this.courses.add(course);
     }
 
     @Override

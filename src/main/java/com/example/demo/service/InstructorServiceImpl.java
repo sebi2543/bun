@@ -1,11 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicInstructorDTO;
+import com.example.demo.dto.IdentificationCourseDTO;
 import com.example.demo.dto.IdentificationInstructorDTO;
+import com.example.demo.dto.IdentificationProfileDTO;
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
+import com.example.demo.entity.InstructorProfile;
 import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.exception.InvalidLastName;
+import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.InstructorProfileRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +25,8 @@ public class InstructorServiceImpl implements InstructorService {
 
 
    final InstructorRepository instructorRepository;
+   final CourseRepository courseRepository;
+   final InstructorProfileRepository instructorProfileRepository;
 
     public void save(Instructor instructor) {
         instructorRepository.save(instructor);
@@ -64,6 +72,22 @@ public class InstructorServiceImpl implements InstructorService {
         Optional<Instructor> instructor=instructorRepository.findById(identificationInstructorDTO.getId());
         if (instructor.isEmpty())
             throw new InvalidIdInstructor();
+    }
+
+    @Override
+    public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationProfileDTO identificationProfileDTO) {
+        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.id).get();
+        InstructorProfile instructorProfile=instructorProfileRepository.findById(identificationProfileDTO.id).get();
+        instructor.setInstructorProfile(instructorProfile);
+        instructorRepository.save(instructor);
+    }
+
+    @Override
+    public void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO) {
+        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.getId()).get();
+        Course course=courseRepository.findById(identificationCourseDTO.getId()).get();
+        instructor.addCourse(course);
+        instructorRepository.save(instructor);
     }
 
     @Override

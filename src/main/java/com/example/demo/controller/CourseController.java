@@ -51,7 +51,7 @@ public class CourseController {
 
     @PostMapping("/add")
     public List<BasicCourseDTO>add(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
-//        courseService.checkTitle(basicCourseDTO);
+        courseService.checkTitle(basicCourseDTO);
         courseService.save(courseMapper.toEntity(basicCourseDTO));
         return courseMapper.toBasics(courseService.getAll());
     }

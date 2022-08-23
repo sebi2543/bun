@@ -56,19 +56,15 @@ public class InstructorController {
         return (instructorMapper.toBasic(instructorService.getAll()));
     }
 
-    //NEFUNCTIONAL
-    @PostMapping("/{id}/assign-course")
-     public void add(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
-        IdentificationInstructorDTO identificationInstructorDTO =new IdentificationInstructorDTO((long) id);
-        Instructor instructor=instructorService.getById(identificationInstructorDTO);
-        Course course=courseService.getById(identificationCourseDTO);
-        instructor.addCourse(course);
-        instructorService.save(instructor);
-        System.err.println(course);
-        System.err.println(instructor);
-        System.err.println(instructorService.getById(identificationInstructorDTO));
-    }
 
+    @PostMapping("/{id}/assign-course")
+     public void assign(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
+        instructorService.assignCourse(new IdentificationInstructorDTO((long) id),identificationCourseDTO);
+    }
+    @PostMapping("/{id}/assign-profile")
+    public void assignProfile(@PathVariable int id,@RequestBody IdentificationProfileDTO identificationProfileDTO){
+        instructorService.assignProfile(new IdentificationInstructorDTO((long)id),identificationProfileDTO);
+    }
     @PutMapping("/{id}/update")
     public List<Instructor>update(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
         instructorService.checkId(new IdentificationInstructorDTO((long) id));
