@@ -56,15 +56,9 @@ public class CourseController {
         return courseMapper.toBasics(courseService.getAll());
     }
 
-    //NEFUNCTIONAL
     @PostMapping("/{id}/assign-instructor")
-    public HttpEntity<Course> assignCourse(@PathVariable int id, @RequestBody IdentificationInstructorDTO identificationInstructorDTO){
-        IdentificationCourseDTO identificationCourseDTO = new IdentificationCourseDTO((long) id);
-        Course course=courseService.getById(identificationCourseDTO);
-        Instructor instructor=instructorService.getById(identificationInstructorDTO);
-        course.setInstructor(instructor);
-        courseService.save(course);
-        return new HttpEntity<>(courseService.getById(identificationCourseDTO));
+    public void  assignCourse(@PathVariable int id, @RequestBody IdentificationInstructorDTO identificationInstructorDTO){
+     courseService.assignInstructor(new IdentificationCourseDTO((long) id),identificationInstructorDTO);
     }
 
     @PutMapping("/{id}/update")

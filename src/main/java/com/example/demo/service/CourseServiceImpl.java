@@ -2,10 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.IdentificationCourseDTO;
+import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidIdCourse;
 import com.example.demo.exception.InvalidTitle;
 import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.security.InvalidParameterException;
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
+    final InstructorRepository instructorRepository;
 
     public Course  save(Course course){
        return  courseRepository.save(course);
@@ -41,6 +45,8 @@ public class CourseServiceImpl implements CourseService {
         if (course.isEmpty())
             throw new InvalidIdCourse();
     }
+
+
 
     public Optional<List<Course>>findAll(){
         return Optional.of(courseRepository.findAll());
@@ -79,4 +85,11 @@ public class CourseServiceImpl implements CourseService {
        return courseRepository.findAllOrderByRating();
     }
 
+    @Override
+    public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
+        Course course=courseRepository.findById(identificationCourseDTO.getId()).get();
+        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.getId()).get();
+        course.setInstructor(instructor);
+        courseRepository.save(course);
+    }
 }

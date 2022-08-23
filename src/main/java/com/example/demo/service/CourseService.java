@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.IdentificationCourseDTO;
+import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -23,5 +24,6 @@ public interface CourseService {
     void delete(Course course);
     void checkTitle(BasicCourseDTO basicCourseDTO);
     void checkId(IdentificationCourseDTO identificationCourseDTO);
+    void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO);
 
 }
