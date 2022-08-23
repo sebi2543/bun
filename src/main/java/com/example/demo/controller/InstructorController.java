@@ -10,6 +10,8 @@ import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,8 +30,8 @@ public class InstructorController {
     }
 
     @PostMapping("/add")
-    public BasicInstructorDTO add(@RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
-        instructorService.checkInstructor(basicInstructorDTO);
+    public BasicInstructorDTO add(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
+//        instructorService.checkInstructor(basicInstructorDTO);
         instructorService.save(instructorMapper.toEntity(basicInstructorDTO));
         return basicInstructorDTO;
     }

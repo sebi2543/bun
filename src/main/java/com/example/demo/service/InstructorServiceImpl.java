@@ -68,10 +68,10 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public void checkInstructor(BasicInstructorDTO instructor){
-        if (instructor.getLastName().length()==0)
-            throw new InvalidLastName();
-        if (instructor.getFirstName().length()==0)
-            throw new InvalidFirstName();
+//        if (instructor.getLastName().length()==0)
+//            throw new InvalidLastName();
+//        if (instructor.getFirstName().length()==0)
+//            throw new InvalidFirstName();
     }
 }
 

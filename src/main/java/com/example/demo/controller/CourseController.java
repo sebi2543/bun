@@ -10,6 +10,8 @@ import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "course")
@@ -17,9 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CourseController {
 
-   final CourseService courseService;
-   final CourseMapper courseMapper;
-   final InstructorService instructorService;
+    final CourseService courseService;
+    final CourseMapper courseMapper;
+    final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
     public List<BasicCourseDTO>showMainPage(){
@@ -49,7 +51,7 @@ public class CourseController {
 
     @PostMapping("/add")
     public List<BasicCourseDTO>add(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
-        courseService.checkTitle(basicCourseDTO);
+//        courseService.checkTitle(basicCourseDTO);
         courseService.save(courseMapper.toEntity(basicCourseDTO));
         return courseMapper.toBasics(courseService.getAll());
     }
@@ -88,4 +90,3 @@ public class CourseController {
         return (courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
     }
 }
-

@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "courses")
@@ -16,6 +17,7 @@ public class Course {
     private Long id;
 
     @Column
+    @NotNull
     private String title;
 
     @ManyToOne
