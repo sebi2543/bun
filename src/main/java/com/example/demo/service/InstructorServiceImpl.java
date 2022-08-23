@@ -99,6 +99,11 @@ public class InstructorServiceImpl implements InstructorService {
         instructorRepository.save(instructor);
     }
 
+    @Override
+    public void add(BasicInstructorDTO basicInstructorDTO) {
+      Instructor instructor=instructorMapper.toEntity(basicInstructorDTO);
+      instructorRepository.save(instructor);
+    }
 
 
     @Override

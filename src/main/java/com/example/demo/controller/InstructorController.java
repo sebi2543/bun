@@ -28,10 +28,8 @@ public class InstructorController {
     }
 
     @PostMapping("/add")
-    public BasicInstructorDTO add(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
-//        instructorService.checkInstructor(basicInstructorDTO);
-        instructorService.save(instructorMapper.toEntity(basicInstructorDTO));
-        return basicInstructorDTO;
+    public void  add(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
+        instructorService.add(basicInstructorDTO);
     }
 
     @PostMapping("/search")

@@ -7,6 +7,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidIdCourse;
 import com.example.demo.exception.InvalidTitle;
+import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
     final InstructorRepository instructorRepository;
-
+    final CourseMapper courseMapper;
     public Course save(Course course) {
         return courseRepository.save(course);
     }
@@ -90,6 +91,13 @@ public class CourseServiceImpl implements CourseService {
         course.setInstructor(instructor);
         courseRepository.save(course);
     }
+
+    @Override
+    public void add(BasicCourseDTO basicCourseDTO) {
+        Course course=courseMapper.toEntity(basicCourseDTO);
+        courseRepository.save(course);
+    }
+
 
     @Override
     public void checkId(IdentificationCourseDTO identificationCourseDTO) {

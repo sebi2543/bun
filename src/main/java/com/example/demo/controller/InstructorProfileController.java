@@ -32,10 +32,8 @@ public class InstructorProfileController {
 
     }
     @PostMapping("/add")
-    public List<BasicInstructorProfileDTO>add(@RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
-        instructorProfileService.checkInstructorProfile(basicInstructorProfileDTO);
-        instructorProfileService.save(instructorProfileMapper.toEntity(basicInstructorProfileDTO));
-        return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
+    public void add(@RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
+
     }
 
     @DeleteMapping("/{id}/delete")

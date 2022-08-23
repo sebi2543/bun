@@ -29,4 +29,5 @@ public interface CourseService {
     void checkId(IdentificationCourseDTO identificationCourseDTO);
     void update(IdentificationCourseDTO identificationCourseDTO,BasicCourseDTO basicCourseDTO);
     void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO);
+    void add(BasicCourseDTO basicCourseDTO);
 }

@@ -28,5 +28,5 @@ public interface InstructorService {
     void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO);
     void update(IdentificationInstructorDTO identificationInstructorDTO,BasicInstructorDTO basicInstructorDTO);
-
+    void add(BasicInstructorDTO basicInstructorDTO);
 }

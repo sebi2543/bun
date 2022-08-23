@@ -19,5 +19,5 @@ public interface InstructorProfileService {
     void checkId(IdentificationInstructorProfileDTO identificationInstructorProfileDTO);
     void checkInstructorProfile(BasicInstructorProfileDTO basicInstructorProfileDTO);
     void update(IdentificationInstructorProfileDTO identificationInstructorProfileDTO, BasicInstructorProfileDTO basicInstructorProfileDTO);
-
+    void add(BasicInstructorProfileDTO basicInstructorProfileDTO);
 }

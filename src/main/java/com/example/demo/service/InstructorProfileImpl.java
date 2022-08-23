@@ -6,6 +6,7 @@ import com.example.demo.entity.InstructorProfile;
 import com.example.demo.exception.InvalidInstructorProfileId;
 import com.example.demo.exception.InvalidLikedIn;
 import com.example.demo.exception.InvalidYoutube;
+import com.example.demo.mapper.InstructorProfileMapper;
 import com.example.demo.repository.InstructorProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class InstructorProfileImpl implements InstructorProfileService{
 
 
     final InstructorProfileRepository instructorProfileRepository;
+    final InstructorProfileMapper instructorProfileMapper;
 
     @Override
     public Optional<List<InstructorProfile>> findAll() {
@@ -73,6 +75,12 @@ public class InstructorProfileImpl implements InstructorProfileService{
         InstructorProfile instructorProfile=this.getById(identificationInstructorProfileDTO);
         instructorProfile.setYoutube(basicInstructorProfileDTO.getYoutube());
         instructorProfile.setLinkedin(basicInstructorProfileDTO.getLinkedin());
+        instructorProfileRepository.save(instructorProfile);
+    }
+
+    @Override
+    public void add(BasicInstructorProfileDTO basicInstructorProfileDTO) {
+        InstructorProfile instructorProfile=instructorProfileMapper.toEntity(basicInstructorProfileDTO);
         instructorProfileRepository.save(instructorProfile);
     }
 
