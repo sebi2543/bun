@@ -5,6 +5,9 @@ import com.example.demo.dto.IdentificationCourseDTO;
 import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,7 @@ public interface CourseService {
     void delete(Course course);
     void checkTitle(BasicCourseDTO basicCourseDTO);
     void checkId(IdentificationCourseDTO identificationCourseDTO);
+    void update(IdentificationCourseDTO identificationCourseDTO,BasicCourseDTO basicCourseDTO);
     void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO);
 
 }

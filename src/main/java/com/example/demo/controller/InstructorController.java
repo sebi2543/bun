@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,23 +54,17 @@ public class InstructorController {
         return (instructorMapper.toBasic(instructorService.getAll()));
     }
 
-
     @PostMapping("/{id}/assign-course")
      public void assign(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
         instructorService.assignCourse(new IdentificationInstructorDTO((long) id),identificationCourseDTO);
     }
     @PostMapping("/{id}/assign-profile")
-    public void assignProfile(@PathVariable int id,@RequestBody IdentificationProfileDTO identificationProfileDTO){
-        instructorService.assignProfile(new IdentificationInstructorDTO((long)id),identificationProfileDTO);
+    public void assignProfile(@PathVariable int id,@RequestBody IdentificationInstructorProfileDTO identificationInstructorProfileDTO){
+        instructorService.assignProfile(new IdentificationInstructorDTO((long)id), identificationInstructorProfileDTO);
     }
     @PutMapping("/{id}/update")
-    public List<Instructor>update(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
-        instructorService.checkId(new IdentificationInstructorDTO((long) id));
-        Instructor instructor=instructorService.getById(new IdentificationInstructorDTO((long) id));
-        instructor.setFirstName(basicInstructorDTO.getFirstName());
-        instructor.setLastName(basicInstructorDTO.getLastName());
-        instructorService.save(instructor);
-        return instructorService.getAll();
+    public void update(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
+       instructorService.update(new IdentificationInstructorDTO((long) id),basicInstructorDTO);
     }
 
     @GetMapping("/best")

@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.BasicInstructorProfileDTO;
-import com.example.demo.dto.IdentificationProfileDTO;
+import com.example.demo.dto.IdentificationInstructorProfileDTO;
 import com.example.demo.entity.InstructorProfile;
 import com.example.demo.mapper.InstructorProfileMapper;
 import com.example.demo.service.InstructorProfileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +26,9 @@ public class InstructorProfileController {
 
     @GetMapping("/{id}")
     public BasicInstructorProfileDTO all(@PathVariable int id){
-        instructorProfileService.checkId(new IdentificationProfileDTO((long) id));
-        IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);
-        return (instructorProfileMapper.toBasic(instructorProfileService.getById(identificationProfileDTO)));
+        instructorProfileService.checkId(new IdentificationInstructorProfileDTO((long) id));
+        IdentificationInstructorProfileDTO identificationInstructorProfileDTO =new IdentificationInstructorProfileDTO((long) id);
+        return (instructorProfileMapper.toBasic(instructorProfileService.getById(identificationInstructorProfileDTO)));
 
     }
     @PostMapping("/add")
@@ -41,22 +40,16 @@ public class InstructorProfileController {
 
     @DeleteMapping("/{id}/delete")
     public List<BasicInstructorProfileDTO>delete(@PathVariable int  id){
-        instructorProfileService.checkId(new IdentificationProfileDTO((long) id));
-        IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);
-        InstructorProfile instructorProfile=instructorProfileService.getById(identificationProfileDTO);
+        instructorProfileService.checkId(new IdentificationInstructorProfileDTO((long) id));
+        IdentificationInstructorProfileDTO identificationInstructorProfileDTO =new IdentificationInstructorProfileDTO((long) id);
+        InstructorProfile instructorProfile=instructorProfileService.getById(identificationInstructorProfileDTO);
         instructorProfileService.delete(instructorProfile);
         return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
     }
 
     @PutMapping("/{id}/update")
-    public List<BasicInstructorProfileDTO>delete(@PathVariable int  id, @RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
-        instructorProfileService.checkId(new IdentificationProfileDTO((long) id));
-        IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);
-        InstructorProfile instructorProfile=instructorProfileService.getById(identificationProfileDTO);
-        instructorProfile.setLinkedin(basicInstructorProfileDTO.getLinkedin());
-        instructorProfile.setYoutube(basicInstructorProfileDTO.getYoutube());
-        instructorProfileService.save(instructorProfile);
-        return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
+    public void delete(@PathVariable int  id, @RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
+        instructorProfileService.update(new IdentificationInstructorProfileDTO((long) id),basicInstructorProfileDTO);
     }
 
 

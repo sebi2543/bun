@@ -22,74 +22,80 @@ public class CourseServiceImpl implements CourseService {
     final CourseRepository courseRepository;
     final InstructorRepository instructorRepository;
 
-    public Course  save(Course course){
-       return  courseRepository.save(course);
+    public Course save(Course course) {
+        return courseRepository.save(course);
     }
 
-    public void saveAll(List<Course> courses){
+    public void saveAll(List<Course> courses) {
         courseRepository.saveAll(courses);
     }
 
-    public void delete(Course course){
+    public void delete(Course course) {
         courseRepository.delete(course);
     }
 
-    public  void checkTitle(BasicCourseDTO basicCourseDTO){
-        if (basicCourseDTO.getTitle().length()==0)
-            throw  new InvalidTitle();
+    public void checkTitle(BasicCourseDTO basicCourseDTO) {
+        if (basicCourseDTO.getTitle().length() == 0)
+            throw new InvalidTitle();
     }
 
-    @Override
-    public void checkId(IdentificationCourseDTO identificationCourseDTO) {
-        Optional<Course> course =courseRepository.findById(identificationCourseDTO.getId());
-        if (course.isEmpty())
-            throw new InvalidIdCourse();
-    }
-
-
-
-    public Optional<List<Course>>findAll(){
+    public Optional<List<Course>> findAll() {
         return Optional.of(courseRepository.findAll());
     }
 
-    public Optional<Course>findById(IdentificationCourseDTO course){
+    public Optional<Course> findById(IdentificationCourseDTO course) {
         return (courseRepository.findById(course.getId()));
     }
 
-    public Optional<List<Course>>findByTitleLike(BasicCourseDTO basicCourseDTO){
+    public Optional<List<Course>> findByTitleLike(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitleLike(basicCourseDTO.getTitle());
     }
 
-    public Optional<List<Course>>findByTitle(BasicCourseDTO basicCourseDTO){
+    public Optional<List<Course>> findByTitle(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitle(basicCourseDTO.getTitle());
     }
 
-    public List<Course> getAll(){
+    public List<Course> getAll() {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Course getById(IdentificationCourseDTO course){
+    public Course getById(IdentificationCourseDTO course) {
         return this.findById(course).orElseThrow(InvalidParameterException::new);
     }
 
-    public List<Course>getByTitleLike(BasicCourseDTO basicCourseDTO){
+    public List<Course> getByTitleLike(BasicCourseDTO basicCourseDTO) {
         return this.findByTitleLike(basicCourseDTO).orElseThrow(InvalidParameterException::new);
     }
 
-    public List<Course>getByTitle(BasicCourseDTO basicCourseDTO){
+    public List<Course> getByTitle(BasicCourseDTO basicCourseDTO) {
         return this.findByTitle(basicCourseDTO).orElseThrow(InvalidParameterException::new);
     }
 
     @Override
     public List<Course> getAllOrderByRatingDesc() {
-       return courseRepository.findAllOrderByRating();
+        return courseRepository.findAllOrderByRating();
     }
 
     @Override
     public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
-        Course course=courseRepository.findById(identificationCourseDTO.getId()).get();
-        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.getId()).get();
+        Course course = courseRepository.findById(identificationCourseDTO.getId()).get();
+        Instructor instructor = instructorRepository.findById(identificationInstructorDTO.getId()).get();
         course.setInstructor(instructor);
         courseRepository.save(course);
     }
+
+    @Override
+    public void checkId(IdentificationCourseDTO identificationCourseDTO) {
+        Optional<Course> course = courseRepository.findById(identificationCourseDTO.getId());
+        if (course.isEmpty())
+            throw new InvalidIdCourse();
+    }
+
+    @Override
+    public void update(IdentificationCourseDTO identificationCourseDTO, BasicCourseDTO basicCourseDTO) {
+        Course course=this.getById(identificationCourseDTO);
+        course.setTitle(basicCourseDTO.getTitle());
+        courseRepository.save(course);
+    }
 }
+

@@ -62,13 +62,8 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/update")
-    public List<Course>update(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
-        courseService.checkId(new IdentificationCourseDTO((long)id));
-        Course course=courseService.getById(new IdentificationCourseDTO((long) id));
-        courseService.checkTitle(basicCourseDTO);
-        course.setTitle(basicCourseDTO.getTitle());
-        courseService.save(course);
-        return (courseService.getAll());
+    public void update(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
+       courseService.update(new IdentificationCourseDTO((long) id),basicCourseDTO);
     }
 
     @DeleteMapping("/{id}/delete")
