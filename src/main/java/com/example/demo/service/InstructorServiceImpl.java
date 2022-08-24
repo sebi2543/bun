@@ -3,14 +3,14 @@ package com.example.demo.service;
 import com.example.demo.dto.BasicInstructorDTO;
 import com.example.demo.dto.IdentificationCourseDTO;
 import com.example.demo.dto.IdentificationInstructorDTO;
-import com.example.demo.dto.IdentificationInstructorProfileDTO;
+import com.example.demo.dto.IdentificationProfileDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.entity.InstructorProfile;
+import com.example.demo.entity.Profile;
 import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.InstructorProfileRepository;
+import com.example.demo.repository.ProfileRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class InstructorServiceImpl implements InstructorService {
 
    final InstructorRepository instructorRepository;
    final CourseRepository courseRepository;
-   final InstructorProfileRepository instructorProfileRepository;
+   final ProfileRepository profileRepository;
    final InstructorMapper instructorMapper;
 
     public void save(Instructor instructor) {
@@ -76,10 +76,10 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationInstructorProfileDTO identificationInstructorProfileDTO) {
+    public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationProfileDTO identificationProfileDTO) {
         Instructor instructor=instructorRepository.findById(identificationInstructorDTO.id).get();
-        InstructorProfile instructorProfile=instructorProfileRepository.findById(identificationInstructorProfileDTO.id).get();
-        instructor.setInstructorProfile(instructorProfile);
+        Profile profile = profileRepository.findById(identificationProfileDTO.id).get();
+        instructor.setProfile(profile);
         instructorRepository.save(instructor);
     }
 

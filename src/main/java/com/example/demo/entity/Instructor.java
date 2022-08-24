@@ -25,7 +25,7 @@ public class Instructor {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
-    private InstructorProfile instructorProfile;
+    private Profile profile;
 
     @OneToMany(mappedBy = "instructor")
     private List<Course>courses = new ArrayList<>();
@@ -48,7 +48,7 @@ public class Instructor {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", instructorProfile=" + instructorProfile +
+                ", instructorProfile=" + profile +
                 ", courses=" + courses +
                 ", rating=" + rating +
                 '}';

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasicInstructorProfileDTO {
+public class BasicProfileDTO {
 
     private String linkedin;
     private String youtube;

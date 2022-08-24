@@ -1,25 +1,25 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.BasicInstructorProfileDTO;
-import com.example.demo.entity.InstructorProfile;
+import com.example.demo.dto.BasicProfileDTO;
+import com.example.demo.entity.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface InstructorProfileMapper {
+public interface ProfileMapper {
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    BasicInstructorProfileDTO toBasic(InstructorProfile instructorProfile);
+    BasicProfileDTO toBasic(Profile profile);
 
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    List<BasicInstructorProfileDTO> toBasic(List<InstructorProfile> instructorProfile);
+    List<BasicProfileDTO> toBasic(List<Profile> profile);
 
     @Mapping(source = "linkedin",target ="linkedin")
     @Mapping(source = "youtube",target ="youtube")
-    InstructorProfile toEntity(BasicInstructorProfileDTO basicInstructorProfileDTO);
+    Profile toEntity(BasicProfileDTO basicProfileDTO);
 
 }

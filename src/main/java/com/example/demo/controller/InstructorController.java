@@ -55,8 +55,8 @@ public class InstructorController {
         instructorService.assignCourse(new IdentificationInstructorDTO((long) id),identificationCourseDTO);
     }
     @PostMapping("/{id}/assign-profile")
-    public void assignProfile(@PathVariable int id,@RequestBody IdentificationInstructorProfileDTO identificationInstructorProfileDTO){
-        instructorService.assignProfile(new IdentificationInstructorDTO((long)id), identificationInstructorProfileDTO);
+    public void assignProfile(@PathVariable int id,@RequestBody IdentificationProfileDTO identificationProfileDTO){
+        instructorService.assignProfile(new IdentificationInstructorDTO((long)id), identificationProfileDTO);
     }
     @PutMapping("/{id}/update")
     public void updateInstructor(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){

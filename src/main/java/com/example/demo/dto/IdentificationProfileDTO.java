@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdentificationInstructorProfileDTO {
+public class IdentificationProfileDTO {
     public  Long id;
 }
