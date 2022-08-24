@@ -21,26 +21,8 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
-    final InstructorRepository instructorRepository;
+    final InstructorService instructorService;
     final CourseMapper courseMapper;
-    public Course save(Course course) {
-        return courseRepository.save(course);
-    }
-
-    @Override
-    public void delete(IdentificationCourseDTO identificationCourseDTO) {
-        this.checkId(identificationCourseDTO);
-        Course course=this.getById(identificationCourseDTO);
-        courseRepository.delete(course);
-    }
-
-    public void saveAll(List<Course> courses) {
-        courseRepository.saveAll(courses);
-    }
-
-    public void delete(Course course) {
-        courseRepository.delete(course);
-    }
 
     public void checkTitle(BasicCourseDTO basicCourseDTO) {
         if (basicCourseDTO.getTitle().length() == 0)
@@ -80,37 +62,49 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllOrderByRatingDesc() {
-        return courseRepository.findAllOrderByRating();
-    }
-
-    @Override
-    public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
-        Course course = courseRepository.findById(identificationCourseDTO.getId()).get();
-        Instructor instructor = instructorRepository.findById(identificationInstructorDTO.getId()).get();
-        course.setInstructor(instructor);
+    public void save(Course course) {
         courseRepository.save(course);
     }
-
     @Override
-    public void add(BasicCourseDTO basicCourseDTO) {
-        Course course=courseMapper.toEntity(basicCourseDTO);
-        courseRepository.save(course);
-    }
-
-
-    @Override
-    public void checkId(IdentificationCourseDTO identificationCourseDTO) {
-        Optional<Course> course = courseRepository.findById(identificationCourseDTO.getId());
-        if (course.isEmpty())
-            throw new InvalidIdCourse();
+    public void delete(IdentificationCourseDTO identificationCourseDTO) {
+        this.checkId(identificationCourseDTO);
+        Course course=this.getById(identificationCourseDTO);
+        courseRepository.delete(course);
     }
 
     @Override
     public void update(IdentificationCourseDTO identificationCourseDTO, BasicCourseDTO basicCourseDTO) {
         Course course=this.getById(identificationCourseDTO);
         course.setTitle(basicCourseDTO.getTitle());
-        courseRepository.save(course);
+        this.save(course);
     }
+
+
+    @Override
+    public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
+        Course course = courseRepository.findById(identificationCourseDTO.getId()).get();
+        Instructor instructor = instructorService.findById(identificationInstructorDTO).get();
+        course.setInstructor(instructor);
+        this.save(course);
+    }
+
+    @Override
+    public void add(BasicCourseDTO basicCourseDTO) {
+        Course course=courseMapper.toEntity(basicCourseDTO);
+        this.save(course);
+    }
+
+    @Override
+    public List<Course> getAllOrderByRatingDesc() {
+        return courseRepository.findAllOrderByRating();
+    }
+
+    @Override
+    public void checkId(IdentificationCourseDTO identificationCourseDTO) {
+        Optional<Course> course = this.findById(identificationCourseDTO);
+        if (course.isEmpty())
+            throw new InvalidIdCourse();
+    }
+
 }
 

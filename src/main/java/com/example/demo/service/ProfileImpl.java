@@ -55,7 +55,7 @@ public class ProfileImpl implements ProfileService {
 
     @Override
     public void checkId(IdentificationProfileDTO identificationProfileDTO) {
-        Optional<Profile>instructorProfile= profileRepository.findById(identificationProfileDTO.getId());
+        Optional<Profile>instructorProfile=this.findById(identificationProfileDTO);
         if (instructorProfile.isEmpty()) {
             throw new InvalidInstructorProfileId();
         }
@@ -75,13 +75,13 @@ public class ProfileImpl implements ProfileService {
         Profile profile =this.getById(identificationProfileDTO);
         profile.setYoutube(basicProfileDTO.getYoutube());
         profile.setLinkedin(basicProfileDTO.getLinkedin());
-        profileRepository.save(profile);
+        this.save(profile);
     }
 
     @Override
     public void add(BasicProfileDTO basicProfileDTO) {
         Profile profile =instructorProfileMapper.toEntity(basicProfileDTO);
-        profileRepository.save(profile);
+        this.save(profile);
     }
 
 }

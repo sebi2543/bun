@@ -24,8 +24,8 @@ public class InstructorServiceImpl implements InstructorService {
 
 
    final InstructorRepository instructorRepository;
-   final CourseRepository courseRepository;
-   final ProfileRepository profileRepository;
+   final CourseService courseService;
+   final ProfileService profileService;
    final InstructorMapper instructorMapper;
 
     public void save(Instructor instructor) {
@@ -43,11 +43,6 @@ public class InstructorServiceImpl implements InstructorService {
 
     public Optional<List<Instructor>> findByFullName(BasicInstructorDTO instructor) {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
-    }
-
-    @Override
-    public List<Instructor> getAllOrderByRating() {
-       return instructorRepository.findAllOrderByRating();
     }
 
     public List<Instructor> getAll() {
@@ -70,25 +65,25 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public void checkId(IdentificationInstructorDTO identificationInstructorDTO) {
-        Optional<Instructor> instructor=instructorRepository.findById(identificationInstructorDTO.getId());
+        Optional<Instructor> instructor=this.findById(identificationInstructorDTO);
         if (instructor.isEmpty())
             throw new InvalidIdInstructor();
     }
 
     @Override
     public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationProfileDTO identificationProfileDTO) {
-        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.id).get();
-        Profile profile = profileRepository.findById(identificationProfileDTO.id).get();
+        Instructor instructor=this.findById(identificationInstructorDTO).get();
+        Profile profile = profileService.findById(identificationProfileDTO).get();
         instructor.setProfile(profile);
         instructorRepository.save(instructor);
     }
 
     @Override
     public void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO) {
-        Instructor instructor=instructorRepository.findById(identificationInstructorDTO.getId()).get();
-        Course course=courseRepository.findById(identificationCourseDTO.getId()).get();
+        Instructor instructor=this.findById(identificationInstructorDTO).get();
+        Course course=courseService.findById(identificationCourseDTO).get();
         instructor.addCourse(course);
-        instructorRepository.save(instructor);
+        this.save(instructor);
     }
 
     @Override
@@ -96,13 +91,18 @@ public class InstructorServiceImpl implements InstructorService {
         Instructor instructor =this.getById(identificationInstructorDTO);
         instructor.setFirstName(basicInstructorDTO.getFirstName());
         instructor.setLastName(basicInstructorDTO.getLastName());
-        instructorRepository.save(instructor);
+        this.save(instructor);
     }
 
     @Override
     public void add(BasicInstructorDTO basicInstructorDTO) {
       Instructor instructor=instructorMapper.toEntity(basicInstructorDTO);
-      instructorRepository.save(instructor);
+      this.save(instructor);
+    }
+
+    @Override
+    public List<Instructor> getAllOrderByRating() {
+        return instructorRepository.findAllOrderByRating();
     }
 
 

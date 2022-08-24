@@ -23,7 +23,7 @@ public interface CourseService {
     List<Course>getByTitleLike(BasicCourseDTO basicCourseDTO);
     List<Course>getByTitle(BasicCourseDTO basicCourseDTO);
     List<Course>getAllOrderByRatingDesc();
-    Course save(Course course);
+    void save(Course course);
     void delete(IdentificationCourseDTO identificationCourseDTO);
     void checkTitle(BasicCourseDTO basicCourseDTO);
     void checkId(IdentificationCourseDTO identificationCourseDTO);

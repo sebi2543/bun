@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class BasicInstructorDTO {
 
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "cannot be null")
+    @NotNull(message = "cannot be null")
     public  String firstName;
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "cannot be null")
+    @NotNull(message = "cannot be null")
     public  String lastName;
 }
