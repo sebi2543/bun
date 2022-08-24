@@ -50,7 +50,7 @@ public class CourseController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
+    public void addCourse(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
         courseService.add(basicCourseDTO);
     }
 
@@ -60,17 +60,17 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/update")
-    public void update(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
+    public void updateCourse(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
        courseService.update(new IdentificationCourseDTO((long) id),basicCourseDTO);
     }
 
     @DeleteMapping("/{id}/delete")
-    public void delete(@PathVariable int id){
+    public void deleteCourse(@PathVariable int id){
         courseService.delete(new IdentificationCourseDTO((long) id));
     }
 
     @GetMapping("/best")
-    public List<SortCourseDTO>best(){
+    public List<SortCourseDTO>bestCourse(){
         return (courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
     }
 }

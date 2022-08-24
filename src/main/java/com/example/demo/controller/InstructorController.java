@@ -28,7 +28,7 @@ public class InstructorController {
     }
 
     @PostMapping("/add")
-    public void  add(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
+    public void  addInstructor(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
         instructorService.add(basicInstructorDTO);
     }
 
@@ -51,7 +51,7 @@ public class InstructorController {
     }
 
     @PostMapping("/{id}/assign-course")
-     public void assign(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
+     public void assignCourse(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
         instructorService.assignCourse(new IdentificationInstructorDTO((long) id),identificationCourseDTO);
     }
     @PostMapping("/{id}/assign-profile")
@@ -59,12 +59,12 @@ public class InstructorController {
         instructorService.assignProfile(new IdentificationInstructorDTO((long)id), identificationInstructorProfileDTO);
     }
     @PutMapping("/{id}/update")
-    public void update(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
+    public void updateInstructor(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
        instructorService.update(new IdentificationInstructorDTO((long) id),basicInstructorDTO);
     }
 
     @GetMapping("/best")
-    public List<SortInstructorDTO> best(){
+    public List<SortInstructorDTO> bestInstructor(){
         return (instructorMapper.toSort(instructorService.getAllOrderByRating()));
     }
 }

@@ -19,30 +19,30 @@ public class InstructorProfileController {
     final InstructorProfileMapper instructorProfileMapper;
 
     @GetMapping("/all")
-    public List<BasicInstructorProfileDTO>all(){
+    public List<BasicInstructorProfileDTO>allProfile(){
         return (instructorProfileMapper.toBasic(instructorProfileService.getAll()));
 
     }
 
     @GetMapping("/{id}")
-    public BasicInstructorProfileDTO all(@PathVariable int id){
+    public BasicInstructorProfileDTO idProfile(@PathVariable int id){
         instructorProfileService.checkId(new IdentificationInstructorProfileDTO((long) id));
         IdentificationInstructorProfileDTO identificationInstructorProfileDTO =new IdentificationInstructorProfileDTO((long) id);
         return (instructorProfileMapper.toBasic(instructorProfileService.getById(identificationInstructorProfileDTO)));
 
     }
     @PostMapping("/add")
-    public void add(@RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
-
+    public void addProfile(@RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
+        instructorProfileService.add(basicInstructorProfileDTO);
     }
 
     @DeleteMapping("/{id}/delete")
-    public void delete(@PathVariable int  id){
+    public void deleteProfile(@PathVariable int  id){
         instructorProfileService.delete(new IdentificationInstructorProfileDTO((long) id));
     }
 
     @PutMapping("/{id}/update")
-    public void delete(@PathVariable int  id, @RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
+    public void updateProfile(@PathVariable int  id, @RequestBody BasicInstructorProfileDTO basicInstructorProfileDTO){
         instructorProfileService.update(new IdentificationInstructorProfileDTO((long) id),basicInstructorProfileDTO);
     }
 
