@@ -11,24 +11,18 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CourseMapper {
 
-    @Mapping(target = "title",source = "title")
     BasicCourseDTO toBasic(Course course);
 
-    @Mapping(target = "title",source = "title")
     List<BasicCourseDTO> toBasics(List<Course> courses);
 
-    @Mapping(target = "id",source = "id")
+    @Mapping(target = "title", ignore = true)
     Course toEntity(IdentificationCourseDTO course);
 
-    @Mapping(target = "title",source = "title")
+    @Mapping(target = "title", ignore = true)
     Course toEntity(BasicCourseDTO basicCourseDTO);
 
-    @Mapping(target = "title",source = "title")
-    @Mapping(target = "rating",source = "rating")
     SortCourseDTO toSort(Course course);
 
-    @Mapping(target = "title",source = "title")
-    @Mapping(target = "rating",source = "rating")
     List<SortCourseDTO>toSort(List<Course> courses);
 
 }
