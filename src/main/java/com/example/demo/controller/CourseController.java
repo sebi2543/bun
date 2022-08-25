@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping(value = "course")
@@ -26,7 +27,7 @@ public class CourseController {
     @GetMapping(value = {"/all"})
     public List<BasicCourseDTO>showMainPage(){
         List<Course>courses = courseService.getAll();
-        return (courseMapper.toBasics(courses));
+        return courseMapper.toBasics(courses);
     }
 
     @PostMapping("/search")

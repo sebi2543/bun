@@ -10,7 +10,6 @@ import com.example.demo.entity.Profile;
 import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
-import com.example.demo.repository.ProfileRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class InstructorServiceImpl implements InstructorService {
 
-
-   final InstructorRepository instructorRepository;
-   final CourseService courseService;
-   final ProfileService profileService;
-   final InstructorMapper instructorMapper;
+    final ProfileService profileService;
+    final CourseRepository courseRepository;
+    final InstructorMapper instructorMapper;
+    final InstructorRepository instructorRepository;
 
     public void save(Instructor instructor) {
         instructorRepository.save(instructor);
@@ -81,7 +79,7 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO) {
         Instructor instructor=this.findById(identificationInstructorDTO).get();
-        Course course=courseService.findById(identificationCourseDTO).get();
+        Course course= courseRepository.findById(identificationCourseDTO.getId()).get();
         instructor.addCourse(course);
         this.save(instructor);
     }
