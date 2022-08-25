@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructorProfileDTOId {
-    public  Long id;
+public class SortCourseDTO {
+
+    private String title;
+    private  int rating;
+
 }

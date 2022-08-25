@@ -1,8 +1,8 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.CourseDTO;
-import com.example.demo.dto.CourseDTOId;
-import com.example.demo.dto.CourseDTORating;
+import com.example.demo.dto.BasicCourseDTO;
+import com.example.demo.dto.IdentificationCourseDTO;
+import com.example.demo.dto.SortCourseDTO;
 import com.example.demo.entity.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,23 +12,23 @@ import java.util.List;
 public interface CourseMapper {
 
     @Mapping(target = "title",source = "title")
-    CourseDTO courseToDTO(Course course);
+    BasicCourseDTO toBasic(Course course);
 
     @Mapping(target = "title",source = "title")
-    List<CourseDTO>coursesToDTOS(List<Course> courses);
+    List<BasicCourseDTO> toBasics(List<Course> courses);
 
     @Mapping(target = "id",source = "id")
-    Course courseDTOIdTOCourse(CourseDTOId course);
+    Course toEntity(IdentificationCourseDTO course);
 
     @Mapping(target = "title",source = "title")
-    Course courseDTOToCourse(CourseDTO courseDTO);
-
-    @Mapping(target = "title",source = "title")
-    @Mapping(target = "rating",source = "rating")
-    CourseDTORating courseToCourseDTORating(Course course);
+    Course toEntity(BasicCourseDTO basicCourseDTO);
 
     @Mapping(target = "title",source = "title")
     @Mapping(target = "rating",source = "rating")
-    List<CourseDTORating> coursesToCourseDTOSRating(List<Course> courses);
+    SortCourseDTO toSort(Course course);
+
+    @Mapping(target = "title",source = "title")
+    @Mapping(target = "rating",source = "rating")
+    List<SortCourseDTO>toSort(List<Course> courses);
 
 }

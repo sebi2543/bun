@@ -7,89 +7,70 @@ import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "course")
 @RestController
+@RequiredArgsConstructor
 public class CourseController {
 
-    @Autowired
-    CourseService courseService;
-
-    @Autowired
-    CourseMapper courseMapper;
-
-    @Autowired
-    InstructorService instructorService;
+    final CourseService courseService;
+    final CourseMapper courseMapper;
+    final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
-    public HttpEntity<List<CourseDTO>>showMainPage(){
+    public List<BasicCourseDTO>showMainPage(){
         List<Course>courses = courseService.getAll();
-        return  new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return (courseMapper.toBasics(courses));
     }
 
     @PostMapping("/search")
-    public HttpEntity<List<CourseDTO>>showSuitableCourses(@RequestBody CourseDTO course) throws InvalidTitle {
+    public List<BasicCourseDTO>showSuitableCourses(@RequestBody BasicCourseDTO course) throws InvalidTitle {
         courseService.checkTitle(course);
         List<Course>courses = courseService.getByTitle(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return (courseMapper.toBasics(courses));
     }
 
     @PostMapping("/suggestion")
-    public HttpEntity<List<CourseDTO>>showAutoSuggestion(@RequestBody CourseDTO course){
+    public List<BasicCourseDTO>showAutoSuggestion(@RequestBody BasicCourseDTO course){
         List<Course>courses = courseService.getByTitleLike(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courses));
+        return (courseMapper.toBasics(courses));
     }
 
     @GetMapping("/{id}")
-    public HttpEntity<CourseDTO>showIdCourse(@PathVariable int id){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course = courseService.getById(new CourseDTOId((long) id));
-        return new HttpEntity<CourseDTO>(courseMapper.courseToDTO(course));
+    public BasicCourseDTO showIdCourse(@PathVariable int id){
+        courseService.checkId(new IdentificationCourseDTO((long)id));
+        Course course = courseService.getById(new IdentificationCourseDTO((long) id));
+        return (courseMapper.toBasic(course));
     }
 
     @PostMapping("/add")
-    public HttpEntity<List<CourseDTO>>add(@RequestBody CourseDTO courseDTO) throws InvalidTitle {
-        courseService.checkTitle(courseDTO);
-        courseService.save(courseMapper.courseDTOToCourse(courseDTO));
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
+    public void addCourse(@RequestBody BasicCourseDTO basicCourseDTO) throws InvalidTitle {
+        courseService.add(basicCourseDTO);
     }
 
-    //NEFUNCTIONAL
     @PostMapping("/{id}/assign-instructor")
-    public HttpEntity<Course> assignCourse(@PathVariable int id, @RequestBody InstructorDTOId instructorDTOId){
-        CourseDTOId courseDTOId= new CourseDTOId((long) id);
-        Course course=courseService.getById(courseDTOId);
-        Instructor instructor=instructorService.getById(instructorDTOId);
-        course.setInstructor(instructor);
-        courseService.save(course);
-        return new HttpEntity<>(courseService.getById(courseDTOId));
+    public void  assignCourse(@PathVariable int id, @RequestBody IdentificationInstructorDTO identificationInstructorDTO){
+     courseService.assignInstructor(new IdentificationCourseDTO((long) id),identificationInstructorDTO);
     }
 
-    @PostMapping("/{id}/update")
-    public HttpEntity<List<Course>>update(@PathVariable int id,@RequestBody CourseDTO courseDTO){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course=courseService.getById(new CourseDTOId((long) id));
-        courseService.checkTitle(courseDTO);
-        course.setTitle(courseDTO.getTitle());
-        courseService.save(course);
-        return new HttpEntity<>(courseService.getAll());
+    @PutMapping("/{id}/update")
+    public void updateCourse(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
+       courseService.update(new IdentificationCourseDTO((long) id),basicCourseDTO);
     }
 
-    @GetMapping("/{id}/delete")
-    public HttpEntity<List<CourseDTO>>delete(@PathVariable int id){
-        courseService.checkId(new CourseDTOId((long)id));
-        Course course=courseService.getById(new CourseDTOId((long) id));
-        courseService.delete(course);
-        return new HttpEntity<>(courseMapper.coursesToDTOS(courseService.getAll()));
+    @DeleteMapping("/{id}/delete")
+    public void deleteCourse(@PathVariable int id){
+        courseService.delete(new IdentificationCourseDTO((long) id));
     }
 
     @GetMapping("/best")
-    public HttpEntity<List<CourseDTORating>>best(){
-        return new HttpEntity<>(courseMapper.coursesToCourseDTOSRating(courseService.getAllOrderByRatingDesc()));
+    public List<SortCourseDTO>bestCourse(){
+        return (courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
     }
 }
-

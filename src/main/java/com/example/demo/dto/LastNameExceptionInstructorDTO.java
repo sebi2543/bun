@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructorDTORating {
-
-    public  Long id;
-    private int rating;
-
+public class LastNameExceptionInstructorDTO {
+    public  String lastName;
 }

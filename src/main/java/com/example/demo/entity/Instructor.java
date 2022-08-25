@@ -25,7 +25,7 @@ public class Instructor {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
-    private InstructorProfile instructorProfile;
+    private Profile profile;
 
     @OneToMany(mappedBy = "instructor")
     private List<Course>courses = new ArrayList<>();
@@ -39,9 +39,7 @@ public class Instructor {
     }
 
     public void addCourse(Course course){
-        List<Course>old =courses;
-        this.courses=new ArrayList<>(old);
-        courses.add(course);
+        this.courses.add(course);
     }
 
     @Override
@@ -50,7 +48,7 @@ public class Instructor {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", instructorProfile=" + instructorProfile +
+                ", instructorProfile=" + profile +
                 ", courses=" + courses +
                 ", rating=" + rating +
                 '}';

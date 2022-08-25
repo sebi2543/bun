@@ -1,6 +1,6 @@
 package com.example.demo.exceptionHandler;
 
-import com.example.demo.dto.CourseDTO;
+import com.example.demo.dto.BasicCourseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class InvalidTitleContainer {
     private String message;
-    private List<CourseDTO>courseDTOS;
+    private List<BasicCourseDTO> basicCourseDTOS;
 
 }
