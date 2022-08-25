@@ -21,7 +21,7 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
-    final InstructorService instructorService;
+    final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
     public void checkTitle(BasicCourseDTO basicCourseDTO) {
@@ -83,7 +83,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
         Course course = courseRepository.findById(identificationCourseDTO.getId()).get();
-        Instructor instructor = instructorService.findById(identificationInstructorDTO).get();
+        Instructor instructor = instructorRepository.findById(identificationInstructorDTO.getId()).get();
         course.setInstructor(instructor);
         this.save(course);
     }

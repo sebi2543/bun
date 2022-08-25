@@ -11,6 +11,7 @@ import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
+import com.example.demo.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.security.InvalidParameterException;
@@ -21,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class InstructorServiceImpl implements InstructorService {
 
-    final ProfileService profileService;
+    final ProfileRepository profileRepository;
     final CourseRepository courseRepository;
     final InstructorMapper instructorMapper;
     final InstructorRepository instructorRepository;
@@ -71,7 +72,7 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationProfileDTO identificationProfileDTO) {
         Instructor instructor=this.findById(identificationInstructorDTO).get();
-        Profile profile = profileService.findById(identificationProfileDTO).get();
+        Profile profile = profileRepository.findById(identificationProfileDTO.getId()).get();
         instructor.setProfile(profile);
         instructorRepository.save(instructor);
     }
