@@ -1,12 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
-import com.example.demo.dto.IdentificationCourseDTO;
-import com.example.demo.dto.IdentificationInstructorDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.exception.InvalidIdCourse;
-import com.example.demo.exception.InvalidTitle;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
@@ -24,17 +20,12 @@ public class CourseServiceImpl implements CourseService {
     final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
-    public void checkTitle(BasicCourseDTO basicCourseDTO) {
-        if (basicCourseDTO.getTitle().length() == 0)
-            throw new InvalidTitle();
-    }
-
     public Optional<List<Course>> findAll() {
         return Optional.of(courseRepository.findAll());
     }
 
-    public Optional<Course> findById(IdentificationCourseDTO course) {
-        return (courseRepository.findById(course.getId()));
+    public Optional<Course> findById(long courseId) {
+        return (courseRepository.findById(courseId));
     }
 
     public Optional<List<Course>> findByTitleLike(BasicCourseDTO basicCourseDTO) {
@@ -49,8 +40,8 @@ public class CourseServiceImpl implements CourseService {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Course getById(IdentificationCourseDTO course) {
-        return this.findById(course).orElseThrow(InvalidParameterException::new);
+    public Course getById(long courseId) {
+        return this.findById(courseId).orElseThrow(InvalidParameterException::new);
     }
 
     public List<Course> getByTitleLike(BasicCourseDTO basicCourseDTO) {
@@ -66,24 +57,23 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(course);
     }
     @Override
-    public void delete(IdentificationCourseDTO identificationCourseDTO) {
-        this.checkId(identificationCourseDTO);
-        Course course=this.getById(identificationCourseDTO);
+    public void delete(long courseId) {
+        Course course=this.getById(courseId);
         courseRepository.delete(course);
     }
 
     @Override
-    public void update(IdentificationCourseDTO identificationCourseDTO, BasicCourseDTO basicCourseDTO) {
-        Course course=this.getById(identificationCourseDTO);
+    public void update(long courseId, BasicCourseDTO basicCourseDTO) {
+        Course course=this.getById(courseId);
         course.setTitle(basicCourseDTO.getTitle());
         this.save(course);
     }
 
 
     @Override
-    public void assignInstructor(IdentificationCourseDTO identificationCourseDTO, IdentificationInstructorDTO identificationInstructorDTO) {
-        Course course = courseRepository.findById(identificationCourseDTO.getId()).get();
-        Instructor instructor = instructorRepository.findById(identificationInstructorDTO.getId()).get();
+    public void assignInstructor(long courseId,long  instructorId) {
+        Course course = courseRepository.findById(courseId).get();
+        Instructor instructor = instructorRepository.findById(instructorId).get();
         course.setInstructor(instructor);
         this.save(course);
     }
@@ -95,16 +85,34 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<BasicCourseDTO> showMainPage() {
+        List<Course>courses = this.getAll();
+        return courseMapper.toBasics(courses);
+    }
+
+    @Override
+    public List<BasicCourseDTO> showSuitableCourses(BasicCourseDTO course) {
+        List<Course>courses = this.getByTitle(course);
+        return (courseMapper.toBasics(courses));
+    }
+
+    @Override
+    public List<BasicCourseDTO> showAutoSuggestion(BasicCourseDTO course) {
+        List<Course>courses = this.getByTitleLike(course);
+        return (courseMapper.toBasics(courses));
+    }
+
+    @Override
+    public BasicCourseDTO showIdCourse(int id) {
+        Course course = this.getById(id);
+        return (courseMapper.toBasic(course));
+    }
+
+    @Override
     public List<Course> getAllOrderByRatingDesc() {
         return courseRepository.findAllOrderByRating();
     }
 
-    @Override
-    public void checkId(IdentificationCourseDTO identificationCourseDTO) {
-        Optional<Course> course = this.findById(identificationCourseDTO);
-        if (course.isEmpty())
-            throw new InvalidIdCourse();
-    }
 
 }
 

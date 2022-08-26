@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.BasicProfileDTO;
-import com.example.demo.dto.IdentificationProfileDTO;
 import com.example.demo.mapper.ProfileMapper;
 import com.example.demo.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "instructor/profile")
@@ -25,24 +25,22 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public BasicProfileDTO idProfile(@PathVariable int id){
-        profileService.checkId(new IdentificationProfileDTO((long) id));
-        IdentificationProfileDTO identificationProfileDTO =new IdentificationProfileDTO((long) id);
-        return (instructorProfileMapper.toBasic(profileService.getById(identificationProfileDTO)));
+        return (instructorProfileMapper.toBasic(profileService.getById(id)));
 
     }
     @PostMapping("/add")
-    public void addProfile(@RequestBody BasicProfileDTO basicProfileDTO){
+    public void addProfile(@Valid @RequestBody BasicProfileDTO basicProfileDTO){
         profileService.add(basicProfileDTO);
     }
 
     @DeleteMapping("/{id}/delete")
     public void deleteProfile(@PathVariable int  id){
-        profileService.delete(new IdentificationProfileDTO((long) id));
+        profileService.delete(id);
     }
 
     @PutMapping("/{id}/update")
-    public void updateProfile(@PathVariable int  id, @RequestBody BasicProfileDTO basicProfileDTO){
-        profileService.update(new IdentificationProfileDTO((long) id), basicProfileDTO);
+    public void updateProfile(@PathVariable int  id, @Valid @RequestBody BasicProfileDTO basicProfileDTO){
+        profileService.update(id, basicProfileDTO);
     }
 
 

@@ -1,13 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicInstructorDTO;
-import com.example.demo.dto.IdentificationCourseDTO;
-import com.example.demo.dto.IdentificationInstructorDTO;
-import com.example.demo.dto.IdentificationProfileDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
-import com.example.demo.exception.InvalidIdInstructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
@@ -36,8 +32,8 @@ public class InstructorServiceImpl implements InstructorService {
         return Optional.of(instructorRepository.findAll());
     }
 
-    public Optional<Instructor> findById(IdentificationInstructorDTO instructor) {
-        return instructorRepository.findById(instructor.getId());
+    public Optional<Instructor> findById(long instructorId) {
+        return instructorRepository.findById(instructorId);
     }
 
     public Optional<List<Instructor>> findByFullName(BasicInstructorDTO instructor) {
@@ -48,8 +44,8 @@ public class InstructorServiceImpl implements InstructorService {
         return this.findAll().orElseThrow(InvalidParameterException::new);
     }
 
-    public Instructor getById(IdentificationInstructorDTO instructor) {
-        return this.findById(instructor).orElseThrow(InvalidParameterException::new);
+    public Instructor getById(long  instructorId) {
+        return this.findById(instructorId).orElseThrow(InvalidParameterException::new);
     }
 
     public List<Instructor> getByFullName(BasicInstructorDTO instructor) {
@@ -57,37 +53,31 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void delete(IdentificationInstructorDTO identificationInstructorDTO) {
-        this.checkId(identificationInstructorDTO);
-        instructorRepository.delete(instructorMapper.toEntity(identificationInstructorDTO));
+    public void delete(long  instructorId) {
+        Instructor instructor=new Instructor();
+        instructor.setId(instructorId);
+        instructorRepository.delete(instructor);
     }
 
     @Override
-    public void checkId(IdentificationInstructorDTO identificationInstructorDTO) {
-        Optional<Instructor> instructor=this.findById(identificationInstructorDTO);
-        if (instructor.isEmpty())
-            throw new InvalidIdInstructor();
-    }
-
-    @Override
-    public void assignProfile(IdentificationInstructorDTO identificationInstructorDTO, IdentificationProfileDTO identificationProfileDTO) {
-        Instructor instructor=this.findById(identificationInstructorDTO).get();
-        Profile profile = profileRepository.findById(identificationProfileDTO.getId()).get();
+    public void assignProfile(long  instructorId,long profileId) {
+        Instructor instructor=this.findById(instructorId).get();
+        Profile profile = profileRepository.findById(profileId).get();
         instructor.setProfile(profile);
         instructorRepository.save(instructor);
     }
 
     @Override
-    public void assignCourse(IdentificationInstructorDTO identificationInstructorDTO, IdentificationCourseDTO identificationCourseDTO) {
-        Instructor instructor=this.findById(identificationInstructorDTO).get();
-        Course course= courseRepository.findById(identificationCourseDTO.getId()).get();
+    public void assignCourse(long  instructorId, long  courseId) {
+        Instructor instructor=this.findById(instructorId).get();
+        Course course= courseRepository.findById(courseId).get();
         instructor.addCourse(course);
         this.save(instructor);
     }
 
     @Override
-    public void update(IdentificationInstructorDTO identificationInstructorDTO, BasicInstructorDTO basicInstructorDTO) {
-        Instructor instructor =this.getById(identificationInstructorDTO);
+    public void update(long  instructorId, BasicInstructorDTO basicInstructorDTO) {
+        Instructor instructor =this.getById(instructorId);
         instructor.setFirstName(basicInstructorDTO.getFirstName());
         instructor.setLastName(basicInstructorDTO.getLastName());
         this.save(instructor);
@@ -100,17 +90,26 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public List<Instructor> getAllOrderByRating() {
-        return instructorRepository.findAllOrderByRating();
+    public List<BasicInstructorDTO> showAll() {
+        List<Instructor> instructors = this.getAll();
+        return (instructorMapper.toBasic(instructors));
     }
 
+    @Override
+    public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
+        List<Instructor> instructors = this.getByFullName(instructor);
+        return (instructorMapper.toBasic(instructors));
+    }
 
     @Override
-    public void checkInstructor(BasicInstructorDTO instructor){
-//        if (instructor.getLastName().length()==0)
-//            throw new InvalidLastName();
-//        if (instructor.getFirstName().length()==0)
-//            throw new InvalidFirstName();
+    public BasicInstructorDTO showIdInstructor(int id) {
+        Instructor instructor = this.getById(id);
+        return (instructorMapper.toBasic(instructor));
+    }
+
+    @Override
+    public List<Instructor> getAllOrderByRating() {
+        return instructorRepository.findAllOrderByRating();
     }
 
 

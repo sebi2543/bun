@@ -1,14 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Instructor;
-import com.example.demo.exception.InvalidFirstName;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,44 +20,40 @@ public class InstructorController {
 
     @GetMapping(value = {"/all"})
     public List<BasicInstructorDTO> showMainPage() {
-        List<Instructor> instructors = instructorService.getAll();
-        return (instructorMapper.toBasic(instructors));
+       return instructorService.showAll();
     }
 
     @PostMapping("/add")
-    public void  addInstructor(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) throws InvalidFirstName {
+    public void  addInstructor(@Valid @RequestBody BasicInstructorDTO basicInstructorDTO) {
         instructorService.add(basicInstructorDTO);
     }
 
     @PostMapping("/search")
-    public List<BasicInstructorDTO> showSuitableInstructors(@RequestBody BasicInstructorDTO instructor) {
-        List<Instructor> instructors = instructorService.getByFullName(instructor);
-        return (instructorMapper.toBasic(instructors));
+    public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
+       return instructorService.showSuitableInstructors(instructor);
     }
 
     @GetMapping("/{id}")
     public BasicInstructorDTO showIdInstructor(@PathVariable int id) {
-        instructorService.checkId(new IdentificationInstructorDTO((long) id));
-        Instructor instructor = instructorService.getById(new IdentificationInstructorDTO((long) id));
-        return (instructorMapper.toBasic(instructor));
+        return instructorService.showIdInstructor(id);
     }
 
     @DeleteMapping("/{id}/delete")
     public void deleteIdInstructor(@PathVariable int id) {
-       instructorService.delete(new IdentificationInstructorDTO((long) id));
+       instructorService.delete(id);
     }
 
     @PostMapping("/{id}/assign-course")
-     public void assignCourse(@PathVariable int id, @RequestBody IdentificationCourseDTO identificationCourseDTO){
-        instructorService.assignCourse(new IdentificationInstructorDTO((long) id),identificationCourseDTO);
+     public void assignCourse(@PathVariable int id, @RequestBody long courseId){
+        instructorService.assignCourse( id,courseId);
     }
     @PostMapping("/{id}/assign-profile")
-    public void assignProfile(@PathVariable int id,@RequestBody IdentificationProfileDTO identificationProfileDTO){
-        instructorService.assignProfile(new IdentificationInstructorDTO((long)id), identificationProfileDTO);
+    public void assignProfile(@PathVariable int id,@RequestBody long profileId){
+        instructorService.assignProfile(id,profileId);
     }
     @PutMapping("/{id}/update")
-    public void updateInstructor(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
-       instructorService.update(new IdentificationInstructorDTO((long) id),basicInstructorDTO);
+    public void updateInstructor(@PathVariable int id,@Valid @RequestBody BasicInstructorDTO basicInstructorDTO){
+       instructorService.update(id,basicInstructorDTO);
     }
 
     @GetMapping("/best")
