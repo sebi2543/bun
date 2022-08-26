@@ -15,8 +15,6 @@ public interface InstructorMapper {
 
     Instructor toEntity(BasicInstructorDTO instructor);
 
-    Instructor toEntity(IdentificationInstructorDTO instructor);
-
     SortInstructorDTO toSort(Instructor instructor);
 
     List<SortInstructorDTO> toSort(List<Instructor> instructor);

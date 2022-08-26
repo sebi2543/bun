@@ -1,11 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicProfileDTO;
-import com.example.demo.dto.IdentificationProfileDTO;
 import com.example.demo.entity.Profile;
-import com.example.demo.exception.InvalidInstructorProfileId;
-import com.example.demo.exception.InvalidLikedIn;
-import com.example.demo.exception.InvalidYoutube;
 import com.example.demo.mapper.ProfileMapper;
 import com.example.demo.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +24,8 @@ public class ProfileImpl implements ProfileService {
     }
 
     @Override
-    public Optional<Profile> findById(IdentificationProfileDTO identificationProfileDTO) {
-        return profileRepository.findById(identificationProfileDTO.getId());
+    public Optional<Profile> findById(long profileId) {
+        return profileRepository.findById(profileId);
     }
 
     @Override
@@ -38,8 +34,8 @@ public class ProfileImpl implements ProfileService {
     }
 
     @Override
-    public Profile getById(IdentificationProfileDTO identificationProfileDTO) {
-       return this.findById(identificationProfileDTO).orElseThrow(InvalidParameterException::new);
+    public Profile getById(long profileId) {
+       return this.findById(profileId).orElseThrow(InvalidParameterException::new);
     }
 
     @Override
@@ -48,31 +44,14 @@ public class ProfileImpl implements ProfileService {
     }
 
     @Override
-    public void delete(IdentificationProfileDTO identificationProfileDTO) {
-        Profile profile =this.getById(identificationProfileDTO);
+    public void delete(long profileId) {
+        Profile profile =this.getById(profileId);
         profileRepository.delete(profile);
     }
 
     @Override
-    public void checkId(IdentificationProfileDTO identificationProfileDTO) {
-        Optional<Profile>instructorProfile=this.findById(identificationProfileDTO);
-        if (instructorProfile.isEmpty()) {
-            throw new InvalidInstructorProfileId();
-        }
-
-    }
-
-    @Override
-    public void checkInstructorProfile(BasicProfileDTO basicProfileDTO) {
-        if (basicProfileDTO.getLinkedin().length()==0)
-            throw new InvalidLikedIn();
-        if (basicProfileDTO.getYoutube().length()==0)
-            throw new InvalidYoutube();
-    }
-
-    @Override
-    public void update(IdentificationProfileDTO identificationProfileDTO, BasicProfileDTO basicProfileDTO) {
-        Profile profile =this.getById(identificationProfileDTO);
+    public void update(long profileId, BasicProfileDTO basicProfileDTO) {
+        Profile profile =this.getById(profileId);
         profile.setYoutube(basicProfileDTO.getYoutube());
         profile.setLinkedin(basicProfileDTO.getLinkedin());
         this.save(profile);
