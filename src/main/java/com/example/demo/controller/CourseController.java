@@ -51,7 +51,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}/update")
-    public void updateCourse(@PathVariable int id,@RequestBody BasicCourseDTO basicCourseDTO){
+    public void updateCourse(@PathVariable int id,@Valid @RequestBody BasicCourseDTO basicCourseDTO){
        courseService.update(id,basicCourseDTO);
     }
 

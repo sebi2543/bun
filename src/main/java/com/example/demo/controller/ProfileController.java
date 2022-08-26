@@ -5,6 +5,8 @@ import com.example.demo.mapper.ProfileMapper;
 import com.example.demo.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "instructor/profile")
@@ -27,7 +29,7 @@ public class ProfileController {
 
     }
     @PostMapping("/add")
-    public void addProfile(@RequestBody BasicProfileDTO basicProfileDTO){
+    public void addProfile(@Valid @RequestBody BasicProfileDTO basicProfileDTO){
         profileService.add(basicProfileDTO);
     }
 
@@ -37,7 +39,7 @@ public class ProfileController {
     }
 
     @PutMapping("/{id}/update")
-    public void updateProfile(@PathVariable int  id, @RequestBody BasicProfileDTO basicProfileDTO){
+    public void updateProfile(@PathVariable int  id, @Valid @RequestBody BasicProfileDTO basicProfileDTO){
         profileService.update(id, basicProfileDTO);
     }
 

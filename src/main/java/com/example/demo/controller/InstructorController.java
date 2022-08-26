@@ -52,7 +52,7 @@ public class InstructorController {
         instructorService.assignProfile(id,profileId);
     }
     @PutMapping("/{id}/update")
-    public void updateInstructor(@PathVariable int id,@RequestBody BasicInstructorDTO basicInstructorDTO){
+    public void updateInstructor(@PathVariable int id,@Valid @RequestBody BasicInstructorDTO basicInstructorDTO){
        instructorService.update(id,basicInstructorDTO);
     }
 
