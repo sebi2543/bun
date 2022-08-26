@@ -19,11 +19,4 @@ public interface InstructorMapper {
 
     List<SortInstructorDTO> toSort(List<Instructor> instructor);
 
-    FirstNameExceptionInstructorDTO toFirstNameException(Instructor instructor);
-
-    List<FirstNameExceptionInstructorDTO> toFirstNameException(List<Instructor> instructor);
-
-    LastNameExceptionInstructorDTO toLastNameException(Instructor instructor);
-
-   List<LastNameExceptionInstructorDTO> toLastNameException(List<Instructor> instructor);
 }
