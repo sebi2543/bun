@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Instructor;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,8 +20,7 @@ public class InstructorController {
 
     @GetMapping(value = {"/all"})
     public List<BasicInstructorDTO> showMainPage() {
-        List<Instructor> instructors = instructorService.getAll();
-        return (instructorMapper.toBasic(instructors));
+       return instructorService.showAll();
     }
 
     @PostMapping("/add")
@@ -32,15 +29,13 @@ public class InstructorController {
     }
 
     @PostMapping("/search")
-    public List<BasicInstructorDTO> showSuitableInstructors(@RequestBody BasicInstructorDTO instructor) {
-        List<Instructor> instructors = instructorService.getByFullName(instructor);
-        return (instructorMapper.toBasic(instructors));
+    public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
+       return instructorService.showSuitableInstructors(instructor);
     }
 
     @GetMapping("/{id}")
     public BasicInstructorDTO showIdInstructor(@PathVariable int id) {
-        Instructor instructor = instructorService.getById(id);
-        return (instructorMapper.toBasic(instructor));
+        return instructorService.showIdInstructor(id);
     }
 
     @DeleteMapping("/{id}/delete")

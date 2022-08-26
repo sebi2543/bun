@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.BasicInstructorDTO;
 import com.example.demo.entity.Instructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +25,7 @@ public interface InstructorService {
     void assignCourse(long instructorId,long courseId);
     void update(long instructorId,BasicInstructorDTO basicInstructorDTO);
     void add(BasicInstructorDTO basicInstructorDTO);
+    List<BasicInstructorDTO> showAll();
+    List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor);
+    BasicInstructorDTO showIdInstructor(int id);
 }

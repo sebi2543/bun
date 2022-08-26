@@ -85,6 +85,30 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<BasicCourseDTO> showMainPage() {
+        List<Course>courses = this.getAll();
+        return courseMapper.toBasics(courses);
+    }
+
+    @Override
+    public List<BasicCourseDTO> showSuitableCourses(BasicCourseDTO course) {
+        List<Course>courses = this.getByTitle(course);
+        return (courseMapper.toBasics(courses));
+    }
+
+    @Override
+    public List<BasicCourseDTO> showAutoSuggestion(BasicCourseDTO course) {
+        List<Course>courses = this.getByTitleLike(course);
+        return (courseMapper.toBasics(courses));
+    }
+
+    @Override
+    public BasicCourseDTO showIdCourse(int id) {
+        Course course = this.getById(id);
+        return (courseMapper.toBasic(course));
+    }
+
+    @Override
     public List<Course> getAllOrderByRatingDesc() {
         return courseRepository.findAllOrderByRating();
     }

@@ -90,6 +90,24 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
+    public List<BasicInstructorDTO> showAll() {
+        List<Instructor> instructors = this.getAll();
+        return (instructorMapper.toBasic(instructors));
+    }
+
+    @Override
+    public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
+        List<Instructor> instructors = this.getByFullName(instructor);
+        return (instructorMapper.toBasic(instructors));
+    }
+
+    @Override
+    public BasicInstructorDTO showIdInstructor(int id) {
+        Instructor instructor = this.getById(id);
+        return (instructorMapper.toBasic(instructor));
+    }
+
+    @Override
     public List<Instructor> getAllOrderByRating() {
         return instructorRepository.findAllOrderByRating();
     }

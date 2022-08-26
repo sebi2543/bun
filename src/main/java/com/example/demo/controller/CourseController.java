@@ -22,26 +22,22 @@ public class CourseController {
 
     @GetMapping(value = {"/all"})
     public List<BasicCourseDTO>showMainPage(){
-        List<Course>courses = courseService.getAll();
-        return courseMapper.toBasics(courses);
+       return courseService.showMainPage();
     }
 
     @PostMapping("/search")
     public List<BasicCourseDTO>showSuitableCourses(@Valid @RequestBody BasicCourseDTO course)  {
-        List<Course>courses = courseService.getByTitle(course);
-        return (courseMapper.toBasics(courses));
+        return courseService.showSuitableCourses(course);
     }
 
     @PostMapping("/suggestion")
     public List<BasicCourseDTO>showAutoSuggestion(@Valid @RequestBody BasicCourseDTO course){
-        List<Course>courses = courseService.getByTitleLike(course);
-        return (courseMapper.toBasics(courses));
+        return courseService.showAutoSuggestion(course);
     }
 
     @GetMapping("/{id}")
     public BasicCourseDTO showIdCourse(@PathVariable int id){
-        Course course = courseService.getById(id);
-        return (courseMapper.toBasic(course));
+        return courseService.showIdCourse(id);
     }
 
     @PostMapping("/add")
