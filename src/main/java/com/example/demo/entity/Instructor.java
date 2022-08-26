@@ -33,9 +33,8 @@ public class Instructor {
     @Column
     private int rating;
 
-    public Instructor(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Instructor(int rating) {
+        this.rating = rating;
     }
 
     public void addCourse(Course course){

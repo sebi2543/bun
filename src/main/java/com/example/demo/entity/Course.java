@@ -17,7 +17,6 @@ public class Course {
     private Long id;
 
     @Column
-    @NotNull
     private String title;
 
     @ManyToOne
@@ -29,6 +28,15 @@ public class Course {
 
     public Course(String title) {
         this.title = title;
+    }
+
+    public Course(String title, int rating) {
+        this.title = title;
+        this.rating = rating;
+    }
+
+    public Course(int rating) {
+        this.rating = rating;
     }
 
     @Override
