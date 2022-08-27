@@ -37,6 +37,11 @@ public class Instructor {
         this.rating = rating;
     }
 
+    public Instructor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void addCourse(Course course){
         this.courses.add(course);
     }

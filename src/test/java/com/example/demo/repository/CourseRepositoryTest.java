@@ -1,12 +1,15 @@
 package com.example.demo.repository;
 import com.example.demo.entity.Course;
 import com.example.demo.repository.CourseRepository;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.apache.bcel.generic.FieldOrMethod;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -14,12 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
-
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@RequiredArgsConstructor
+public
 class CourseRepositoryTest {
 
-    @Autowired
-    CourseRepository courseRepository;
+     @Autowired
+     CourseRepository courseRepository;
+
     @Test
+    @DisplayName("find like testing")
     void multiple_success_findByTileLike() {
 
         //given
@@ -40,10 +47,11 @@ class CourseRepositoryTest {
         int result=courseRepository.findByTitleLike("java").get().size();
 
         //then
-        Assertions.assertEquals(4,result);
+        Assertions.assertEquals(4,result,"the answer should be 4");
     }
 
     @Test
+    @DisplayName("sorting course test")
     void findAllOrderByRating(){
         //given
         Course course1=new Course(2);
