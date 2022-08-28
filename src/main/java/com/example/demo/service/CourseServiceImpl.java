@@ -110,7 +110,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public float calculateAverage(long id) {
         Course course=this.getById(id);
-        return (float)course.getSum()/course.getHeadcount();
+        return course.getRating();
     }
 
     @Override

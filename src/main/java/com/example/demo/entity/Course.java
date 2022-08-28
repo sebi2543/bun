@@ -25,7 +25,7 @@ public class Course {
     private Instructor instructor;
 
     @Column
-    private  int rating;
+    private  float rating;
 
     @Column
     private int headcount;
@@ -49,6 +49,7 @@ public class Course {
     public void addGrade(long grade){
         headcount++;
         sum+=grade;
+        rating= (float)sum/headcount;
     }
 
     public float calculateAverage(){
