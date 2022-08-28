@@ -1,12 +1,9 @@
 package com.example.demo.service;
 
+
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +27,7 @@ public interface CourseService {
     List<BasicCourseDTO>showMainPage();
     List<BasicCourseDTO>showSuitableCourses(BasicCourseDTO course);
     List<BasicCourseDTO>showAutoSuggestion(BasicCourseDTO course);
-    public BasicCourseDTO showIdCourse(int id);
-
+    BasicCourseDTO showIdCourse(long  id);
+    float calculateAverage(long  id);
+    void update(long id,long grade);
     }

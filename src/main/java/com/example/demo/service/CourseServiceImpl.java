@@ -1,5 +1,4 @@
 package com.example.demo.service;
-
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
@@ -103,9 +102,22 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public BasicCourseDTO showIdCourse(int id) {
+    public BasicCourseDTO showIdCourse(long id) {
         Course course = this.getById(id);
         return (courseMapper.toBasic(course));
+    }
+
+    @Override
+    public float calculateAverage(long id) {
+        Course course=this.getById(id);
+        return (float)course.getSum()/course.getHeadcount();
+    }
+
+    @Override
+    public void update(long  id,long grade) {
+        Course course=this.getById(id);
+        course.addGrade(grade);
+        this.save(course);
     }
 
     @Override

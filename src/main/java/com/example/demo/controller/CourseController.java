@@ -64,4 +64,14 @@ public class CourseController {
     public List<SortCourseDTO>bestCourse(){
         return (courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
     }
+
+    @PostMapping("/{id}/give-grade")
+    public void giveGrade(@PathVariable int id ,@RequestBody long grade){
+        courseService.update(id,grade);
+    }
+
+    @GetMapping("/{id}/average")
+    public Float calculateAverage(@PathVariable  long id){
+         return  courseService.calculateAverage(id);
+    }
 }

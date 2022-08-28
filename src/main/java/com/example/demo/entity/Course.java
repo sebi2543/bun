@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.domain.CourseRating;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,12 @@ public class Course {
     @Column
     private  int rating;
 
+    @Column
+    private int headcount;
+
+    @Column
+    private long sum;
+
     public Course(String title) {
         this.title = title;
     }
@@ -39,6 +46,14 @@ public class Course {
         this.rating = rating;
     }
 
+    public void addGrade(long grade){
+        headcount++;
+        sum+=grade;
+    }
+
+    public float calculateAverage(){
+        return (float)headcount/sum;
+    }
     @Override
     public String toString() {
         return "Course{" +
