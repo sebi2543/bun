@@ -120,6 +120,7 @@ public class CourseServiceImpl implements CourseService {
         this.save(course);
     }
 
+
     @Override
     public List<Course> getAllOrderByRatingDesc() {
         return courseRepository.findAllOrderByRating();

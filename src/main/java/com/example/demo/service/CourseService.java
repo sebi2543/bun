@@ -30,4 +30,5 @@ public interface CourseService {
     BasicCourseDTO showIdCourse(long  id);
     float calculateAverage(long  id);
     void update(long id,long grade);
+
     }

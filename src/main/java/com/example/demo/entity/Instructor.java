@@ -27,7 +27,7 @@ public class Instructor {
     @JoinColumn
     private Profile profile;
 
-    @OneToMany(mappedBy = "instructor")
+    @OneToMany(mappedBy = "instructor",fetch = FetchType.EAGER )
     private List<Course>courses = new ArrayList<>();
 
     @Column
@@ -44,6 +44,14 @@ public class Instructor {
 
     public void addCourse(Course course){
         this.courses.add(course);
+    }
+
+    public float calculateRating(){
+        int sum=0;
+        for (Course course:courses){
+             sum+=course.getRating();
+        }
+        return (float)sum/courses.size();
     }
 
     @Override
