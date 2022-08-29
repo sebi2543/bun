@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.BasicInstructorDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
@@ -11,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public
 class InstructorServiceImplTest {
 
     @Autowired
@@ -89,14 +93,39 @@ class InstructorServiceImplTest {
         Assertions.assertEquals(12,instructorService.getById(3).getProfile().getId());
     }
 
-    @Test
-    public void assignCourse(){
-        instructorService.assignCourse(1,13);
-        instructorService.assignCourse(2,14);
-        instructorService.assignCourse(3,15);
+//    @Test
+//    public void assignCourse(){
+//        instructorService.assignCourse(1,13);
+//        instructorService.assignCourse(2,14);
+//        instructorService.assignCourse(3,15);
+//
+//        Assertions.assertEquals(1,instructorService.getCourses(1).size());
+//        Assertions.assertEquals(1,instructorService.getCourses(2).size());
+//        Assertions.assertEquals(1,instructorService.getCourses(3).size());
+//    }
 
-        Assertions.assertEquals(1,instructorService.getCourses(1).size());
-        Assertions.assertEquals(1,instructorService.getCourses(2).size());
-        Assertions.assertEquals(1,instructorService.getCourses(3).size());
+    @Test
+    public void update(){
+        instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
+        assertEquals("lewis",instructorService.getById(1).getFirstName());
+        assertEquals("hamilton",instructorService.getById(1).getLastName());
+    }
+
+    @Test
+    public void  add(){
+        instructorService.add(new BasicInstructorDTO("michale","stan"));
+        instructorService.add(new BasicInstructorDTO("michale","stan"));
+        assertEquals(11,instructorService.getAll().size());
+    }
+
+    @Test
+    public void showAll(){
+        assertEquals(9,instructorService.showAll().size());
+    }
+
+    @Test
+    public void showSuitableInstructors(){
+       List<BasicInstructorDTO>instructors = instructorService.showSuitableInstructors(new BasicInstructorDTO("david","kean"));
+        assertEquals(2,instructors.size());
     }
 }
