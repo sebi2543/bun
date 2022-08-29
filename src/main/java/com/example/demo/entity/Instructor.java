@@ -31,15 +31,16 @@ public class Instructor {
     private List<Course>courses = new ArrayList<>();
 
     @Column
-    private int rating;
+    private float rating;
 
     public Instructor(int rating) {
         this.rating = rating;
     }
 
-    public Instructor(String firstName, String lastName) {
+    public Instructor(String firstName, String lastName, int rating) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.rating = rating;
     }
 
     public void addCourse(Course course){

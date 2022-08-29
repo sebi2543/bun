@@ -5,76 +5,88 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.apache.bcel.generic.FieldOrMethod;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@RequiredArgsConstructor
-public
-class CourseRepositoryTest {
+public class CourseRepositoryTest {
 
-     @Autowired
-     CourseRepository courseRepository;
+    @Autowired
+    CourseRepository courseRepository;
 
-    @Test
-    @DisplayName("find like testing")
-    void multiple_success_findByTileLike() {
+//    Optional<List<Course>> findByTitle(String title);
+//
+//    @Query( value = "SELECT * FROM courses WHERE title LIKE %:title% ",nativeQuery = true)
+//    Optional<List<Course>>findByTitleLike(String title);
+//
+//    @Query( value = "SELECT * FROM courses ORDER BY rating DESC",nativeQuery = true)
+//    List<Course>findAllOrderByRating();
 
-        //given
-        Course course=new Course("java");
-        Course course2=new Course("java-beginner");
-        Course course3=new Course("java-master");
-        Course course4=new Course("javascript");
-        Course course5=new Course("perl");
-        Course course6=new Course("ruby");
-        courseRepository.save(course);
-        courseRepository.save(course2);
-        courseRepository.save(course3);
-        courseRepository.save(course4);
-        courseRepository.save(course5);
-        courseRepository.save(course6);
+    @BeforeEach
+    void populateDB(){
+        Course course1=new Course("java",5);
+        Course course2=new Course("python",1);
+        Course course3=new Course("ruby",9);
+        Course course4=new Course("html",9);
+        Course course5=new Course("c++",4);
+        Course course6=new Course("matlab",3);
+        Course course7=new Course("javascript",8);
+        Course course8=new Course("python",7);
+        Course course9=new Course("java",2);
 
-        //when
-        int result=courseRepository.findByTitleLike("java").get().size();
-
-        //then
-        Assertions.assertEquals(4,result,"the answer should be 4");
-    }
-
-    @Test
-    @DisplayName("sorting course test")
-    void findAllOrderByRating(){
-        //given
-        Course course1=new Course(2);
-        Course course2=new Course(3);
-        Course course3=new Course(1);
-        Course course4=new Course(9);
-        Course course5=new Course(10);
-        Course course6=new Course(6);
         courseRepository.save(course1);
         courseRepository.save(course2);
         courseRepository.save(course3);
         courseRepository.save(course4);
         courseRepository.save(course5);
         courseRepository.save(course6);
-
-        //when
-        List<Float> ratings=new ArrayList<>();
-        List<Course> courses=courseRepository.findAllOrderByRating();
-        for (Course course : courses){
-                ratings.add(course.getRating());
-        }
-
-        //then
-        Assertions.assertEquals(ratings, List.of((float)10, (float)9, (float)6, (float)3, (float)2, (float)1));
+        courseRepository.save(course7);
+        courseRepository.save(course8);
+        courseRepository.save(course9);
     }
+
+    @Test
+    public void nonEmpty_findByTitle(){
+        List<Course> courses=courseRepository.findByTitle("java").get();
+        Assertions.assertEquals(2,courses.size());
+    }
+    @Test
+    public void empty_findByTitle(){
+        List<Course> courses=courseRepository.findByTitle("c").get();
+        Assertions.assertEquals(0,courses.size());
+    }
+
+    @Test
+    public void nonEmpty_findByTitleLike(){
+        List<Course> courses=courseRepository.findByTitleLike("java").get();
+        Assertions.assertEquals(3,courses.size());
+    }
+
+    @Test
+    public void empty_findByTitleLike(){
+        List<Course> courses=courseRepository.findByTitleLike(".net").get();
+        Assertions.assertEquals(0,courses.size());
+    }
+    @Test
+   public void findAllOrderByRating() {
+        List<Course>courses=courseRepository.findAllOrderByRating();
+        List<Float>ratings=new ArrayList<>();
+        for (Course course:courses)
+            ratings.add(course.getRating());
+        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0, (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
+   }
+
+
 }
