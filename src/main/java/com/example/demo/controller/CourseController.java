@@ -67,7 +67,7 @@ public class CourseController {
 
     @PostMapping("/{id}/give-grade")
     public void giveGrade(@PathVariable int id ,@RequestBody long grade){
-        courseService.update(id,grade);
+        courseService.giveGrade(id,grade);
     }
 
     @GetMapping("/{id}/average")

@@ -1,38 +1,19 @@
 package com.example.demo.repository;
 import com.example.demo.entity.Course;
-import com.example.demo.repository.CourseRepository;
-import lombok.RequiredArgsConstructor;
-import org.aspectj.apache.bcel.generic.FieldOrMethod;
-import org.checkerframework.checker.units.qual.C;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CourseRepositoryTest {
 
     @Autowired
-    CourseRepository courseRepository;
-
-//    Optional<List<Course>> findByTitle(String title);
-//
-//    @Query( value = "SELECT * FROM courses WHERE title LIKE %:title% ",nativeQuery = true)
-//    Optional<List<Course>>findByTitleLike(String title);
-//
-//    @Query( value = "SELECT * FROM courses ORDER BY rating DESC",nativeQuery = true)
-//    List<Course>findAllOrderByRating();
+   CourseRepository courseRepository;
 
     @BeforeEach
     void populateDB(){

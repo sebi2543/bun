@@ -29,6 +29,6 @@ public interface CourseService {
     List<BasicCourseDTO>showAutoSuggestion(BasicCourseDTO course);
     BasicCourseDTO showIdCourse(long  id);
     float calculateAverage(long  id);
-    void update(long id,long grade);
+    void giveGrade(long id,long grade);
 
     }

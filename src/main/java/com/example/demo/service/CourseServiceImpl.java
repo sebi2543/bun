@@ -114,7 +114,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void update(long  id,long grade) {
+    public void giveGrade(long  id,long grade) {
         Course course=this.getById(id);
         course.addGrade(grade);
         this.save(course);
