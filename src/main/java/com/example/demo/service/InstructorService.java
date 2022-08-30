@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicInstructorDTO;
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,4 +26,6 @@ public interface InstructorService {
     List<BasicInstructorDTO> showAll();
     List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor);
     BasicInstructorDTO showIdInstructor(int id);
+    float calculateAverage(long id);
+    List<Course>getCourses(long id);
 }

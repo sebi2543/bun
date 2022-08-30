@@ -14,7 +14,6 @@ public interface CourseMapper {
 
     List<BasicCourseDTO> toBasics(List<Course> courses);
 
-    @Mapping(target = "title", ignore = true)
     Course toEntity(BasicCourseDTO basicCourseDTO);
 
     @Mapping(target = "title", ignore = true)

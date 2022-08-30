@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Course;
-
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
@@ -63,5 +61,15 @@ public class CourseController {
     @GetMapping("/best")
     public List<SortCourseDTO>bestCourse(){
         return (courseMapper.toSort(courseService.getAllOrderByRatingDesc()));
+    }
+
+    @PostMapping("/{id}/give-grade")
+    public void giveGrade(@PathVariable int id ,@RequestBody long grade){
+        courseService.giveGrade(id,grade);
+    }
+
+    @GetMapping("/{id}/average")
+    public Float calculateAverage(@PathVariable  long id){
+         return  courseService.calculateAverage(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
+import com.example.demo.entity.Course;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
@@ -59,6 +60,15 @@ public class InstructorController {
     @GetMapping("/best")
     public List<SortInstructorDTO> bestInstructor(){
         return (instructorMapper.toSort(instructorService.getAllOrderByRating()));
+    }
+
+    @GetMapping("/{id}/average")
+    public float calculateAverage(@PathVariable long id){
+        return instructorService.calculateAverage(id);
+    }
+    @GetMapping("{id}/get-courses")
+    public List<Course>showCourses(@PathVariable long id){
+        return  instructorService.getCourses(id);
     }
 }
 

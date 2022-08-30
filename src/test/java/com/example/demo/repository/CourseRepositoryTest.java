@@ -1,0 +1,73 @@
+package com.example.demo.repository;
+
+import com.example.demo.entity.Course;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public class CourseRepositoryTest {
+
+    @Autowired
+   CourseRepository courseRepository;
+
+    @BeforeEach
+    void populateDB(){
+        Course course1=new Course("java",5);
+        Course course2=new Course("python",1);
+        Course course3=new Course("ruby",9);
+        Course course4=new Course("html",9);
+        Course course5=new Course("c++",4);
+        Course course6=new Course("matlab",3);
+        Course course7=new Course("javascript",8);
+        Course course8=new Course("python",7);
+        Course course9=new Course("java",2);
+
+        courseRepository.save(course1);
+        courseRepository.save(course2);
+        courseRepository.save(course3);
+        courseRepository.save(course4);
+        courseRepository.save(course5);
+        courseRepository.save(course6);
+        courseRepository.save(course7);
+        courseRepository.save(course8);
+        courseRepository.save(course9);
+    }
+
+    @Test
+    public void nonEmpty_findByTitle(){
+        List<Course> courses=courseRepository.findByTitle("java").get();
+        Assertions.assertEquals(2,courses.size());
+    }
+    @Test
+    public void empty_findByTitle(){
+        List<Course> courses=courseRepository.findByTitle("c").get();
+        Assertions.assertEquals(0,courses.size());
+    }
+
+    @Test
+    public void nonEmpty_findByTitleLike(){
+        List<Course> courses=courseRepository.findByTitleLike("java").get();
+        Assertions.assertEquals(3,courses.size());
+    }
+
+    @Test
+    public void empty_findByTitleLike(){
+        List<Course> courses=courseRepository.findByTitleLike(".net").get();
+        Assertions.assertEquals(0,courses.size());
+    }
+    @Test
+   public void findAllOrderByRating() {
+        List<Course>courses=courseRepository.findAllOrderByRating();
+        List<Float>ratings=new ArrayList<>();
+        for (Course course:courses)
+            ratings.add(course.getRating());
+        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0, (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
+   }
+
+
+}

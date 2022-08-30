@@ -103,10 +103,24 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public BasicCourseDTO showIdCourse(int id) {
+    public BasicCourseDTO showIdCourse(long id) {
         Course course = this.getById(id);
         return (courseMapper.toBasic(course));
     }
+
+    @Override
+    public float calculateAverage(long id) {
+        Course course=this.getById(id);
+        return course.getRating();
+    }
+
+    @Override
+    public void giveGrade(long  id,long grade) {
+        Course course=this.getById(id);
+        course.addGrade(grade);
+        this.save(course);
+    }
+
 
     @Override
     public List<Course> getAllOrderByRatingDesc() {

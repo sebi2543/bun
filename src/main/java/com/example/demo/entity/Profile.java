@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Builder
 public class Profile {
 
     @Id
@@ -21,4 +20,9 @@ public class Profile {
 
     @Column
     private String youtube;
+
+    public Profile(String linkedin, String youtube) {
+        this.linkedin = linkedin;
+        this.youtube = youtube;
+    }
 }

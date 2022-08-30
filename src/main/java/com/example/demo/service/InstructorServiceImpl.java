@@ -69,7 +69,7 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public void assignCourse(long  instructorId, long  courseId) {
-        Instructor instructor=this.findById(instructorId).get();
+        Instructor instructor=this.getById(instructorId);
         Course course= courseRepository.findById(courseId).get();
         instructor.addCourse(course);
         this.save(instructor);
@@ -105,6 +105,18 @@ public class InstructorServiceImpl implements InstructorService {
     public BasicInstructorDTO showIdInstructor(int id) {
         Instructor instructor = this.getById(id);
         return (instructorMapper.toBasic(instructor));
+    }
+
+    @Override
+    public float calculateAverage(long id) {
+        Instructor instructor= this.getById(id);
+        return instructor.calculateRating();
+    }
+
+    @Override
+    public List<Course> getCourses(long id) {
+        Instructor instructor=this.getById(id);
+        return instructor.getCourses();
     }
 
     @Override

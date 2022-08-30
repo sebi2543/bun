@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import lombok.*;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "courses")
@@ -17,7 +16,6 @@ public class Course {
     private Long id;
 
     @Column
-    @NotNull
     private String title;
 
     @ManyToOne
@@ -25,12 +23,32 @@ public class Course {
     private Instructor instructor;
 
     @Column
-    private  int rating;
+    private  float rating;
+
+    @Column
+    private int headcount;
+
+    @Column
+    private long sum;
 
     public Course(String title) {
         this.title = title;
     }
 
+    public Course(String title, int rating) {
+        this.title = title;
+        this.rating = rating;
+    }
+
+    public Course(int rating) {
+        this.rating = rating;
+    }
+
+    public void addGrade(long grade){
+        headcount++;
+        sum+=grade;
+        rating= (float)sum/headcount;
+    }
     @Override
     public String toString() {
         return "Course{" +
