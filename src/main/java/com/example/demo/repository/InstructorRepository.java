@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface InstructorRepository extends JpaRepository<Instructor,Long> {
 
-   Optional<List<Instructor>> findByFirstNameAndLastName(String firstName, String lastName);
+  List<Instructor>findByFirstNameAndLastName(String firstName, String lastName);
 
    @Query( value = "SELECT * FROM instructors ORDER BY rating DESC",nativeQuery = true)
    List<Instructor>findAllOrderByRating();

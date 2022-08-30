@@ -20,24 +20,24 @@ public class CourseServiceImpl implements CourseService {
     final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
-    public Optional<List<Course>> findAll() {
-        return Optional.of(courseRepository.findAll());
+    public List<Course> findAll() {
+        return (courseRepository.findAll());
     }
 
     public Optional<Course> findById(long courseId) {
         return (courseRepository.findById(courseId));
     }
 
-    public Optional<List<Course>> findByTitleLike(BasicCourseDTO basicCourseDTO) {
+    public List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitleLike(basicCourseDTO.getTitle());
     }
 
-    public Optional<List<Course>> findByTitle(BasicCourseDTO basicCourseDTO) {
+    public List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitle(basicCourseDTO.getTitle());
     }
 
     public List<Course> getAll() {
-        return this.findAll().orElseThrow(InvalidParameterException::new);
+        return this.findAll();
     }
 
     public Course getById(long courseId) {
@@ -45,11 +45,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     public List<Course> getByTitleLike(BasicCourseDTO basicCourseDTO) {
-        return this.findByTitleLike(basicCourseDTO).orElseThrow(InvalidParameterException::new);
+        return this.findByTitleLike(basicCourseDTO);
     }
 
     public List<Course> getByTitle(BasicCourseDTO basicCourseDTO) {
-        return this.findByTitle(basicCourseDTO).orElseThrow(InvalidParameterException::new);
+        return this.findByTitle(basicCourseDTO);
     }
 
     @Override
