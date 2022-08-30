@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -43,16 +42,21 @@ class InstructorRepositoryTest {
     }
     @Test
     void exist_findByFirstNameAndLastName() {
-       Optional<List<Instructor>> instructors1 = instructorRepository.findByFirstNameAndLastName("john","smith");
-       Optional<List<Instructor>> instructors2 = instructorRepository.findByFirstNameAndLastName("david","kean");
-       Assertions.assertEquals(1,instructors1.get().size());
-       Assertions.assertEquals(2,instructors2.get().size());
+       List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","smith");
+       List<Instructor> instructors2 = instructorRepository.findByFirstNameAndLastName("david","kean");
+
+       Assertions.assertEquals(1,instructors1.size());
+       Assertions.assertEquals(1,instructors1.get(0).getId());
+
+       Assertions.assertEquals(2,instructors2.size());
+       Assertions.assertEquals(2,instructors2.get(0).getId());
+       Assertions.assertEquals(3,instructors2.get(1).getId());
     }
 
     @Test
     void empty_findByFirstNameAndLastName() {
-        Optional<List<Instructor>> instructors1 = instructorRepository.findByFirstNameAndLastName("john","johnson");
-        Assertions.assertEquals(0,instructors1.get().size());
+        List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","johnson");
+        Assertions.assertEquals(0,instructors1.size());
     }
 
     @Test

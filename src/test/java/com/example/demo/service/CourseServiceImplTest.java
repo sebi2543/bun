@@ -49,9 +49,11 @@ class CourseServiceImplTest {
 
     @Test
     public void delete() {
+
         courseService.delete(1);
         courseService.delete(9);
         courseService.delete(5);
+
         Optional<Course> course1 =courseService.findById(1);
         Optional<Course> course2 =courseService.findById(9);
         Optional<Course> course3 =courseService.findById(5);
@@ -59,6 +61,9 @@ class CourseServiceImplTest {
         Assertions.assertFalse(course1.isPresent());
         Assertions.assertFalse(course2.isPresent());
         Assertions.assertFalse(course3.isPresent());
+
+        Assertions.assertEquals(courseService.getAll().size(),6);
+
     }
 
     @Test
@@ -67,6 +72,8 @@ class CourseServiceImplTest {
         courseService.add(new BasicCourseDTO("marketing"));
 
         Assertions.assertEquals(11,courseService.getAll().size());
+        Assertions.assertEquals("photoshop",courseService.getByTitle(new BasicCourseDTO("photoshop")).get(0).getTitle());
+        Assertions.assertEquals("marketing",courseService.getByTitle(new BasicCourseDTO("marketing")).get(0).getTitle());
     }
     @Test
     public void update(){
@@ -74,9 +81,9 @@ class CourseServiceImplTest {
         courseService.update(9,new BasicCourseDTO("modified2"));
         courseService.update(4,new BasicCourseDTO("modified3"));
 
-        Assertions.assertEquals("modified1",courseService.getById(2).getTitle());
-        Assertions.assertEquals("modified2",courseService.getById(9).getTitle());
-        Assertions.assertEquals("modified3",courseService.getById(4).getTitle());
+        Assertions.assertEquals("modified1",courseService.getByTitle(new BasicCourseDTO("modified1")).get(0).getTitle());
+        Assertions.assertEquals("modified2",courseService.getByTitle(new BasicCourseDTO("modified2")).get(0).getTitle());
+        Assertions.assertEquals("modified3",courseService.getByTitle(new BasicCourseDTO("modified3")).get(0).getTitle());
     }
 
     @Test
@@ -97,6 +104,7 @@ class CourseServiceImplTest {
         courseService.giveGrade(1,5);
         Assertions.assertEquals(19,courseService.getById(1).getSum());
         Assertions.assertEquals(3,courseService.getById(1).getHeadcount());
+        Assertions.assertEquals(6.3,courseService.getById(1).getHeadcount());
     }
 
     @Test

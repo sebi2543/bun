@@ -11,11 +11,11 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class BasicInstructorDTO {
 
-    @NotBlank
+    @NotBlank(message = "firstName can contain only letters")
     @Size(min = 3,max = 15)
     public  String firstName;
 
-    @NotBlank
+    @NotBlank(message = "firstName can contain only letters")
     @Size(min = 3,max = 15)
     public  String lastName;
 }

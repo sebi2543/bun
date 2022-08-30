@@ -111,10 +111,11 @@ class InstructorServiceImplTest {
     }
 
     @Test
-    public void  add(){
+    public void add(){
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         assertEquals(11,instructorService.getAll().size());
+        assertEquals( 2,instructorService.findByFullName(new BasicInstructorDTO("michale","stan")).size());
     }
 
     @Test
@@ -126,5 +127,7 @@ class InstructorServiceImplTest {
     public void showSuitableInstructors(){
        List<BasicInstructorDTO>instructors = instructorService.showSuitableInstructors(new BasicInstructorDTO("david","kean"));
         assertEquals(2,instructors.size());
+        assertEquals("david",instructors.get(0).getFirstName());
+        assertEquals("kean",instructors.get(0).getLastName());
     }
 }

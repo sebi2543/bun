@@ -40,24 +40,29 @@ public class CourseRepositoryTest {
 
     @Test
     public void nonEmpty_findByTitle(){
-        List<Course> courses=courseRepository.findByTitle("java").get();
+        List<Course> courses=courseRepository.findByTitle("java");
         Assertions.assertEquals(2,courses.size());
+        Assertions.assertEquals(1,courses.get(0).getId());
+        Assertions.assertEquals(9,courses.get(1).getId());
     }
     @Test
     public void empty_findByTitle(){
-        List<Course> courses=courseRepository.findByTitle("c").get();
+        List<Course> courses=courseRepository.findByTitle("c");
         Assertions.assertEquals(0,courses.size());
     }
 
     @Test
     public void nonEmpty_findByTitleLike(){
-        List<Course> courses=courseRepository.findByTitleLike("java").get();
+        List<Course> courses=courseRepository.findByTitleLike("java");
         Assertions.assertEquals(3,courses.size());
+        Assertions.assertEquals(1,courses.get(0).getId());
+        Assertions.assertEquals(7,courses.get(1).getId());
+        Assertions.assertEquals(9,courses.get(2).getId());
     }
 
     @Test
     public void empty_findByTitleLike(){
-        List<Course> courses=courseRepository.findByTitleLike(".net").get();
+        List<Course> courses=courseRepository.findByTitleLike(".net");
         Assertions.assertEquals(0,courses.size());
     }
     @Test
