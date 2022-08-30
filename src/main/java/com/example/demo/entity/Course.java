@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import com.example.demo.domain.CourseRating;
 import lombok.*;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "courses")
@@ -50,10 +48,6 @@ public class Course {
         headcount++;
         sum+=grade;
         rating= (float)sum/headcount;
-    }
-
-    public float calculateAverage(){
-        return (float)headcount/sum;
     }
     @Override
     public String toString() {

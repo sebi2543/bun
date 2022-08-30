@@ -27,7 +27,7 @@ public class Instructor {
     @JoinColumn
     private Profile profile;
 
-    @OneToMany(mappedBy = "instructor",fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "instructor")
     private List<Course>courses = new ArrayList<>();
 
     @Column

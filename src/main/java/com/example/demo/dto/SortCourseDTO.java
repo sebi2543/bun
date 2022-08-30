@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class SortCourseDTO {
 
     private String title;
-
     private  int rating;
 
 }

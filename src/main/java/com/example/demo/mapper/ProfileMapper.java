@@ -4,9 +4,7 @@ import com.example.demo.dto.BasicProfileDTO;
 import com.example.demo.entity.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
-
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR, componentModel = "spring")

@@ -5,7 +5,6 @@ import com.example.demo.mapper.ProfileMapper;
 import com.example.demo.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,6 +41,4 @@ public class ProfileController {
     public void updateProfile(@PathVariable int  id, @Valid @RequestBody BasicProfileDTO basicProfileDTO){
         profileService.update(id, basicProfileDTO);
     }
-
-
 }
