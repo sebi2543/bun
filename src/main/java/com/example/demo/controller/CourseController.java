@@ -5,6 +5,8 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,14 @@ public class CourseController {
     final CourseService courseService;
     final CourseMapper courseMapper;
     final InstructorService instructorService;
-
+    Logger logger= LoggerFactory.getLogger(CourseController.class);
     @GetMapping(value = {"/all"})
     public ResponseEntity<List<BasicCourseDTO>>showMainPage(){
+        logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");;
        return new ResponseEntity<>(courseService.showMainPage(), HttpStatus.ACCEPTED);
     }
 
