@@ -5,6 +5,8 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -19,8 +21,8 @@ public class CourseController {
     final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
-    public List<BasicCourseDTO>showMainPage(){
-       return courseService.showMainPage();
+    public ResponseEntity<List<BasicCourseDTO>>showMainPage(){
+       return new ResponseEntity<>(courseService.showMainPage(), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/search")

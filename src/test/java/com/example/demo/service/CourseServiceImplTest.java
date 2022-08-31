@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public
 class CourseServiceImplTest {
     @Autowired
     CourseRepository courseRepository;
@@ -104,7 +105,7 @@ class CourseServiceImplTest {
         courseService.giveGrade(1,5);
         Assertions.assertEquals(19,courseService.getById(1).getSum());
         Assertions.assertEquals(3,courseService.getById(1).getHeadcount());
-        Assertions.assertEquals(6.3,courseService.getById(1).getHeadcount());
+        Assertions.assertEquals(6.333333492279053,(float)courseService.getById(1).getRating());
     }
 
     @Test
