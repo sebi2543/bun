@@ -43,6 +43,10 @@ public class Instructor {
         this.rating = rating;
     }
 
+    public Instructor(Long id) {
+        this.id = id;
+    }
+
     public void addCourse(Course course){
         this.courses.add(course);
     }

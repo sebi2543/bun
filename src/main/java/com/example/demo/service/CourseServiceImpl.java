@@ -41,7 +41,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     public Course getById(long courseId) {
-        return this.findById(courseId).orElseThrow(InvalidParameterException::new);
+        return this.findById(courseId).get();
     }
 
     public List<Course> getByTitleLike(BasicCourseDTO basicCourseDTO) {
@@ -67,7 +67,6 @@ public class CourseServiceImpl implements CourseService {
         course.setTitle(basicCourseDTO.getTitle());
         this.save(course);
     }
-
 
     @Override
     public void assignInstructor(long courseId,long  instructorId) {
