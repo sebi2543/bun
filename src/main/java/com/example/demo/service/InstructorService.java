@@ -13,9 +13,9 @@ public interface InstructorService {
     List<Instructor> getAll();
     Instructor getById(long instructorId);
     List<Instructor> getByFullName(BasicInstructorDTO instructor);
-    Optional<List<Instructor>>findAll();
-    Optional<Instructor> findById(long instructorId);
-    Optional<List<Instructor>>findByFullName(BasicInstructorDTO instructor);
+    List<Instructor>findAll();
+    Optional<Instructor>findById(long instructorId);
+    List<Instructor>findByFullName(BasicInstructorDTO instructor);
     List<Instructor>getAllOrderByRating();
     void save(Instructor instructor);
     void delete(long instructorId);

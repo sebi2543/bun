@@ -28,20 +28,20 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
 
-    public Optional<List<Instructor>> findAll() {
-        return Optional.of(instructorRepository.findAll());
+    public List<Instructor> findAll() {
+        return instructorRepository.findAll();
     }
 
     public Optional<Instructor> findById(long instructorId) {
         return instructorRepository.findById(instructorId);
     }
 
-    public Optional<List<Instructor>> findByFullName(BasicInstructorDTO instructor) {
+    public List<Instructor> findByFullName(BasicInstructorDTO instructor) {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
     }
 
     public List<Instructor> getAll() {
-        return this.findAll().orElseThrow(InvalidParameterException::new);
+        return this.findAll();
     }
 
     public Instructor getById(long  instructorId) {
@@ -49,7 +49,7 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     public List<Instructor> getByFullName(BasicInstructorDTO instructor) {
-        return this.findByFullName(instructor).orElseThrow(InvalidParameterException::new);
+        return this.findByFullName(instructor);
     }
 
     @Override

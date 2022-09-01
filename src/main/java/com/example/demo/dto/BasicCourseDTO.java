@@ -11,8 +11,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class BasicCourseDTO {
 
-    @NotBlank
-    @Size(min = 2,max = 10)
+    @NotBlank(message = "title can contain only letters")
+    @Size(min = 2,max = 10,message = "title must be between 2 and 10 letters")
     private String title;
 }
 

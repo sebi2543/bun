@@ -9,10 +9,10 @@ import java.util.Optional;
 @Service
 public interface CourseService {
 
-    Optional<List<Course>>findAll();
+    List<Course>findAll();
     Optional<Course>findById(long courseId);
-    Optional<List<Course>>findByTitle(BasicCourseDTO basicCourseDTO);
-    Optional<List<Course>>findByTitleLike(BasicCourseDTO basicCourseDTO);
+    List<Course>findByTitle(BasicCourseDTO basicCourseDTO);
+    List<Course>findByTitleLike(BasicCourseDTO basicCourseDTO);
     List<Course>getAll();
     Course getById(long courseId);
     List<Course>getByTitleLike(BasicCourseDTO basicCourseDTO);

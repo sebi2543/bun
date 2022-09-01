@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public interface ProfileService {
-    Optional<List<Profile>>findAll();
+    List<Profile>findAll();
     Optional<Profile>findById(long profileId);
     List<Profile>getAll();
     Profile getById(long profileId);

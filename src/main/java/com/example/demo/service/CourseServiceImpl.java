@@ -8,7 +8,6 @@ import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,36 +19,36 @@ public class CourseServiceImpl implements CourseService {
     final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
-    public Optional<List<Course>> findAll() {
-        return Optional.of(courseRepository.findAll());
+    public List<Course> findAll() {
+        return (courseRepository.findAll());
     }
 
     public Optional<Course> findById(long courseId) {
         return (courseRepository.findById(courseId));
     }
 
-    public Optional<List<Course>> findByTitleLike(BasicCourseDTO basicCourseDTO) {
+    public List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitleLike(basicCourseDTO.getTitle());
     }
 
-    public Optional<List<Course>> findByTitle(BasicCourseDTO basicCourseDTO) {
+    public List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitle(basicCourseDTO.getTitle());
     }
 
     public List<Course> getAll() {
-        return this.findAll().orElseThrow(InvalidParameterException::new);
+        return this.findAll();
     }
 
     public Course getById(long courseId) {
-        return this.findById(courseId).orElseThrow(InvalidParameterException::new);
+        return this.findById(courseId).get();
     }
 
     public List<Course> getByTitleLike(BasicCourseDTO basicCourseDTO) {
-        return this.findByTitleLike(basicCourseDTO).orElseThrow(InvalidParameterException::new);
+        return this.findByTitleLike(basicCourseDTO);
     }
 
     public List<Course> getByTitle(BasicCourseDTO basicCourseDTO) {
-        return this.findByTitle(basicCourseDTO).orElseThrow(InvalidParameterException::new);
+        return this.findByTitle(basicCourseDTO);
     }
 
     @Override
@@ -58,8 +57,7 @@ public class CourseServiceImpl implements CourseService {
     }
     @Override
     public void delete(long courseId) {
-        Course course=this.getById(courseId);
-        courseRepository.delete(course);
+        courseRepository.delete(this.getById(courseId));
     }
 
     @Override
@@ -68,7 +66,6 @@ public class CourseServiceImpl implements CourseService {
         course.setTitle(basicCourseDTO.getTitle());
         this.save(course);
     }
-
 
     @Override
     public void assignInstructor(long courseId,long  instructorId) {

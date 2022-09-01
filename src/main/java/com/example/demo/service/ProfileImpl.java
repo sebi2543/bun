@@ -14,13 +14,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProfileImpl implements ProfileService {
 
-
     final ProfileRepository profileRepository;
     final ProfileMapper instructorProfileMapper;
 
     @Override
-    public Optional<List<Profile>> findAll() {
-        return Optional.of(profileRepository.findAll());
+    public List<Profile> findAll() {
+        return (profileRepository.findAll());
     }
 
     @Override
@@ -30,7 +29,7 @@ public class ProfileImpl implements ProfileService {
 
     @Override
     public List<Profile> getAll() {
-        return this.findAll().orElseThrow(InvalidParameterException::new);
+        return this.findAll();
     }
 
     @Override
