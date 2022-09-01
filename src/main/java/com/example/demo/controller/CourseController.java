@@ -8,7 +8,6 @@ import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +23,17 @@ public class CourseController {
     final CourseMapper courseMapper;
     final InstructorService instructorService;
     Logger logger= LoggerFactory.getLogger(CourseController.class);
+
     @GetMapping(value = {"/all"})
-    public ResponseEntity<List<Course>>showMainPage(){
+    public List<BasicCourseDTO>showMainPage(){
         logger.trace("A TRACE Message");
         logger.debug("A DEBUG Message");
         logger.info("An INFO Message");
         logger.warn("A WARN Message");
         logger.error("An ERROR Message");;
-       return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(courseService.getAll());
+        return courseService.showMainPage();
     }
+
 
     @PostMapping("/search")
     public List<BasicCourseDTO>showSuitableCourses(@Valid @RequestBody BasicCourseDTO course)  {

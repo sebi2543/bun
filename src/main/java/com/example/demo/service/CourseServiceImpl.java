@@ -8,7 +8,6 @@ import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
 
