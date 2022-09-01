@@ -40,7 +40,6 @@ public class Course {
         this.rating = rating;
     }
 
-
     public Course(Long id) {
         this.id = id;
     }

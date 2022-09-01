@@ -36,7 +36,7 @@ class ProfileImplTest {
     }
 
     @Test
-    void delete() {
+    void delete_MultipleProfiles_ProfilesAreDeleted() {
         profileService.delete(1);
         profileService.delete(7);
         Assertions.assertEquals(5,profileService.getAll().size());
@@ -45,7 +45,7 @@ class ProfileImplTest {
     }
 
     @Test
-    void update() {
+    void update_MultipleProfiles_ProfilesAreUpdated() {
         profileService.update(3,new BasicProfileDTO("LINKEDIN","YOUTUBE"));
         profileService.update(7,new BasicProfileDTO("LINKEDIN1","YOUTUBE1"));
         Assertions.assertEquals("LINKEDIN",profileService.getById(3).getLinkedin());
@@ -56,7 +56,7 @@ class ProfileImplTest {
 
     }
     @Test
-    void add() {
+    void add_MultipleProfiles_ProfilesAreAdded() {
         profileService.add(new BasicProfileDTO("newLinkedIn","newYoutube"));
         profileService.add(new BasicProfileDTO("newLinkedIn1","newYoutube1"));
         Assertions.assertEquals(9,profileService.getAll().size());

@@ -61,11 +61,11 @@ public class InstructorController {
     public List<SortInstructorDTO> bestInstructor(){
         return (instructorMapper.toSort(instructorService.getAllOrderByRating()));
     }
-
     @GetMapping("/{id}/average")
     public float calculateAverage(@PathVariable long id){
         return instructorService.calculateAverage(id);
     }
+
     @GetMapping("{id}/get-courses")
     public List<Course>showCourses(@PathVariable long id){
         return  instructorService.getCourses(id);

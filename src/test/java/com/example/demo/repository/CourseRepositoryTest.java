@@ -39,20 +39,20 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void nonEmpty_findByTitle(){
+    public void findByTitle_nonEmpty_NonEmptyList(){
         List<Course> courses=courseRepository.findByTitle("java");
         Assertions.assertEquals(2,courses.size());
         Assertions.assertEquals(1,courses.get(0).getId());
         Assertions.assertEquals(9,courses.get(1).getId());
     }
     @Test
-    public void empty_findByTitle(){
+    public void findByTitle_Empty_EmptyList(){
         List<Course> courses=courseRepository.findByTitle("c");
         Assertions.assertEquals(0,courses.size());
     }
 
     @Test
-    public void nonEmpty_findByTitleLike(){
+    public void findByTitleLike_nonEmpty_NonEmptyList(){
         List<Course> courses=courseRepository.findByTitleLike("java");
         Assertions.assertEquals(3,courses.size());
         Assertions.assertEquals(1,courses.get(0).getId());
@@ -61,12 +61,12 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void empty_findByTitleLike(){
+    public void findByTitleLike_Empty_EmptyList(){
         List<Course> courses=courseRepository.findByTitleLike(".net");
         Assertions.assertEquals(0,courses.size());
     }
     @Test
-   public void findAllOrderByRating() {
+   public void findAllOrderByRating_MixedValues_OrderedList() {
         List<Course>courses=courseRepository.findAllOrderByRating();
         List<Float>ratings=new ArrayList<>();
         for (Course course:courses)

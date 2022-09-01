@@ -13,9 +13,9 @@ public class BasicInstructorDTO {
 
     @NotBlank(message = "firstName can contain only letters")
     @Size(min = 3,max = 15)
-    public  String firstName;
+    private   String firstName;
 
     @NotBlank(message = "firstName can contain only letters")
     @Size(min = 3,max = 15)
-    public  String lastName;
+    private   String lastName;
 }

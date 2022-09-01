@@ -49,7 +49,7 @@ class CourseServiceImplTest {
     }
 
     @Test
-    public void delete() {
+    public void delete_MultipleCourse_CoursesAreDeleted() {
 
         courseService.delete(1);
         courseService.delete(9);
@@ -68,7 +68,7 @@ class CourseServiceImplTest {
     }
 
     @Test
-    public void add(){
+    public void add_MultipleCourses_CoursesAreAdded(){
         courseService.add(new BasicCourseDTO("photoshop"));
         courseService.add(new BasicCourseDTO("marketing"));
 
@@ -77,7 +77,7 @@ class CourseServiceImplTest {
         Assertions.assertEquals("marketing",courseService.getByTitle(new BasicCourseDTO("marketing")).get(0).getTitle());
     }
     @Test
-    public void update(){
+    public void update_OnlyTitle_CoursesAreModified(){
         courseService.update(2,new BasicCourseDTO("modified1"));
         courseService.update(9,new BasicCourseDTO("modified2"));
         courseService.update(4,new BasicCourseDTO("modified3"));
@@ -88,7 +88,7 @@ class CourseServiceImplTest {
     }
 
     @Test
-    public void assignInstructor(){
+    public void assignInstructor_MultipleAssigns_InstructorsAreAssigned(){
         Instructor instructor1=new Instructor("JOHNSON","JOHN",1);
         Instructor instructor2=new Instructor("JIM","WALKER",6);
         instructorService.save(instructor1);
@@ -99,17 +99,16 @@ class CourseServiceImplTest {
         Assertions.assertEquals(11,courseService.getById(2).getInstructor().id);
     }
     @Test
-    public void giveGrade(){
+    public void giveGrade_MixedValues_FieldsAreModified(){
         courseService.giveGrade(1,10);
         courseService.giveGrade(1,4);
         courseService.giveGrade(1,5);
         Assertions.assertEquals(19,courseService.getById(1).getSum());
         Assertions.assertEquals(3,courseService.getById(1).getHeadcount());
-        Assertions.assertEquals(6.333333492279053,(float)courseService.getById(1).getRating());
     }
 
     @Test
-    public void calculateAverage(){
+    public void calculateAverage_MixedValues_CorrectAverage(){
         courseService.giveGrade(1,10);
         courseService.giveGrade(1,1);
         Assertions.assertEquals(5.5,courseService.calculateAverage(1));

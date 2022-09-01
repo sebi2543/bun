@@ -14,7 +14,7 @@ public class CourseTest {
     }
 
     @Test
-    void addGrade() {
+    void addGrade_MixedValues_CorrectAverage() {
         course.addGrade(7);
         course.addGrade(9);
         course.addGrade(1);

@@ -19,19 +19,19 @@ public class CourseServiceImpl implements CourseService {
     final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
-    public List<Course> findAll() {
+    private List<Course> findAll() {
         return (courseRepository.findAll());
     }
 
-    public Optional<Course> findById(long courseId) {
+    private Optional<Course> findById(long courseId) {
         return (courseRepository.findById(courseId));
     }
 
-    public List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
+    private List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitleLike(basicCourseDTO.getTitle());
     }
 
-    public List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
+    private List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitle(basicCourseDTO.getTitle());
     }
 
@@ -64,7 +64,7 @@ public class CourseServiceImpl implements CourseService {
     public void update(long courseId, BasicCourseDTO basicCourseDTO) {
         Course course=this.getById(courseId);
         course.setTitle(basicCourseDTO.getTitle());
-        this.save(course);
+        this.courseRepository.save(course);
     }
 
     @Override
@@ -72,13 +72,13 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.findById(courseId).get();
         Instructor instructor = instructorRepository.findById(instructorId).get();
         course.setInstructor(instructor);
-        this.save(course);
+        this.courseRepository.save(course);
     }
 
     @Override
     public void add(BasicCourseDTO basicCourseDTO) {
         Course course=courseMapper.toEntity(basicCourseDTO);
-        this.save(course);
+        this.courseRepository.save(course);
     }
 
     @Override
@@ -115,9 +115,8 @@ public class CourseServiceImpl implements CourseService {
     public void giveGrade(long  id,long grade) {
         Course course=this.getById(id);
         course.addGrade(grade);
-        this.save(course);
+        this.courseRepository.save(course);
     }
-
 
     @Override
     public List<Course> getAllOrderByRatingDesc() {

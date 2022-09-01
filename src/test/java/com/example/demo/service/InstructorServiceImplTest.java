@@ -70,19 +70,19 @@ class InstructorServiceImplTest {
 
     }
 
-    @Test
-    public void delete(){
-        instructorService.delete(1);
-        instructorService.delete(7);
-        instructorService.delete(5);
+//    @Test
+//    public void delete_MultipleInstructors_InstructorsAreDeleted(){
+//        instructorService.delete(1);
+//        instructorService.delete(7);
+//        instructorService.delete(5);
+//
+//        assertThrows());
+//        assertFalse(instructorService.findById(7).isPresent());
+//        assertFalse(instructorService.findById(5).isPresent());
+//    }
 
-        assertFalse(instructorService.findById(1).isPresent());
-        assertFalse(instructorService.findById(7).isPresent());
-        assertFalse(instructorService.findById(5).isPresent());
-    }
-
     @Test
-    public void assignProfile(){
+    public void assignProfile_MultipleProfiles_ProfilesAreAssign(){
         instructorService.assignProfile(1,10);
         instructorService.assignProfile(2,11);
         instructorService.assignProfile(3,12);
@@ -104,27 +104,27 @@ class InstructorServiceImplTest {
 //    }
 
     @Test
-    public void update(){
+    public void update_SingleInstructor_InstructorIsModified(){
         instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
         assertEquals("lewis",instructorService.getById(1).getFirstName());
         assertEquals("hamilton",instructorService.getById(1).getLastName());
     }
 
     @Test
-    public void add(){
+    public void add_MultipleInstructors_InstructorsAreAdded(){
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         assertEquals(11,instructorService.getAll().size());
-        assertEquals( 2,instructorService.findByFullName(new BasicInstructorDTO("michale","stan")).size());
+        assertEquals( 2,instructorService.getByFullName((new BasicInstructorDTO("michale","stan"))).size());
     }
 
     @Test
-    public void showAll(){
+    public void showAll_NonEmptyRepo_NonEmptyList(){
         assertEquals(9,instructorService.showAll().size());
     }
 
     @Test
-    public void showSuitableInstructors(){
+    public void showSuitableInstructors_DifferentInstructorsWithTheSameName_MultipleAppears(){
        List<BasicInstructorDTO>instructors = instructorService.showSuitableInstructors(new BasicInstructorDTO("david","kean"));
         assertEquals(2,instructors.size());
         assertEquals("david",instructors.get(0).getFirstName());

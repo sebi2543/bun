@@ -41,7 +41,7 @@ class InstructorRepositoryTest {
         instructorRepository.save(instructor9);
     }
     @Test
-    void exist_findByFirstNameAndLastName() {
+    void findByFirstNameAndLastName_Exist_Found() {
        List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","smith");
        List<Instructor> instructors2 = instructorRepository.findByFirstNameAndLastName("david","kean");
 
@@ -54,13 +54,13 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void empty_findByFirstNameAndLastName() {
+    void findByFirstNameAndLastName_Missing_NotFound() {
         List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","johnson");
         Assertions.assertEquals(0,instructors1.size());
     }
 
     @Test
-    void findAllOrderByRating() {
+    void findAllOrderByRating_MixedValues_OrderedList() {
         List<Instructor>instructors=instructorRepository.findAllOrderByRating();
         List<Float>ratings=new ArrayList<>();
         for (Instructor instructor:instructors)

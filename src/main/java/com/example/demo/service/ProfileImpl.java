@@ -17,13 +17,11 @@ public class ProfileImpl implements ProfileService {
     final ProfileRepository profileRepository;
     final ProfileMapper instructorProfileMapper;
 
-    @Override
-    public List<Profile> findAll() {
+    private List<Profile> findAll() {
         return (profileRepository.findAll());
     }
 
-    @Override
-    public Optional<Profile> findById(long profileId) {
+    private Optional<Profile> findById(long profileId) {
         return profileRepository.findById(profileId);
     }
 

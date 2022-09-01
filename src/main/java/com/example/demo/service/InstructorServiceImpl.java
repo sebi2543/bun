@@ -27,16 +27,15 @@ public class InstructorServiceImpl implements InstructorService {
         instructorRepository.save(instructor);
     }
 
-
-    public List<Instructor> findAll() {
+    private List<Instructor> findAll() {
         return instructorRepository.findAll();
     }
 
-    public Optional<Instructor> findById(long instructorId) {
+    private Optional<Instructor> findById(long instructorId) {
         return instructorRepository.findById(instructorId);
     }
 
-    public List<Instructor> findByFullName(BasicInstructorDTO instructor) {
+    private List<Instructor> findByFullName(BasicInstructorDTO instructor) {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
     }
 
@@ -72,7 +71,7 @@ public class InstructorServiceImpl implements InstructorService {
         Instructor instructor=this.getById(instructorId);
         Course course= courseRepository.findById(courseId).get();
         instructor.addCourse(course);
-        this.save(instructor);
+        this.instructorRepository.save(instructor);
     }
 
     @Override
@@ -80,13 +79,13 @@ public class InstructorServiceImpl implements InstructorService {
         Instructor instructor =this.getById(instructorId);
         instructor.setFirstName(basicInstructorDTO.getFirstName());
         instructor.setLastName(basicInstructorDTO.getLastName());
-        this.save(instructor);
+        this.instructorRepository.save(instructor);
     }
 
     @Override
     public void add(BasicInstructorDTO basicInstructorDTO) {
       Instructor instructor=instructorMapper.toEntity(basicInstructorDTO);
-      this.save(instructor);
+      this.instructorRepository.save(instructor);
     }
 
     @Override
@@ -123,7 +122,5 @@ public class InstructorServiceImpl implements InstructorService {
     public List<Instructor> getAllOrderByRating() {
         return instructorRepository.findAllOrderByRating();
     }
-
-
 }
 

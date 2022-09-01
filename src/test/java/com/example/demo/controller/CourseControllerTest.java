@@ -45,7 +45,7 @@ class CourseControllerTest {
     }
 
     @Test
-    public void showMainPage() throws Exception {
+    public void showMainPage_NonEmptyRepository_NonEmptyList() throws Exception {
 
         List<Course> course = new ArrayList<>();
         course.add(new Course("java", 10));
