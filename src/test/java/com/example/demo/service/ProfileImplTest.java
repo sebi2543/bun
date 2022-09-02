@@ -2,12 +2,17 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicProfileDTO;
 import com.example.demo.entity.Profile;
+import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.security.InvalidParameterException;
+import java.util.Optional;
+
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
@@ -39,9 +44,16 @@ class ProfileImplTest {
     void delete_MultipleProfiles_ProfilesAreDeleted() {
         profileService.delete(1);
         profileService.delete(7);
-        Assertions.assertEquals(5,profileService.getAll().size());
-        Assertions.assertFalse(profileService.findById(1).isPresent());
-        Assertions.assertFalse(profileService.findById(7).isPresent());
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
+
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
     }
 
     @Test
@@ -60,11 +72,11 @@ class ProfileImplTest {
         profileService.add(new BasicProfileDTO("newLinkedIn","newYoutube"));
         profileService.add(new BasicProfileDTO("newLinkedIn1","newYoutube1"));
         Assertions.assertEquals(9,profileService.getAll().size());
-        Assertions.assertEquals("newLinkedIn",profileService.findById(8).get().getLinkedin());
-        Assertions.assertEquals("newYoutube",profileService.findById(8).get().getYoutube());
-
-        Assertions.assertEquals("newLinkedIn1",profileService.findById(9).get().getLinkedin());
-        Assertions.assertEquals("newYoutube1",profileService.findById(9).get().getYoutube());
-
+        Assertions.assertAll(
+        ()->Assertions.assertEquals("newLinkedIn",profileService.getById((8)).getLinkedin()),
+        ()->Assertions.assertEquals("newYoutube",profileService.getById(8).getYoutube()),
+        ()->Assertions.assertEquals("newLinkedIn1",profileService.getById(9).getLinkedin()),
+        ()->Assertions.assertEquals("newYoutube1",profileService.getById(9).getYoutube())
+        );
     }
 }

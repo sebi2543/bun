@@ -68,14 +68,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void assignInstructor(long courseId,long  instructorId) {
-        Course course = courseRepository.findById(courseId).get();
-        Instructor instructor = instructorRepository.findById(instructorId).get();
-        course.setInstructor(instructor);
-        this.courseRepository.save(course);
-    }
-
-    @Override
     public void add(BasicCourseDTO basicCourseDTO) {
         Course course=courseMapper.toEntity(basicCourseDTO);
         this.courseRepository.save(course);

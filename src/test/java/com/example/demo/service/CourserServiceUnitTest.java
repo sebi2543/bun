@@ -24,6 +24,8 @@ public class CourserServiceUnitTest {
      CourseRepository courseRepository;
      @Mock
      InstructorRepository instructorRepository;
+     @Mock
+     InstructorService instructorService;
 
      @Mock
      CourseMapper courseMapper;
@@ -56,7 +58,7 @@ public class CourserServiceUnitTest {
           Course course=new Course(1L);
           Mockito.when(courseRepository.findById(any())).thenReturn((Optional.of(course)));
           Mockito.when(instructorRepository.findById(any())).thenReturn((Optional.of(new Instructor(1L))));
-          courseService.assignInstructor(1L,1L);
+          instructorService.assignCourse(1L,1L);
           Mockito.verify(courseRepository).findById(1L);
           Mockito.verify(courseRepository).save(course);
           Mockito.verify(instructorRepository).findById(1L);

@@ -21,7 +21,6 @@ public interface CourseService {
     void save(Course course);
     void delete(long courseId);
     void update(long courseId,BasicCourseDTO basicCourseDTO);
-    void assignInstructor(long courseId, long instructorId);
     void add(BasicCourseDTO basicCourseDTO);
     List<BasicCourseDTO>showMainPage();
     List<BasicCourseDTO>showSuitableCourses(BasicCourseDTO course);

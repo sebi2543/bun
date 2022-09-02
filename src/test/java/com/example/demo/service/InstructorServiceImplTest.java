@@ -5,13 +5,18 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
 import com.example.demo.repository.InstructorRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -70,16 +75,24 @@ class InstructorServiceImplTest {
 
     }
 
-//    @Test
-//    public void delete_MultipleInstructors_InstructorsAreDeleted(){
-//        instructorService.delete(1);
-//        instructorService.delete(7);
-//        instructorService.delete(5);
-//
-//        assertThrows());
-//        assertFalse(instructorService.findById(7).isPresent());
-//        assertFalse(instructorService.findById(5).isPresent());
-//    }
+    @Test
+    public void delete_MultipleInstructors_InstructorsAreDeleted(){
+        instructorService.delete(1);
+        instructorService.delete(7);
+        instructorService.delete(5);
+
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(1);
+        });
+
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(7);
+        });
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(5);
+        });
+        assertEquals(6,instructorService.getAll().size());
+    }
 
     @Test
     public void assignProfile_MultipleProfiles_ProfilesAreAssign(){
@@ -87,9 +100,11 @@ class InstructorServiceImplTest {
         instructorService.assignProfile(2,11);
         instructorService.assignProfile(3,12);
 
-        Assertions.assertEquals(10,instructorService.getById(1).getProfile().getId());
-        Assertions.assertEquals(11,instructorService.getById(2).getProfile().getId());
-        Assertions.assertEquals(12,instructorService.getById(3).getProfile().getId());
+        Assertions.assertAll(
+        ()-> Assertions.assertEquals(11,instructorService.getById(2).getProfile().getId()),
+        ()-> Assertions.assertEquals(12,instructorService.getById(3).getProfile().getId()),
+        ()-> Assertions.assertEquals(10,instructorService.getById(1).getProfile().getId())
+    );
     }
 
 //    @Test
@@ -106,16 +121,21 @@ class InstructorServiceImplTest {
     @Test
     public void update_SingleInstructor_InstructorIsModified(){
         instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
-        assertEquals("lewis",instructorService.getById(1).getFirstName());
-        assertEquals("hamilton",instructorService.getById(1).getLastName());
+
+        Assertions.assertAll(
+        ()->assertEquals("lewis",instructorService.getById(1).getFirstName()),
+        ()->assertEquals("hamilton",instructorService.getById(1).getLastName())
+        );
     }
 
     @Test
     public void add_MultipleInstructors_InstructorsAreAdded(){
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         instructorService.add(new BasicInstructorDTO("michale","stan"));
-        assertEquals(11,instructorService.getAll().size());
-        assertEquals( 2,instructorService.getByFullName((new BasicInstructorDTO("michale","stan"))).size());
+        Assertions.assertAll(
+        ()->assertEquals( 2,instructorService.getByFullName((new BasicInstructorDTO("michale","stan"))).size()),
+        ()->assertEquals(11,instructorService.getAll().size())
+    );
     }
 
     @Test
@@ -126,8 +146,10 @@ class InstructorServiceImplTest {
     @Test
     public void showSuitableInstructors_DifferentInstructorsWithTheSameName_MultipleAppears(){
        List<BasicInstructorDTO>instructors = instructorService.showSuitableInstructors(new BasicInstructorDTO("david","kean"));
-        assertEquals(2,instructors.size());
-        assertEquals("david",instructors.get(0).getFirstName());
-        assertEquals("kean",instructors.get(0).getLastName());
+        Assertions.assertAll(
+        ()->assertEquals(2,instructors.size()),
+        ()->assertEquals("david",instructors.get(0).getFirstName()),
+        ()->assertEquals("kean",instructors.get(0).getLastName())
+    );
     }
 }

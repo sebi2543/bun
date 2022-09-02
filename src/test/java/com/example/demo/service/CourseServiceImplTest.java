@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @SpringBootTest
@@ -55,36 +57,42 @@ class CourseServiceImplTest {
         courseService.delete(9);
         courseService.delete(5);
 
-        Optional<Course> course1 =courseService.findById(1);
-        Optional<Course> course2 =courseService.findById(9);
-        Optional<Course> course3 =courseService.findById(5);
+        Assertions.assertThrows(NoSuchElementException.class,()->{
+            courseService.getById(1);
 
-        Assertions.assertFalse(course1.isPresent());
-        Assertions.assertFalse(course2.isPresent());
-        Assertions.assertFalse(course3.isPresent());
+        });
+
+        Assertions.assertThrows(NoSuchElementException.class,()->{
+            courseService.getById(9);
+        });
+
+        Assertions.assertThrows(NoSuchElementException.class,()->{
+            courseService.getById(5);
+        });
 
         Assertions.assertEquals(courseService.getAll().size(),6);
 
     }
-
     @Test
     public void add_MultipleCourses_CoursesAreAdded(){
         courseService.add(new BasicCourseDTO("photoshop"));
         courseService.add(new BasicCourseDTO("marketing"));
-
-        Assertions.assertEquals(11,courseService.getAll().size());
-        Assertions.assertEquals("photoshop",courseService.getByTitle(new BasicCourseDTO("photoshop")).get(0).getTitle());
-        Assertions.assertEquals("marketing",courseService.getByTitle(new BasicCourseDTO("marketing")).get(0).getTitle());
+        Assertions.assertAll(
+        ()->Assertions.assertEquals(11,courseService.getAll().size()),
+        ()->Assertions.assertEquals("photoshop",courseService.getByTitle(new BasicCourseDTO("photoshop")).get(0).getTitle()),
+        ()->Assertions.assertEquals("marketing",courseService.getByTitle(new BasicCourseDTO("marketing")).get(0).getTitle())
+        );
     }
     @Test
     public void update_OnlyTitle_CoursesAreModified(){
         courseService.update(2,new BasicCourseDTO("modified1"));
         courseService.update(9,new BasicCourseDTO("modified2"));
         courseService.update(4,new BasicCourseDTO("modified3"));
-
-        Assertions.assertEquals("modified1",courseService.getByTitle(new BasicCourseDTO("modified1")).get(0).getTitle());
-        Assertions.assertEquals("modified2",courseService.getByTitle(new BasicCourseDTO("modified2")).get(0).getTitle());
-        Assertions.assertEquals("modified3",courseService.getByTitle(new BasicCourseDTO("modified3")).get(0).getTitle());
+        Assertions.assertAll(
+        ()->Assertions.assertEquals("modified1",courseService.getByTitle(new BasicCourseDTO("modified1")).get(0).getTitle()),
+        ()->Assertions.assertEquals("modified2",courseService.getByTitle(new BasicCourseDTO("modified2")).get(0).getTitle()),
+        ()->Assertions.assertEquals("modified3",courseService.getByTitle(new BasicCourseDTO("modified3")).get(0).getTitle())
+        );
     }
 
     @Test
@@ -93,8 +101,8 @@ class CourseServiceImplTest {
         Instructor instructor2=new Instructor("JIM","WALKER",6);
         instructorService.save(instructor1);
         instructorService.save(instructor2);
-        courseService.assignInstructor(1,10);
-        courseService.assignInstructor(2,11);
+        instructorService.assignCourse(10,1);
+        instructorService.assignCourse(11,2);
         Assertions.assertEquals(10,courseService.getById(1).getInstructor().id);
         Assertions.assertEquals(11,courseService.getById(2).getInstructor().id);
     }
@@ -103,8 +111,10 @@ class CourseServiceImplTest {
         courseService.giveGrade(1,10);
         courseService.giveGrade(1,4);
         courseService.giveGrade(1,5);
-        Assertions.assertEquals(19,courseService.getById(1).getSum());
-        Assertions.assertEquals(3,courseService.getById(1).getHeadcount());
+        Assertions.assertAll(
+        ()->Assertions.assertEquals(19,courseService.getById(1).getSum()),
+        ()->Assertions.assertEquals(3,courseService.getById(1).getHeadcount())
+        );
     }
 
     @Test

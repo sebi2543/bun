@@ -55,11 +55,6 @@ public class CourseController {
         courseService.add(basicCourseDTO);
     }
 
-    @PostMapping("/{id}/assign-instructor")
-    public void  assignInstructor(@PathVariable int id, @RequestBody long  instructorId){
-     courseService.assignInstructor(id,instructorId);
-    }
-
     @PutMapping("/{id}/update")
     public void updateCourse(@PathVariable int id,@Valid @RequestBody BasicCourseDTO basicCourseDTO){
        courseService.update(id,basicCourseDTO);
