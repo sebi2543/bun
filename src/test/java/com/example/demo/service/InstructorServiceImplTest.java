@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -107,16 +108,17 @@ class InstructorServiceImplTest {
     );
     }
 
-//    @Test
-//    public void assignCourse(){
-//        instructorService.assignCourse(1,13);
-//        instructorService.assignCourse(2,14);
-//        instructorService.assignCourse(3,15);
-//
-//        Assertions.assertEquals(1,instructorService.getCourses(1).size());
-//        Assertions.assertEquals(1,instructorService.getCourses(2).size());
-//        Assertions.assertEquals(1,instructorService.getCourses(3).size());
-//    }
+    @Test
+    @Transactional
+    public void assignCourse(){
+        instructorService.assignCourse(1,13);
+        instructorService.assignCourse(2,14);
+        instructorService.assignCourse(3,15);
+
+        Assertions.assertEquals(1,instructorService.getCourses(1).size());
+        Assertions.assertEquals(1,instructorService.getCourses(2).size());
+        Assertions.assertEquals(1,instructorService.getCourses(3).size());
+    }
 
     @Test
     public void update_SingleInstructor_InstructorIsModified(){

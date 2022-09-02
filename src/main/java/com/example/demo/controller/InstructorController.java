@@ -67,7 +67,7 @@ public class InstructorController {
     }
 
     @GetMapping("{id}/get-courses")
-    public List<Course>showCourses(@PathVariable long id){
+    public List<BasicCourseDTO>showCourses(@PathVariable long id){
         return  instructorService.getCourses(id);
     }
 }

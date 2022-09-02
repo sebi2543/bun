@@ -19,8 +19,10 @@ public class CourseTest {
         course.addGrade(9);
         course.addGrade(1);
         course.addGrade(6);
-        assertEquals(23,course.getSum());
-        assertEquals(4,course.getHeadcount());
-        assertEquals(5.75,course.getRating());
+        assertAll(
+                ()->assertEquals(23,course.getSum()),
+                ()->assertEquals(4,course.getHeadcount()),
+                ()->assertEquals(5.75,course.getRating())
+        );
     }
 }

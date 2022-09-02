@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.BasicInstructorDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
@@ -24,5 +25,5 @@ public interface InstructorService {
     List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor);
     BasicInstructorDTO showIdInstructor(int id);
     float calculateAverage(long id);
-    List<Course>getCourses(long id);
+    List<BasicCourseDTO> getCourses(long id);
 }

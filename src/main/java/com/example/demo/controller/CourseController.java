@@ -79,4 +79,10 @@ public class CourseController {
     public Float calculateAverage(@PathVariable  long id){
          return  courseService.calculateAverage(id);
     }
+
+    @PostMapping("/{id}/assign-instructor")
+    public void  assignInstructor(@PathVariable int id, @RequestBody long  instructorId){
+        courseService.assignInstructor(id,instructorId);
+    }
+
 }

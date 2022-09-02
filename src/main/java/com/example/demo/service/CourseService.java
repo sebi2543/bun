@@ -9,10 +9,6 @@ import java.util.Optional;
 @Service
 public interface CourseService {
 
-//    List<Course>findAll();
-//    Optional<Course>findById(long courseId);
-//    List<Course>findByTitle(BasicCourseDTO basicCourseDTO);
-//    List<Course>findByTitleLike(BasicCourseDTO basicCourseDTO);
     List<Course>getAll();
     Course getById(long courseId);
     List<Course>getByTitleLike(BasicCourseDTO basicCourseDTO);
@@ -28,5 +24,6 @@ public interface CourseService {
     BasicCourseDTO showIdCourse(long  id);
     float calculateAverage(long  id);
     void giveGrade(long id,long grade);
+    void assignInstructor(long courseId,long  instructorId);
 
     }

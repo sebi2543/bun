@@ -115,6 +115,13 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findAllOrderByRating();
     }
 
+    @Override
+    public void assignInstructor(long courseId,long  instructorId) {
+        Course course = courseRepository.findById(courseId).get();
+        Instructor instructor = instructorRepository.findById(instructorId).get();
+        course.setInstructor(instructor);
+        this.save(course);
+    }
 
 }
 
