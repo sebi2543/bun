@@ -29,7 +29,7 @@ public class InstructorController {
         instructorService.add(basicInstructorDTO);
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
        return instructorService.showSuitableInstructors(instructor);
     }

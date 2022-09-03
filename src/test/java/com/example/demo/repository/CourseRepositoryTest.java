@@ -74,5 +74,4 @@ public class CourseRepositoryTest {
         Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0, (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
    }
 
-
 }

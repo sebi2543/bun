@@ -25,24 +25,24 @@ public class CourseController {
     Logger logger= LoggerFactory.getLogger(CourseController.class);
 
     @GetMapping(value = {"/all"})
-    public List<BasicCourseDTO>showMainPage(){
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");;
+    public List<BasicCourseDTO> showMainPage(){
+//        logger.trace("A TRACE Message");
+//        logger.debug("A DEBUG Message");
+//        logger.info("An INFO Message");
+//        logger.warn("A WARN Message");
+//        logger.error("An ERROR Message");;
         return courseService.showMainPage();
     }
-
-
-    @PostMapping("/search")
-    public List<BasicCourseDTO>showSuitableCourses(@Valid @RequestBody BasicCourseDTO course)  {
-        return courseService.showSuitableCourses(course);
+//    @RequestBody BasicCourseDTO course
+    @GetMapping("/search")
+    public List<BasicCourseDTO>showSuitableCourses()  {
+        return courseService.showSuitableCourses(new BasicCourseDTO("java"));
+//        return courseService.showMainPage();
     }
 
     @PostMapping("/suggestion")
-    public List<BasicCourseDTO>showAutoSuggestion(@Valid @RequestBody BasicCourseDTO course){
-        return courseService.showAutoSuggestion(course);
+    public List<BasicCourseDTO>showAutoSuggestion(){
+        return courseService.showAutoSuggestion(new BasicCourseDTO("java"));
     }
 
     @GetMapping("/{id}")

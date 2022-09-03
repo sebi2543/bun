@@ -41,7 +41,7 @@ public class CourserServiceUnitTest {
 
      @Test
      public void delete_OnlyTitleCourse_ServiceIsCalled(){
-          Mockito.when(courseRepository.findById(any())).thenReturn((Optional.of(new Course("JAVA"))));
+          Mockito.when(courseRepository.findById(any(Long.class))).thenReturn((Optional.of(new Course("JAVA"))));
           courseService.delete(1);
           Mockito.verify(courseRepository).delete(any());
           Mockito.verify(courseRepository).findById(1L);
@@ -51,17 +51,17 @@ public class CourserServiceUnitTest {
      public void update_OnlyTitleCourse_ServiceIsCalled(){
           Mockito.when(courseRepository.findById(any())).thenReturn((Optional.of(new Course(1L))));
           courseService.update(1,new BasicCourseDTO("SPRING"));
-          Mockito.verify(courseRepository).save(any());
+          Mockito.verify(courseRepository).save(any(Course.class));
      }
      @Test
-     public void assignInstructor_CourseWithoutInstructor_RepositoriesAreCalled(){
-          Course course=new Course(1L);
+     public void assignInstructor_CourseWithoutInstructor_RepositoriesAreCalled() {
+          Course course = new Course(1L);
           Mockito.when(courseRepository.findById(any())).thenReturn((Optional.of(course)));
           Mockito.when(instructorRepository.findById(any())).thenReturn((Optional.of(new Instructor(1L))));
-          instructorService.assignCourse(1L,1L);
+          courseService.assignInstructor(1L, 1L);
           Mockito.verify(courseRepository).findById(1L);
-          Mockito.verify(courseRepository).save(course);
           Mockito.verify(instructorRepository).findById(1L);
+          Mockito.verify(courseRepository).save(course);
      }
      @Test
      public void add_OnlyTitleCourse_RepositoryIsCalled(){
