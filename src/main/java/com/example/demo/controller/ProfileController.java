@@ -20,7 +20,7 @@ public class ProfileController {
     final ProfileService profileService;
     final ProfileMapper instructorProfileMapper;
 
-    @GetMapping(value = {"/all"})
+    @GetMapping(value = "/all")
     public List<BasicProfileDTO>allProfile(){
         return (instructorProfileMapper.toBasic(profileService.getAll()));
 

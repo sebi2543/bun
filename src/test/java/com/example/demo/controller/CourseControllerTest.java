@@ -1,14 +1,14 @@
 package com.example.demo.controller;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
-import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.NestedServletException;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.in;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,17 +36,22 @@ class CourseControllerTest {
     @Autowired
     CourseService courseService;
     @Autowired
-    CourseMapper courseMapper;
-    @Autowired
     InstructorService instructorService;
     @Autowired
     CourseController courseController;
 
-    MockMvc mockMvc;
+    ObjectMapper mapper;
+    ObjectWriter ow;
+    String requestJson;
+
+     MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() throws JsonProcessingException {
         mockMvc = MockMvcBuilders.standaloneSetup(courseController).build();
+        mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ow = mapper.writer().withDefaultPrettyPrinter();
     }
 
     @BeforeEach
@@ -88,10 +90,7 @@ class CourseControllerTest {
 
     @Test
     public void showSuitableCourses_Exist_Found() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("java"));
+        requestJson = ow.writeValueAsString(new Course("java"));
         mockMvc.perform(get("/course/search").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].title", is("java")))
@@ -100,20 +99,14 @@ class CourseControllerTest {
 
     @Test
     public void showSuitableCourses_NotExist_NotFound() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course(".net"));
+        requestJson = ow.writeValueAsString(new Course(".net"));
         mockMvc.perform(get("/course/search").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     public void showAutoSuggestion_Exist_Found() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("java"));
+        requestJson = ow.writeValueAsString(new Course("java"));
         mockMvc.perform(get("/course/suggestion").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(jsonPath("$[0].title", is("java")))
                 .andExpect(jsonPath("$[1].title", is("javascript")))
@@ -123,10 +116,7 @@ class CourseControllerTest {
 
     @Test
     public void showAutoSuggestion_NotExist_NotFound() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("photoshop"));
+        requestJson = ow.writeValueAsString(new Course("photoshop"));
         mockMvc.perform(get("/course/suggestion").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -150,31 +140,22 @@ class CourseControllerTest {
 
     @Test
     public void addCourse_SingleCourse_Added() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("spring"));
+        requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(post("/course/add").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getAll().size(),10);
-        Assertions.assertEquals(courseService.getById(10).getTitle(),"spring");
+        Assertions.assertEquals(courseService.getById(11).getTitle(),"spring");
     }
     @Test
     public void updateCourse_SingleCourse_Modified() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("spring"));
+        requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(put("/course/{id}/update","5").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getById(5).getTitle(),"spring");
     }
     @Test
     public void deleteCourse_SingleCourse_Deleted() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("spring"));
+        requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(delete("/course/{id}/delete","1").contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getAll().size(),8);
@@ -182,10 +163,7 @@ class CourseControllerTest {
 
     @Test
     public void best_MixedRatings_Ordered() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(new Course("spring"));
+
         mockMvc.perform(get("/course/best").contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$[0].title", is("ruby")))
@@ -194,10 +172,7 @@ class CourseControllerTest {
 
     @Test
     public void giveGrade_LowValue_CorrectAverage() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(3);
+        requestJson = ow.writeValueAsString(3);
         mockMvc.perform(post("/course/{id}/give-grade",1).contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(1,courseService.getById(1).getHeadcount());
@@ -207,10 +182,7 @@ class CourseControllerTest {
 
     @Test
     public void giveGrade_HighValue_CorrectAverage() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(9);
+        requestJson = ow.writeValueAsString(9);
         mockMvc.perform(post("/course/{id}/give-grade",1).contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(1,courseService.getById(1).getHeadcount());
@@ -223,17 +195,13 @@ class CourseControllerTest {
         mockMvc.perform(get("/course/{id}/average",9).contentType(APPLICATION_JSON_UTF8));
         Assertions.assertEquals(6,courseService.calculateAverage(9));
     }
-//    public void  assignInstructor(@PathVariable int id, @RequestBody long  instructorId){
+
     @Test
     @Transactional
     public void assignInstructor_SingleInstructor_Added() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(10);
+        requestJson = ow.writeValueAsString(10);
         mockMvc.perform(post("/course/{id}/assign-instructor",3).contentType(APPLICATION_JSON_UTF8).content(requestJson))
                 .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getById(3).getInstructor().getId(),10);
-
     }
 }

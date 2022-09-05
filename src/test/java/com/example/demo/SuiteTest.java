@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.controller.CourseController;
 import com.example.demo.entity.CourseTest;
 import com.example.demo.entity.InstructorTest;
 import com.example.demo.repository.CourseRepositoryTest;
@@ -14,7 +15,8 @@ import org.junit.platform.suite.api.Suite;
 
 @SelectClasses({InstructorRepositoryTest.class, CourseRepositoryTest.class, InstructorTest.class,
                 CourseServiceImpl.class, InstructorServiceImplTest.class, ProfileImplTest.class,
-                CourseTest.class, CourseServiceImplTest.class
+                CourseTest.class, CourseServiceImplTest.class,
+                CourseController.class
 })
 class SuiteTest {
 

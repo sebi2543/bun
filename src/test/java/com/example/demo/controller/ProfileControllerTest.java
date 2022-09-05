@@ -46,13 +46,13 @@ class ProfileControllerTest {
     ProfileService profileService;
 
     @Autowired
-    InstructorController instructorController;
+    ProfileController profileController;
 
     MockMvc mockMvc;
 
     @BeforeEach
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(instructorController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(profileController).build();
     }
 
     @BeforeEach
