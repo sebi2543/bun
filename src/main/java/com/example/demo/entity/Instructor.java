@@ -43,6 +43,11 @@ public class Instructor {
         this.rating = rating;
     }
 
+    public Instructor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Instructor(Long id) {
         this.id = id;
     }

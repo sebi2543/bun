@@ -122,5 +122,7 @@ public class InstructorServiceImpl implements InstructorService {
     public List<Instructor> getAllOrderByRating() {
         return instructorRepository.findAllOrderByRating();
     }
+
+
 }
 

@@ -66,6 +66,7 @@ public class InstructorController {
     public List<BasicCourseDTO>showCourses(@PathVariable long id){
         return  instructorService.getCourses(id);
     }
+
 }
 
 

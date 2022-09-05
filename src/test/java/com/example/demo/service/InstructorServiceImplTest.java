@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -38,7 +39,7 @@ class InstructorServiceImplTest {
     CourseService courseService;
     @BeforeEach
     public void populateDB(){
-        Instructor instructor1=new Instructor("john","smith",5);
+        Instructor instructor1=new Instructor("john","smith");
         Instructor instructor2=new Instructor("david","kean",1);
         Instructor instructor3=new Instructor("david","kean",6);
         Instructor instructor4=new Instructor("hanna","walker",1);
@@ -52,8 +53,8 @@ class InstructorServiceImplTest {
         Profile profile2=new Profile("DAVIDlinkedin","DAVIDyoutube");
         Profile profile3=new Profile("Linkedin","youtube");
 
-        Course course1=new Course("html");
-        Course course2=new Course("css");
+        Course course1=new Course("html",10);
+        Course course2=new Course("css",1);
         Course course3=new Course("javascript");
 
         instructorRepository.save(instructor1);
@@ -73,6 +74,7 @@ class InstructorServiceImplTest {
         courseService.save(course1);
         courseService.save(course2);
         courseService.save(course3);
+
 
     }
 
@@ -141,5 +143,21 @@ class InstructorServiceImplTest {
         ()->assertEquals("david",instructors.get(0).getFirstName()),
         ()->assertEquals("kean",instructors.get(0).getLastName())
     );
+    }
+    @Test
+    @Transactional
+    public void calculateAverage(){
+        courseService.assignInstructor(13,1);
+        courseService.assignInstructor(14,1);
+        List<Course>courses=instructorService.getById(1).getCourses();
+        for (Course course:courses)
+            System.err.println(course.getRating());
+
+        System.err.println(courseService.getById(13).getInstructor());
+        System.err.println(courseService.getById(14).getInstructor());
+        System.err.println(instructorService.getById(1).getCourses().size());
+        float average=instructorService.calculateAverage(1);
+
+
     }
 }
