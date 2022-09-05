@@ -18,7 +18,6 @@ public interface InstructorService {
     void save(Instructor instructor);
     void delete(long instructorId);
     void assignProfile(long instructorId,long profileId);
-    void assignCourse(long instructorId,long courseId);
     void update(long instructorId,BasicInstructorDTO basicInstructorDTO);
     void add(BasicInstructorDTO basicInstructorDTO);
     List<BasicInstructorDTO> showAll();

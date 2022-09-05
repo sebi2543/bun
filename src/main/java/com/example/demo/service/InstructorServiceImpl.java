@@ -71,14 +71,7 @@ public class InstructorServiceImpl implements InstructorService {
         instructorRepository.save(instructor);
     }
 
-    @Override
-    @Transactional
-    public void assignCourse(long  instructorId, long  courseId) {
-        Instructor instructor=this.getById(instructorId);
-        Course course= courseRepository.findById(courseId).get();
-        instructor.addCourse(course);
-        this.instructorRepository.save(instructor);
-    }
+
 
     @Override
     public void update(long  instructorId, BasicInstructorDTO basicInstructorDTO) {

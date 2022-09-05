@@ -44,10 +44,6 @@ public class InstructorController {
        instructorService.delete(id);
     }
 
-    @PostMapping("/{id}/assign-course")
-     public void assignCourse(@PathVariable int id, @RequestBody long courseId){
-        instructorService.assignCourse( id,courseId);
-    }
     @PostMapping("/{id}/assign-profile")
     public void assignProfile(@PathVariable int id,@RequestBody long profileId){
         instructorService.assignProfile(id,profileId);

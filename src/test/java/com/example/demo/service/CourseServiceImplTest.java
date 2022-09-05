@@ -101,8 +101,8 @@ class CourseServiceImplTest {
         Instructor instructor2=new Instructor("JIM","WALKER",6);
         instructorService.save(instructor1);
         instructorService.save(instructor2);
-        instructorService.assignCourse(10,1);
-        instructorService.assignCourse(11,2);
+        courseService.assignInstructor(1,10);
+        courseService.assignInstructor(2,11);
         Assertions.assertEquals(10,courseService.getById(1).getInstructor().id);
         Assertions.assertEquals(11,courseService.getById(2).getInstructor().id);
     }

@@ -6,6 +6,7 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping(value = "course")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class CourseController {
 
     final CourseService courseService;

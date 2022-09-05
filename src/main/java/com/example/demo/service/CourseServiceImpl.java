@@ -7,12 +7,14 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
@@ -70,6 +72,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void add(BasicCourseDTO basicCourseDTO) {
         Course course=courseMapper.toEntity(basicCourseDTO);
+        log.error("there was{},and now are{}",courseRepository.findAll().size(),courseRepository.findAll().size()+1);
         this.courseRepository.save(course);
     }
 

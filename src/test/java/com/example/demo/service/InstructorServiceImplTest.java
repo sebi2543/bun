@@ -109,18 +109,6 @@ class InstructorServiceImplTest {
     }
 
     @Test
-    @Transactional
-    public void assignCourse(){
-        instructorService.assignCourse(1,13);
-        instructorService.assignCourse(2,14);
-        instructorService.assignCourse(3,15);
-
-        Assertions.assertEquals(1,instructorService.getCourses(1).size());
-        Assertions.assertEquals(1,instructorService.getCourses(2).size());
-        Assertions.assertEquals(1,instructorService.getCourses(3).size());
-    }
-
-    @Test
     public void update_SingleInstructor_InstructorIsModified(){
         instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
 
