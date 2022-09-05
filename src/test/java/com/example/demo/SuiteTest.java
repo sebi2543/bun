@@ -1,6 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.controller.CourseController;
+import com.example.demo.controller.CourseControllerTest;
+import com.example.demo.controller.ProfileController;
+import com.example.demo.controller.ProfileControllerTest;
 import com.example.demo.entity.CourseTest;
 import com.example.demo.entity.InstructorTest;
 import com.example.demo.repository.CourseRepositoryTest;
@@ -15,8 +18,9 @@ import org.junit.platform.suite.api.Suite;
 
 @SelectClasses({InstructorRepositoryTest.class, CourseRepositoryTest.class, InstructorTest.class,
                 CourseServiceImpl.class, InstructorServiceImplTest.class, ProfileImplTest.class,
-                CourseTest.class, CourseServiceImplTest.class,
-                CourseController.class
+                CourseTest.class, CourseServiceImplTest.class, CourseControllerTest.class, ProfileControllerTest.class
+
+
 })
 class SuiteTest {
 
