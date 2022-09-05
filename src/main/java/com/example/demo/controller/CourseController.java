@@ -35,16 +35,15 @@ public class CourseController {
 //        logger.error("An ERROR Message");;
         return courseService.showMainPage();
     }
-//    @RequestBody BasicCourseDTO course
+
     @GetMapping("/search")
-    public List<BasicCourseDTO>showSuitableCourses()  {
-        return courseService.showSuitableCourses(new BasicCourseDTO("java"));
-//        return courseService.showMainPage();
+    public List<BasicCourseDTO>showSuitableCourses(@RequestBody BasicCourseDTO basicCourseDTO)  {
+        return courseService.showSuitableCourses(basicCourseDTO);
     }
 
-    @PostMapping("/suggestion")
-    public List<BasicCourseDTO>showAutoSuggestion(){
-        return courseService.showAutoSuggestion(new BasicCourseDTO("java"));
+    @GetMapping("/suggestion")
+    public List<BasicCourseDTO>showAutoSuggestion(@RequestBody BasicCourseDTO basicCourseDTO){
+        return courseService.showAutoSuggestion(basicCourseDTO);
     }
 
     @GetMapping("/{id}")
@@ -78,7 +77,7 @@ public class CourseController {
     }
 
     @GetMapping("/{id}/average")
-    public Float calculateAverage(@PathVariable  long id){
+    public float calculateAverage(@PathVariable  long id){
          return  courseService.calculateAverage(id);
     }
 

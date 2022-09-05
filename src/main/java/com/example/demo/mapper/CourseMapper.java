@@ -16,7 +16,6 @@ public interface CourseMapper {
 
     Course toEntity(BasicCourseDTO basicCourseDTO);
 
-    @Mapping(target = "title", ignore = true)
     SortCourseDTO toSort(Course course);
 
     List<SortCourseDTO>toSort(List<Course> courses);

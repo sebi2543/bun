@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -74,7 +75,7 @@ class ProfileControllerTest {
     }
     @Test
     void allProfile() throws Exception {
-        mockMvc.perform(get("/profile/all"))
+        mockMvc.perform(get("/profile/all").contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().is2xxSuccessful());
     }
 }
