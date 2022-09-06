@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.BasicInstructorDTO;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
 import com.example.demo.mapper.CourseMapper;
@@ -13,7 +12,6 @@ import com.example.demo.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
@@ -71,8 +69,6 @@ public class InstructorServiceImpl implements InstructorService {
         instructorRepository.save(instructor);
     }
 
-
-
     @Override
     public void update(long  instructorId, BasicInstructorDTO basicInstructorDTO) {
         Instructor instructor =this.getById(instructorId);
@@ -122,7 +118,5 @@ public class InstructorServiceImpl implements InstructorService {
     public List<Instructor> getAllOrderByRating() {
         return instructorRepository.findAllOrderByRating();
     }
-
-
 }
 

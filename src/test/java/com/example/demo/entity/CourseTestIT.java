@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CourseTest {
+public class CourseTestIT {
 
     Course course;
 
@@ -20,9 +20,9 @@ public class CourseTest {
         course.addGrade(1);
         course.addGrade(6);
         assertAll(
-                ()->assertEquals(23,course.getSum()),
-                ()->assertEquals(4,course.getHeadcount()),
-                ()->assertEquals(5.75,course.getRating())
+            ()->assertEquals(23,course.getSum()),
+            ()->assertEquals(4,course.getHeadcount()),
+            ()->assertEquals(5.75,course.getRating())
         );
     }
 }

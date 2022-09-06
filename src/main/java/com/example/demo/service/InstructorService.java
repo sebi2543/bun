@@ -2,11 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.BasicInstructorDTO;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface InstructorService {

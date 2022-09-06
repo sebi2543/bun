@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @RequestMapping(value = "profile")
 @RestController
 @RequiredArgsConstructor
@@ -23,9 +22,11 @@ public class ProfileController {
     public List<BasicProfileDTO>showAllProfile(){
         return (instructorProfileMapper.toBasic(profileService.getAll()));
     }
+
     @GetMapping("/{id}")
     public BasicProfileDTO showIdProfile(@PathVariable int id){
         return (instructorProfileMapper.toBasic(profileService.getById(id)));}
+
     @PostMapping("/add")
     public void addProfile(@Valid @RequestBody BasicProfileDTO basicProfileDTO){
         profileService.add(basicProfileDTO);}

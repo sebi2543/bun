@@ -11,20 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class CourseServiceImplTest {
+class CourseServiceTestIT {
+
     @Autowired
     CourseRepository courseRepository;
-
     @Autowired
     CourseService courseService;
-
     @Autowired
     InstructorService instructorService;
 
@@ -74,6 +71,7 @@ class CourseServiceImplTest {
         Assertions.assertEquals(courseService.getAll().size(),6);
 
     }
+
     @Test
     public void add_MultipleCourses_CoursesAreAdded(){
         courseService.add(new BasicCourseDTO("photoshop"));
@@ -84,6 +82,7 @@ class CourseServiceImplTest {
         ()->Assertions.assertEquals("marketing",courseService.getByTitle(new BasicCourseDTO("marketing")).get(0).getTitle())
         );
     }
+
     @Test
     public void update_OnlyTitle_CoursesAreModified(){
         courseService.update(2,new BasicCourseDTO("modified1"));
@@ -125,6 +124,4 @@ class CourseServiceImplTest {
         courseService.giveGrade(1,1);
         Assertions.assertEquals(5.5,courseService.calculateAverage(1));
     }
-
-
 }

@@ -18,8 +18,8 @@ public class Course {
     @Column
     private String title;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn()
     private Instructor instructor;
 
     @Column

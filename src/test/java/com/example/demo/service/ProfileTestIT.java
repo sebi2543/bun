@@ -2,46 +2,18 @@ package com.example.demo.service;
 
 import com.example.demo.dto.BasicProfileDTO;
 import com.example.demo.entity.Profile;
-import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import com.example.demo.dto.BasicCourseDTO;
-import com.example.demo.entity.Course;
-import com.example.demo.mapper.CourseMapper;
-import com.example.demo.repository.CourseRepository;
-import com.example.demo.service.CourseService;
-import com.example.demo.service.InstructorService;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.hamcrest.core.Is.is;
 import java.security.InvalidParameterException;
-import java.util.Optional;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class ProfileImplTest {
+class ProfileTestIT {
 
     @Autowired
     ProfileService profileService;
@@ -92,6 +64,7 @@ class ProfileImplTest {
         Assertions.assertEquals("YOUTUBE1",profileService.getById(7).getYoutube());
 
     }
+
     @Test
     void add_MultipleProfiles_ProfilesAreAdded() {
         profileService.add(new BasicProfileDTO("newLinkedIn","newYoutube"));

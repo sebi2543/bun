@@ -8,7 +8,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class InstructorTest {
+class InstructorTestIT {
 
     Instructor instructor=new Instructor("JOHN","SMITH");
 
@@ -22,6 +22,7 @@ class InstructorTest {
         instructor.getCourses().add(course1);
         instructor.getCourses().add(course2);
     }
+
     @Test
     public void calculateRating(){
         float average=instructor.calculateRating();

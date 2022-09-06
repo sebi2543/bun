@@ -5,7 +5,6 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
 import com.example.demo.repository.InstructorRepository;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,30 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class InstructorServiceImplTest {
+class InstructorServiceTestIT {
 
     @Autowired
     InstructorRepository instructorRepository;
-
     @Autowired
     InstructorService instructorService;
-
     @Autowired
     ProfileService profileService;
-
     @Autowired
     CourseService courseService;
+
     @BeforeEach
     public void populateDB(){
         Instructor instructor1=new Instructor("john","smith");
@@ -75,17 +68,19 @@ class InstructorServiceImplTest {
         courseService.save(course2);
         courseService.save(course3);
 
-
+        courseService.assignInstructor(13,1);
+        courseService.assignInstructor(14,2);
+        courseService.assignInstructor(15,3);
     }
 
     @Test
     public void delete_MultipleInstructors_InstructorsAreDeleted(){
-        instructorService.delete(1);
+        instructorService.delete(9);
         instructorService.delete(7);
         instructorService.delete(5);
 
         Assertions.assertThrows(InvalidParameterException.class,()->{
-            instructorService.getById(1);
+            instructorService.getById(9);
         });
 
         Assertions.assertThrows(InvalidParameterException.class,()->{
@@ -113,7 +108,6 @@ class InstructorServiceImplTest {
     @Test
     public void update_SingleInstructor_InstructorIsModified(){
         instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
-
         Assertions.assertAll(
         ()->assertEquals("lewis",instructorService.getById(1).getFirstName()),
         ()->assertEquals("hamilton",instructorService.getById(1).getLastName())
@@ -144,20 +138,16 @@ class InstructorServiceImplTest {
         ()->assertEquals("kean",instructors.get(0).getLastName())
     );
     }
+
     @Test
     @Transactional
     public void calculateAverage(){
-        courseService.assignInstructor(13,1);
-        courseService.assignInstructor(14,1);
-        List<Course>courses=instructorService.getById(1).getCourses();
-        for (Course course:courses)
-            System.err.println(course.getRating());
+        List<Instructor>instructors=instructorService.getAll();
+        for (Instructor instructor:instructors)
+            System.err.println(instructor.getCourses().size());
 
-        System.err.println(courseService.getById(13).getInstructor());
-        System.err.println(courseService.getById(14).getInstructor());
-        System.err.println(instructorService.getById(1).getCourses().size());
-        float average=instructorService.calculateAverage(1);
-
-
+        List<Course>courses=courseService.getAll();
+        for(Course course:courses)
+            System.err.println(course.getInstructor().getId());
     }
 }

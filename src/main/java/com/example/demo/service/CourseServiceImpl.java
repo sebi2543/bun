@@ -57,6 +57,7 @@ public class CourseServiceImpl implements CourseService {
     public void save(Course course) {
         courseRepository.save(course);
     }
+
     @Override
     public void delete(long courseId) {
         courseRepository.delete(this.getById(courseId));
@@ -125,6 +126,5 @@ public class CourseServiceImpl implements CourseService {
         course.setInstructor(instructor);
         this.save(course);
     }
-
 }
 

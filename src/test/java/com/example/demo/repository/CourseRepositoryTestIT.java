@@ -10,7 +10,7 @@ import java.util.List;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class CourseRepositoryTest {
+public class CourseRepositoryTestIT {
 
     @Autowired
    CourseRepository courseRepository;
@@ -47,7 +47,7 @@ public class CourseRepositoryTest {
     }
     @Test
     public void findByTitle_Empty_EmptyList(){
-        List<Course> courses=courseRepository.findByTitle("c");
+        List<Course>courses=courseRepository.findByTitle("c");
         Assertions.assertEquals(0,courses.size());
     }
 
@@ -71,7 +71,8 @@ public class CourseRepositoryTest {
         List<Float>ratings=new ArrayList<>();
         for (Course course:courses)
             ratings.add(course.getRating());
-        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0, (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
+        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0,
+                                        (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
    }
 
 }

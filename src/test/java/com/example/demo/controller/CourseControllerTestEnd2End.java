@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class CourseControllerTest {
+class CourseControllerTestEnd2End {
 
     @Autowired
     CourseService courseService;
@@ -44,8 +43,7 @@ class CourseControllerTest {
     ObjectMapper mapper;
     ObjectWriter ow;
     String requestJson;
-
-     MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
@@ -93,39 +91,39 @@ class CourseControllerTest {
     public void showSuitableCourses_Exist_Found() throws Exception {
         requestJson = ow.writeValueAsString(new Course("java"));
         mockMvc.perform(get("/course/search").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].title", is("java")))
-                .andExpect(jsonPath("$[1].title", is("java")));
+               .andExpect(jsonPath("$", hasSize(2)))
+               .andExpect(jsonPath("$[0].title", is("java")))
+               .andExpect(jsonPath("$[1].title", is("java")));
     }
 
     @Test
     public void showSuitableCourses_NotExist_NotFound() throws Exception {
         requestJson = ow.writeValueAsString(new Course(".net"));
         mockMvc.perform(get("/course/search").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(jsonPath("$", hasSize(0)));
+               .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     public void showAutoSuggestion_Exist_Found() throws Exception {
         requestJson = ow.writeValueAsString(new Course("java"));
         mockMvc.perform(get("/course/suggestion").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(jsonPath("$[0].title", is("java")))
-                .andExpect(jsonPath("$[1].title", is("javascript")))
-                .andExpect(jsonPath("$[2].title", is("java")))
-                .andExpect(jsonPath("$", hasSize(3)));
+               .andExpect(jsonPath("$[0].title", is("java")))
+               .andExpect(jsonPath("$[1].title", is("javascript")))
+               .andExpect(jsonPath("$[2].title", is("java")))
+               .andExpect(jsonPath("$", hasSize(3)));
     }
 
     @Test
     public void showAutoSuggestion_NotExist_NotFound() throws Exception {
         requestJson = ow.writeValueAsString(new Course("photoshop"));
         mockMvc.perform(get("/course/suggestion").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(jsonPath("$", hasSize(0)));
+               .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     public void showIdCourse_Exist_Found() throws Exception {
         mockMvc.perform(get("/course/{id}", "6").contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.title", is("matlab")));
+               .andExpect(jsonPath("$.title", is("matlab")));
     }
 
     @Test
@@ -143,39 +141,42 @@ class CourseControllerTest {
     public void addCourse_SingleCourse_Added() throws Exception {
         requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(post("/course/add").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getAll().size(),10);
         Assertions.assertEquals(courseService.getById(11).getTitle(),"spring");
     }
+
     @Test
     public void updateCourse_SingleCourse_Modified() throws Exception {
         requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(put("/course/{id}/update","5").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getById(5).getTitle(),"spring");
     }
+
     @Test
     public void deleteCourse_SingleCourse_Deleted() throws Exception {
         requestJson = ow.writeValueAsString(new Course("spring"));
         mockMvc.perform(delete("/course/{id}/delete","1").contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getAll().size(),8);
     }
+
 
     @Test
     public void best_MixedRatings_Ordered() throws Exception {
 
         mockMvc.perform(get("/course/best").contentType(APPLICATION_JSON_UTF8))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$[0].title", is("ruby")))
-                .andExpect(jsonPath("$[8].title", is("python")));
+               .andExpect(status().is2xxSuccessful())
+               .andExpect(jsonPath("$[0].title", is("ruby")))
+               .andExpect(jsonPath("$[8].title", is("python")));
     }
 
     @Test
     public void giveGrade_LowValue_CorrectAverage() throws Exception {
         requestJson = ow.writeValueAsString(3);
         mockMvc.perform(post("/course/{id}/give-grade",1).contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(1,courseService.getById(1).getHeadcount());
         Assertions.assertEquals(3,courseService.getById(1).getSum());
         Assertions.assertEquals(3,courseService.getById(1).getRating());
@@ -185,7 +186,7 @@ class CourseControllerTest {
     public void giveGrade_HighValue_CorrectAverage() throws Exception {
         requestJson = ow.writeValueAsString(9);
         mockMvc.perform(post("/course/{id}/give-grade",1).contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(1,courseService.getById(1).getHeadcount());
         Assertions.assertEquals(9,courseService.getById(1).getSum());
         Assertions.assertEquals(9,courseService.getById(1).getRating());
@@ -202,7 +203,7 @@ class CourseControllerTest {
     public void assignInstructor_SingleInstructor_Added() throws Exception {
         requestJson = ow.writeValueAsString(10);
         mockMvc.perform(post("/course/{id}/assign-instructor",3).contentType(APPLICATION_JSON_UTF8).content(requestJson))
-                .andExpect(status().is2xxSuccessful());
+               .andExpect(status().is2xxSuccessful());
         Assertions.assertEquals(courseService.getById(3).getInstructor().getId(),10);
     }
 }

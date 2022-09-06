@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Service
 public interface ProfileService {
+
     List<Profile>getAll();
     Profile getById(long profileId);
     Profile save(Profile profile);

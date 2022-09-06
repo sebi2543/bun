@@ -52,10 +52,6 @@ public class Instructor {
         this.id = id;
     }
 
-    public void addCourse(Course course){
-        this.courses.add(course);
-    }
-
     public float calculateRating(){
         int sum=0;
         for (Course course:courses){

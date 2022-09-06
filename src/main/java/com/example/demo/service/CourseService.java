@@ -4,7 +4,6 @@ import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface CourseService {
@@ -25,5 +24,4 @@ public interface CourseService {
     float calculateAverage(long  id);
     void giveGrade(long id,long grade);
     void assignInstructor(long courseId,long  instructorId);
-
-    }
+}

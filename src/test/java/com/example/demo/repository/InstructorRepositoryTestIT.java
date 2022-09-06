@@ -13,7 +13,7 @@ import java.util.List;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class InstructorRepositoryTest {
+class InstructorRepositoryTestIT {
 
     @Autowired
     InstructorRepository instructorRepository;
@@ -65,6 +65,7 @@ class InstructorRepositoryTest {
         List<Float>ratings=new ArrayList<>();
         for (Instructor instructor:instructors)
             ratings.add(instructor.getRating());
-        Assertions.assertEquals(ratings,List.of((float)8,(float)6,(float)6,(float)5,(float)3,(float)2,(float)1,(float)1,(float)1));
+        Assertions.assertEquals(ratings,List.of((float)8,(float)6,(float)6,(float)5,(float)3,
+                                                (float)2,(float)1,(float)1,(float)1));
     }
 }

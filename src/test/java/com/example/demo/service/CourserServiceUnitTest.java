@@ -25,13 +25,11 @@ public class CourserServiceUnitTest {
      @Mock
      InstructorRepository instructorRepository;
      @Mock
-     InstructorService instructorService;
-
-     @Mock
      CourseMapper courseMapper;
 
      @InjectMocks
      CourseServiceImpl courseService;
+
      @Test
      public void save_OnlyTitleCourse_ServiceIsCalled(){
           Course course= new Course("JAVA");

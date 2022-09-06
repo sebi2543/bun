@@ -59,5 +59,4 @@ public class ProfileImpl implements ProfileService {
         Profile profile =instructorProfileMapper.toEntity(basicProfileDTO);
         this.save(profile);
     }
-
 }
