@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Course;
 import com.example.demo.mapper.CourseMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -17,32 +15,26 @@ import java.util.List;
 @RequestMapping(value = "course")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class CourseController {
 
     final CourseService courseService;
     final CourseMapper courseMapper;
     final InstructorService instructorService;
-    Logger logger= LoggerFactory.getLogger(CourseController.class);
 
     @GetMapping(value = {"/all"})
-    public List<BasicCourseDTO>showMainPage(){
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");;
+    public List<BasicCourseDTO> showMainPage(){
         return courseService.showMainPage();
     }
 
-
-    @PostMapping("/search")
-    public List<BasicCourseDTO>showSuitableCourses(@Valid @RequestBody BasicCourseDTO course)  {
-        return courseService.showSuitableCourses(course);
+    @GetMapping("/search")
+    public List<BasicCourseDTO>showSuitableCourses(@Valid @RequestBody BasicCourseDTO basicCourseDTO)  {
+        return courseService.showSuitableCourses(basicCourseDTO);
     }
 
-    @PostMapping("/suggestion")
-    public List<BasicCourseDTO>showAutoSuggestion(@Valid @RequestBody BasicCourseDTO course){
-        return courseService.showAutoSuggestion(course);
+    @GetMapping("/suggestion")
+    public List<BasicCourseDTO>showAutoSuggestion(@Valid @RequestBody BasicCourseDTO basicCourseDTO){
+        return courseService.showAutoSuggestion(basicCourseDTO);
     }
 
     @GetMapping("/{id}")
@@ -53,11 +45,6 @@ public class CourseController {
     @PostMapping("/add")
     public void addCourse(@Valid @RequestBody BasicCourseDTO basicCourseDTO){
         courseService.add(basicCourseDTO);
-    }
-
-    @PostMapping("/{id}/assign-instructor")
-    public void  assignInstructor(@PathVariable int id, @RequestBody long  instructorId){
-     courseService.assignInstructor(id,instructorId);
     }
 
     @PutMapping("/{id}/update")
@@ -81,7 +68,13 @@ public class CourseController {
     }
 
     @GetMapping("/{id}/average")
-    public Float calculateAverage(@PathVariable  long id){
+    public float calculateAverage(@PathVariable  long id){
          return  courseService.calculateAverage(id);
     }
+
+    @PostMapping("/{id}/assign-instructor")
+    public void  assignInstructor(@PathVariable int id, @RequestBody long  instructorId){
+        courseService.assignInstructor(id,instructorId);
+    }
+
 }

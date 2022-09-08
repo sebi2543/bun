@@ -13,7 +13,7 @@ import java.util.List;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class InstructorRepositoryTest {
+class InstructorRepositoryTestIT {
 
     @Autowired
     InstructorRepository instructorRepository;
@@ -41,7 +41,7 @@ class InstructorRepositoryTest {
         instructorRepository.save(instructor9);
     }
     @Test
-    void exist_findByFirstNameAndLastName() {
+    void findByFirstNameAndLastName_Exist_Found() {
        List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","smith");
        List<Instructor> instructors2 = instructorRepository.findByFirstNameAndLastName("david","kean");
 
@@ -54,17 +54,18 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void empty_findByFirstNameAndLastName() {
+    void findByFirstNameAndLastName_Missing_NotFound() {
         List<Instructor> instructors1 = instructorRepository.findByFirstNameAndLastName("john","johnson");
         Assertions.assertEquals(0,instructors1.size());
     }
 
     @Test
-    void findAllOrderByRating() {
+    void findAllOrderByRating_MixedValues_OrderedList() {
         List<Instructor>instructors=instructorRepository.findAllOrderByRating();
         List<Float>ratings=new ArrayList<>();
         for (Instructor instructor:instructors)
             ratings.add(instructor.getRating());
-        Assertions.assertEquals(ratings,List.of((float)8,(float)6,(float)6,(float)5,(float)3,(float)2,(float)1,(float)1,(float)1));
+        Assertions.assertEquals(ratings,List.of((float)8,(float)6,(float)6,(float)5,(float)3,
+                                                (float)2,(float)1,(float)1,(float)1));
     }
 }

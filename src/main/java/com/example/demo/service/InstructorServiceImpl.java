@@ -1,15 +1,17 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.BasicCourseDTO;
 import com.example.demo.dto.BasicInstructorDTO;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
+import com.example.demo.mapper.CourseMapper;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import com.example.demo.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Optional;
@@ -22,21 +24,21 @@ public class InstructorServiceImpl implements InstructorService {
     final CourseRepository courseRepository;
     final InstructorMapper instructorMapper;
     final InstructorRepository instructorRepository;
+    final CourseMapper courseMapper;
 
     public void save(Instructor instructor) {
         instructorRepository.save(instructor);
     }
 
-
-    public List<Instructor> findAll() {
+    private List<Instructor> findAll() {
         return instructorRepository.findAll();
     }
 
-    public Optional<Instructor> findById(long instructorId) {
+    private Optional<Instructor> findById(long instructorId) {
         return instructorRepository.findById(instructorId);
     }
 
-    public List<Instructor> findByFullName(BasicInstructorDTO instructor) {
+    private List<Instructor> findByFullName(BasicInstructorDTO instructor) {
         return instructorRepository.findByFirstNameAndLastName(instructor.getFirstName(), instructor.getLastName());
     }
 
@@ -68,25 +70,17 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public void assignCourse(long  instructorId, long  courseId) {
-        Instructor instructor=this.getById(instructorId);
-        Course course= courseRepository.findById(courseId).get();
-        instructor.addCourse(course);
-        this.save(instructor);
-    }
-
-    @Override
     public void update(long  instructorId, BasicInstructorDTO basicInstructorDTO) {
         Instructor instructor =this.getById(instructorId);
         instructor.setFirstName(basicInstructorDTO.getFirstName());
         instructor.setLastName(basicInstructorDTO.getLastName());
-        this.save(instructor);
+        this.instructorRepository.save(instructor);
     }
 
     @Override
     public void add(BasicInstructorDTO basicInstructorDTO) {
       Instructor instructor=instructorMapper.toEntity(basicInstructorDTO);
-      this.save(instructor);
+      this.instructorRepository.save(instructor);
     }
 
     @Override
@@ -114,16 +108,15 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public List<Course> getCourses(long id) {
+    @Transactional
+    public List<BasicCourseDTO> getCourses(long id) {
         Instructor instructor=this.getById(id);
-        return instructor.getCourses();
+        return courseMapper.toBasics(courseRepository.findAll());
     }
 
     @Override
     public List<Instructor> getAllOrderByRating() {
         return instructorRepository.findAllOrderByRating();
     }
-
-
 }
 

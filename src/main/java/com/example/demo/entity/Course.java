@@ -18,8 +18,8 @@ public class Course {
     @Column
     private String title;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn()
     private Instructor instructor;
 
     @Column
@@ -39,7 +39,6 @@ public class Course {
         this.title = title;
         this.rating = rating;
     }
-
 
     public Course(Long id) {
         this.id = id;

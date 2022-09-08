@@ -7,31 +7,33 @@ import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CourseServiceImpl implements CourseService {
 
     final CourseRepository courseRepository;
     final InstructorRepository instructorRepository;
     final CourseMapper courseMapper;
 
-    public List<Course> findAll() {
+    private List<Course> findAll() {
         return (courseRepository.findAll());
     }
 
-    public Optional<Course> findById(long courseId) {
+    private Optional<Course> findById(long courseId) {
         return (courseRepository.findById(courseId));
     }
 
-    public List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
+    private List<Course> findByTitleLike(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitleLike(basicCourseDTO.getTitle());
     }
 
-    public List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
+    private List<Course> findByTitle(BasicCourseDTO basicCourseDTO) {
         return courseRepository.findByTitle(basicCourseDTO.getTitle());
     }
 
@@ -55,6 +57,7 @@ public class CourseServiceImpl implements CourseService {
     public void save(Course course) {
         courseRepository.save(course);
     }
+
     @Override
     public void delete(long courseId) {
         courseRepository.delete(this.getById(courseId));
@@ -64,21 +67,14 @@ public class CourseServiceImpl implements CourseService {
     public void update(long courseId, BasicCourseDTO basicCourseDTO) {
         Course course=this.getById(courseId);
         course.setTitle(basicCourseDTO.getTitle());
-        this.save(course);
-    }
-
-    @Override
-    public void assignInstructor(long courseId,long  instructorId) {
-        Course course = courseRepository.findById(courseId).get();
-        Instructor instructor = instructorRepository.findById(instructorId).get();
-        course.setInstructor(instructor);
-        this.save(course);
+        this.courseRepository.save(course);
     }
 
     @Override
     public void add(BasicCourseDTO basicCourseDTO) {
         Course course=courseMapper.toEntity(basicCourseDTO);
-        this.save(course);
+        log.error("there was{},and now are{}",courseRepository.findAll().size(),courseRepository.findAll().size()+1);
+        this.courseRepository.save(course);
     }
 
     @Override
@@ -115,15 +111,20 @@ public class CourseServiceImpl implements CourseService {
     public void giveGrade(long  id,long grade) {
         Course course=this.getById(id);
         course.addGrade(grade);
-        this.save(course);
+        this.courseRepository.save(course);
     }
-
 
     @Override
     public List<Course> getAllOrderByRatingDesc() {
         return courseRepository.findAllOrderByRating();
     }
 
-
+    @Override
+    public void assignInstructor(long courseId,long  instructorId) {
+        Course course = courseRepository.findById(courseId).get();
+        Instructor instructor = instructorRepository.findById(instructorId).get();
+        course.setInstructor(instructor);
+        this.save(course);
+    }
 }
 

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.entity.Course;
 import com.example.demo.mapper.InstructorMapper;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.InstructorService;
@@ -29,8 +28,8 @@ public class InstructorController {
         instructorService.add(basicInstructorDTO);
     }
 
-    @PostMapping("/search")
-    public List<BasicInstructorDTO> showSuitableInstructors(BasicInstructorDTO instructor) {
+    @GetMapping("/search")
+    public List<BasicInstructorDTO> showSuitableInstructors(@Valid @RequestBody BasicInstructorDTO instructor) {
        return instructorService.showSuitableInstructors(instructor);
     }
 
@@ -44,30 +43,24 @@ public class InstructorController {
        instructorService.delete(id);
     }
 
-    @PostMapping("/{id}/assign-course")
-     public void assignCourse(@PathVariable int id, @RequestBody long courseId){
-        instructorService.assignCourse( id,courseId);
-    }
     @PostMapping("/{id}/assign-profile")
     public void assignProfile(@PathVariable int id,@RequestBody long profileId){
-        instructorService.assignProfile(id,profileId);
-    }
+        instructorService.assignProfile(id,profileId);}
+
     @PutMapping("/{id}/update")
     public void updateInstructor(@PathVariable int id,@Valid @RequestBody BasicInstructorDTO basicInstructorDTO){
-       instructorService.update(id,basicInstructorDTO);
-    }
+       instructorService.update(id,basicInstructorDTO);}
 
     @GetMapping("/best")
-    public List<SortInstructorDTO> bestInstructor(){
-        return (instructorMapper.toSort(instructorService.getAllOrderByRating()));
-    }
+    public List<SortInstructorDTO> bestInstructor() {return (instructorMapper.toSort(instructorService.getAllOrderByRating()));}
 
     @GetMapping("/{id}/average")
     public float calculateAverage(@PathVariable long id){
         return instructorService.calculateAverage(id);
     }
+
     @GetMapping("{id}/get-courses")
-    public List<Course>showCourses(@PathVariable long id){
+    public List<BasicCourseDTO>showCourses(@PathVariable long id){
         return  instructorService.getCourses(id);
     }
 }

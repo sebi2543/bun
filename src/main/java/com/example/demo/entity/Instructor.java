@@ -43,12 +43,13 @@ public class Instructor {
         this.rating = rating;
     }
 
-    public Instructor(Long id) {
-        this.id = id;
+    public Instructor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public void addCourse(Course course){
-        this.courses.add(course);
+    public Instructor(Long id) {
+        this.id = id;
     }
 
     public float calculateRating(){

@@ -1,20 +1,22 @@
 package com.example.demo;
 
-import com.example.demo.entity.CourseTest;
-import com.example.demo.entity.InstructorTest;
-import com.example.demo.repository.CourseRepositoryTest;
-import com.example.demo.repository.InstructorRepositoryTest;
+import com.example.demo.controller.*;
+import com.example.demo.entity.CourseTestIT;
+import com.example.demo.entity.InstructorTestIT;
+import com.example.demo.repository.CourseRepositoryTestIT;
+import com.example.demo.repository.InstructorRepositoryTestIT;
 import com.example.demo.service.CourseServiceImpl;
-import com.example.demo.service.CourseServiceImplTest;
-import com.example.demo.service.InstructorServiceImplTest;
-import com.example.demo.service.ProfileImplTest;
+import com.example.demo.service.CourseServiceTestIT;
+import com.example.demo.service.InstructorServiceTestIT;
+import com.example.demo.service.ProfileTestIT;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 @Suite
 
-@SelectClasses({InstructorRepositoryTest.class, CourseRepositoryTest.class, InstructorTest.class,
-                CourseServiceImpl.class, InstructorServiceImplTest.class, ProfileImplTest.class,
-                CourseTest.class, CourseServiceImplTest.class
+@SelectClasses({InstructorRepositoryTestIT.class, CourseRepositoryTestIT.class, InstructorTestIT.class,
+                CourseServiceImpl.class, InstructorServiceTestIT.class, ProfileTestIT.class,
+                CourseTestIT.class, CourseServiceTestIT.class, CourseControllerTestEnd2End.class, ProfileControllerTestEnd2End.class,
+                InstructorControllerTestEnd2End.class
 })
 class SuiteTest {
 

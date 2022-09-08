@@ -8,10 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import java.security.InvalidParameterException;
+
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class ProfileImplTest {
+class ProfileTestIT {
 
     @Autowired
     ProfileService profileService;
@@ -36,16 +38,23 @@ class ProfileImplTest {
     }
 
     @Test
-    void delete() {
+    void delete_MultipleProfiles_ProfilesAreDeleted() {
         profileService.delete(1);
         profileService.delete(7);
-        Assertions.assertEquals(5,profileService.getAll().size());
-        Assertions.assertFalse(profileService.findById(1).isPresent());
-        Assertions.assertFalse(profileService.findById(7).isPresent());
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
+
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            profileService.getById(1);
+        });
     }
 
     @Test
-    void update() {
+    void update_MultipleProfiles_ProfilesAreUpdated() {
         profileService.update(3,new BasicProfileDTO("LINKEDIN","YOUTUBE"));
         profileService.update(7,new BasicProfileDTO("LINKEDIN1","YOUTUBE1"));
         Assertions.assertEquals("LINKEDIN",profileService.getById(3).getLinkedin());
@@ -55,16 +64,17 @@ class ProfileImplTest {
         Assertions.assertEquals("YOUTUBE1",profileService.getById(7).getYoutube());
 
     }
+
     @Test
-    void add() {
+    void add_MultipleProfiles_ProfilesAreAdded() {
         profileService.add(new BasicProfileDTO("newLinkedIn","newYoutube"));
         profileService.add(new BasicProfileDTO("newLinkedIn1","newYoutube1"));
         Assertions.assertEquals(9,profileService.getAll().size());
-        Assertions.assertEquals("newLinkedIn",profileService.findById(8).get().getLinkedin());
-        Assertions.assertEquals("newYoutube",profileService.findById(8).get().getYoutube());
-
-        Assertions.assertEquals("newLinkedIn1",profileService.findById(9).get().getLinkedin());
-        Assertions.assertEquals("newYoutube1",profileService.findById(9).get().getYoutube());
-
+        Assertions.assertAll(
+        ()->Assertions.assertEquals("newLinkedIn",profileService.getById((8)).getLinkedin()),
+        ()->Assertions.assertEquals("newYoutube",profileService.getById(8).getYoutube()),
+        ()->Assertions.assertEquals("newLinkedIn1",profileService.getById(9).getLinkedin()),
+        ()->Assertions.assertEquals("newYoutube1",profileService.getById(9).getYoutube())
+        );
     }
 }

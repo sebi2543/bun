@@ -11,28 +11,28 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
+import java.security.InvalidParameterException;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public
-class InstructorServiceImplTest {
+class InstructorServiceTestIT {
 
     @Autowired
     InstructorRepository instructorRepository;
-
     @Autowired
     InstructorService instructorService;
-
     @Autowired
     ProfileService profileService;
-
     @Autowired
     CourseService courseService;
+
     @BeforeEach
     public void populateDB(){
-        Instructor instructor1=new Instructor("john","smith",5);
+        Instructor instructor1=new Instructor("john","smith");
         Instructor instructor2=new Instructor("david","kean",1);
         Instructor instructor3=new Instructor("david","kean",6);
         Instructor instructor4=new Instructor("hanna","walker",1);
@@ -46,8 +46,8 @@ class InstructorServiceImplTest {
         Profile profile2=new Profile("DAVIDlinkedin","DAVIDyoutube");
         Profile profile3=new Profile("Linkedin","youtube");
 
-        Course course1=new Course("html");
-        Course course2=new Course("css");
+        Course course1=new Course("html",10);
+        Course course2=new Course("css",1);
         Course course3=new Course("javascript");
 
         instructorRepository.save(instructor1);
@@ -68,66 +68,86 @@ class InstructorServiceImplTest {
         courseService.save(course2);
         courseService.save(course3);
 
+        courseService.assignInstructor(13,1);
+        courseService.assignInstructor(14,2);
+        courseService.assignInstructor(15,3);
     }
 
     @Test
-    public void delete(){
-        instructorService.delete(1);
+    public void delete_MultipleInstructors_InstructorsAreDeleted(){
+        instructorService.delete(9);
         instructorService.delete(7);
         instructorService.delete(5);
 
-        assertFalse(instructorService.findById(1).isPresent());
-        assertFalse(instructorService.findById(7).isPresent());
-        assertFalse(instructorService.findById(5).isPresent());
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(9);
+        });
+
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(7);
+        });
+        Assertions.assertThrows(InvalidParameterException.class,()->{
+            instructorService.getById(5);
+        });
+        assertEquals(6,instructorService.getAll().size());
     }
 
     @Test
-    public void assignProfile(){
+    public void assignProfile_MultipleProfiles_ProfilesAreAssign(){
         instructorService.assignProfile(1,10);
         instructorService.assignProfile(2,11);
         instructorService.assignProfile(3,12);
 
-        Assertions.assertEquals(10,instructorService.getById(1).getProfile().getId());
-        Assertions.assertEquals(11,instructorService.getById(2).getProfile().getId());
-        Assertions.assertEquals(12,instructorService.getById(3).getProfile().getId());
+        Assertions.assertAll(
+        ()-> Assertions.assertEquals(11,instructorService.getById(2).getProfile().getId()),
+        ()-> Assertions.assertEquals(12,instructorService.getById(3).getProfile().getId()),
+        ()-> Assertions.assertEquals(10,instructorService.getById(1).getProfile().getId())
+    );
     }
 
-//    @Test
-//    public void assignCourse(){
-//        instructorService.assignCourse(1,13);
-//        instructorService.assignCourse(2,14);
-//        instructorService.assignCourse(3,15);
-//
-//        Assertions.assertEquals(1,instructorService.getCourses(1).size());
-//        Assertions.assertEquals(1,instructorService.getCourses(2).size());
-//        Assertions.assertEquals(1,instructorService.getCourses(3).size());
-//    }
-
     @Test
-    public void update(){
+    public void update_SingleInstructor_InstructorIsModified(){
         instructorService.update(1,new BasicInstructorDTO("lewis","hamilton"));
-        assertEquals("lewis",instructorService.getById(1).getFirstName());
-        assertEquals("hamilton",instructorService.getById(1).getLastName());
+        Assertions.assertAll(
+        ()->assertEquals("lewis",instructorService.getById(1).getFirstName()),
+        ()->assertEquals("hamilton",instructorService.getById(1).getLastName())
+        );
     }
 
     @Test
-    public void add(){
+    public void add_MultipleInstructors_InstructorsAreAdded(){
         instructorService.add(new BasicInstructorDTO("michale","stan"));
         instructorService.add(new BasicInstructorDTO("michale","stan"));
-        assertEquals(11,instructorService.getAll().size());
-        assertEquals( 2,instructorService.findByFullName(new BasicInstructorDTO("michale","stan")).size());
+        Assertions.assertAll(
+        ()->assertEquals( 2,instructorService.getByFullName((new BasicInstructorDTO("michale","stan"))).size()),
+        ()->assertEquals(11,instructorService.getAll().size())
+    );
     }
 
     @Test
-    public void showAll(){
+    public void showAll_NonEmptyRepo_NonEmptyList(){
         assertEquals(9,instructorService.showAll().size());
     }
 
     @Test
-    public void showSuitableInstructors(){
+    public void showSuitableInstructors_DifferentInstructorsWithTheSameName_MultipleAppears(){
        List<BasicInstructorDTO>instructors = instructorService.showSuitableInstructors(new BasicInstructorDTO("david","kean"));
-        assertEquals(2,instructors.size());
-        assertEquals("david",instructors.get(0).getFirstName());
-        assertEquals("kean",instructors.get(0).getLastName());
+        Assertions.assertAll(
+        ()->assertEquals(2,instructors.size()),
+        ()->assertEquals("david",instructors.get(0).getFirstName()),
+        ()->assertEquals("kean",instructors.get(0).getLastName())
+    );
+    }
+
+    @Test
+    @Transactional
+    public void calculateAverage(){
+        List<Instructor>instructors=instructorService.getAll();
+        for (Instructor instructor:instructors)
+            System.err.println(instructor.getCourses().size());
+
+        List<Course>courses=courseService.getAll();
+        for(Course course:courses)
+            System.err.println(course.getInstructor().getId());
     }
 }

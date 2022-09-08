@@ -10,7 +10,7 @@ import java.util.List;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class CourseRepositoryTest {
+public class CourseRepositoryTestIT {
 
     @Autowired
    CourseRepository courseRepository;
@@ -39,20 +39,20 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void nonEmpty_findByTitle(){
+    public void findByTitle_nonEmpty_NonEmptyList(){
         List<Course> courses=courseRepository.findByTitle("java");
         Assertions.assertEquals(2,courses.size());
         Assertions.assertEquals(1,courses.get(0).getId());
         Assertions.assertEquals(9,courses.get(1).getId());
     }
     @Test
-    public void empty_findByTitle(){
-        List<Course> courses=courseRepository.findByTitle("c");
+    public void findByTitle_Empty_EmptyList(){
+        List<Course>courses=courseRepository.findByTitle("c");
         Assertions.assertEquals(0,courses.size());
     }
 
     @Test
-    public void nonEmpty_findByTitleLike(){
+    public void findByTitleLike_nonEmpty_NonEmptyList(){
         List<Course> courses=courseRepository.findByTitleLike("java");
         Assertions.assertEquals(3,courses.size());
         Assertions.assertEquals(1,courses.get(0).getId());
@@ -61,18 +61,18 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void empty_findByTitleLike(){
+    public void findByTitleLike_Empty_EmptyList(){
         List<Course> courses=courseRepository.findByTitleLike(".net");
         Assertions.assertEquals(0,courses.size());
     }
     @Test
-   public void findAllOrderByRating() {
+   public void findAllOrderByRating_MixedValues_OrderedList() {
         List<Course>courses=courseRepository.findAllOrderByRating();
         List<Float>ratings=new ArrayList<>();
         for (Course course:courses)
             ratings.add(course.getRating());
-        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0, (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
+        Assertions.assertEquals(ratings,List.of((float)9.0,(float) 9.0,(float) 8.0, (float)7.0,
+                                        (float)5.0,(float) 4.0, (float)3.0, (float)2.0, (float)1.0));
    }
-
 
 }
