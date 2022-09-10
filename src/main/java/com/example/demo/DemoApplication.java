@@ -2,6 +2,8 @@ package com.example.demo;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.entity.Profile;
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.CourseService;
 import com.example.demo.service.ProfileService;
 import com.example.demo.service.InstructorService;
@@ -16,6 +18,10 @@ public class DemoApplication {
 
     public static void main(String[] args)  {
         ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+        UserRepository userRepository=context.getBean(UserRepository.class);
+        User user=new User("ana","pass");
+        user.setActive(true);
+        userRepository.save(user);
 //        CourseService courseService =context.getBean(CourseService.class);
 //        InstructorService instructorService =context.getBean(InstructorService.class);
 //        ProfileService profileService =context.getBean(ProfileService.class);
