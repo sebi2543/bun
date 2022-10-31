@@ -23,10 +23,27 @@ public class ProjectSecurityConfig3 extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/**/all").permitAll()
-                .antMatchers("/**/update").authenticated()
-                .and().formLogin();
+//        http.authorizeRequests()
+//                .antMatchers(
+//                        "/actuator/**",
+//                        "/index",
+//                        "/index.html",
+//                        "/auth/perform-login",
+//                        "/api/auth/perform-login",
+//                        "/logout",
+//                        "/static/**",
+//                        "/**/*.{js,html,css,ico,png}",
+//                        // SWAGGER
+//                        "/swagger-resources/**",
+//                        "/swagger-ui.html",
+//                        "/v2/api-docs",
+//                        "/webjars/**"
+//                )
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and().formLogin();
+        http.authorizeRequests().anyRequest().permitAll();
     }
 
     @Bean
