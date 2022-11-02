@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
+import com.example.demo.dto.FrontendCourseDTO;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CourseService {
     void delete(long courseId);
     void update(long courseId,BasicCourseDTO basicCourseDTO);
     void add(BasicCourseDTO basicCourseDTO);
-    List<BasicCourseDTO>showMainPage();
+    List<FrontendCourseDTO>showMainPage();
     List<BasicCourseDTO>showSuitableCourses(BasicCourseDTO course);
     List<BasicCourseDTO>showAutoSuggestion(BasicCourseDTO course);
     BasicCourseDTO showIdCourse(long  id);

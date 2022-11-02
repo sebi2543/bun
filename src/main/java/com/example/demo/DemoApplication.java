@@ -25,23 +25,23 @@ public class DemoApplication {
         user.setActive(true);
         userRepository.save(user);
 //        CourseService courseService =context.getBean(CourseService.class);
-//        InstructorService instructorService =context.getBean(InstructorService.class);
+        InstructorService instructorService =context.getBean(InstructorService.class);
 //        ProfileService profileService =context.getBean(ProfileService.class);
 //
-//        Instructor inst1=new Instructor("JOHN","SMITH");
-//        Instructor inst2=new Instructor("HARRY","KEAN");
-//        Instructor inst3=new Instructor("JOE","HARD");
-//        Instructor inst4=new Instructor("JACK","MILLER");
+        Instructor inst1=new Instructor("JOHN","SMITH");
+        Instructor inst2=new Instructor("HARRY","KEAN");
+        Instructor inst3=new Instructor("JOE","HARD");
+        Instructor inst4=new Instructor("JACK","MILLER");
 //        inst1.setRating(9);
 //        inst2.setRating(1);
 //        inst3.setRating(7);
 //        inst4.setRating(4);
 //
 //
-//        instructorService.save(inst1);
-//        instructorService.save(inst2);
-//        instructorService.save(inst3);
-//        instructorService.save(inst4);
+        instructorService.save(inst1);
+        instructorService.save(inst2);
+        instructorService.save(inst3);
+        instructorService.save(inst4);
 //
         Course course1=new Course("JAVA");
         course1.setRating(10);
@@ -82,6 +82,19 @@ public class DemoApplication {
 //        profileService.save(profile3);
 //        profileService.save(profile4);
 //
+        course1.setInstructor(inst1);
+        course2.setInstructor(inst2);
+        course3.setInstructor(inst3);
+        course4.setInstructor(inst4);
+        course5.setInstructor(inst4);
+        course6.setInstructor(inst3);
+        course7.setInstructor(inst2);
+        course8.setInstructor(inst1);
+        course9.setInstructor(inst2);
+        course10.setInstructor(inst3);
+        course11.setInstructor(inst4);
+        course12.setInstructor(inst1);
+
         courseService.save(course1);
         courseService.save(course2);
         courseService.save(course3);
@@ -94,5 +107,7 @@ public class DemoApplication {
         courseService.save(course10);
         courseService.save(course11);
         courseService.save(course12);
+
+        System.out.println(course1.getInstructorName());
     }
 }

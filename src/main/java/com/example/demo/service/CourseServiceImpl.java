@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.BasicCourseDTO;
+import com.example.demo.dto.FrontendCourseDTO;
 import com.example.demo.entity.Course;
 import com.example.demo.entity.Instructor;
 import com.example.demo.mapper.CourseMapper;
@@ -78,9 +79,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<BasicCourseDTO> showMainPage() {
+    public List<FrontendCourseDTO> showMainPage() {
         List<Course>courses = this.getAll();
-        return courseMapper.toBasics(courses);
+        return courseMapper.toFrontends(courses);
     }
 
     @Override

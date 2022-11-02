@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "courses")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Course {
 
     @Id
@@ -30,6 +30,9 @@ public class Course {
 
     @Column
     private long sum;
+
+    @Column
+    private String instructorName;
 
     public Course(String title) {
         this.title = title;
@@ -60,5 +63,10 @@ public class Course {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 '}';
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+        this.instructorName=this.instructor.getFirstName()+" "+this.instructor.getLastName();
     }
 }

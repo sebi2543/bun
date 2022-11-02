@@ -23,7 +23,7 @@ public class CourseController {
     final InstructorService instructorService;
 
     @GetMapping(value = {"/all"})
-    public List<BasicCourseDTO> showMainPage(){
+    public List<FrontendCourseDTO> showMainPage(){
         return courseService.showMainPage();
     }
 
