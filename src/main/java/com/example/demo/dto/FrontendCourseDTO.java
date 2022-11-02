@@ -17,4 +17,6 @@ public class FrontendCourseDTO {
     @Size(min = 2,max = 10,message = "title must be between 2 and 10 letters")
     private String title;
     private String instructorName;
+    private int rating;
+    private String description;
 }

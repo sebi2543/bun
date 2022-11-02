@@ -34,6 +34,9 @@ public class Course {
     @Column
     private String instructorName;
 
+    @Column
+    private String description;
+
     public Course(String title) {
         this.title = title;
     }
@@ -41,6 +44,11 @@ public class Course {
     public Course(String title, int rating) {
         this.title = title;
         this.rating = rating;
+    }
+
+    public Course(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Course(Long id) {

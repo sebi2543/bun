@@ -43,31 +43,31 @@ public class DemoApplication {
         instructorService.save(inst3);
         instructorService.save(inst4);
 //
-        Course course1=new Course("JAVA");
+        Course course1=new Course("JAVA","oftogies ofg thir dediode on users' devices.");
         course1.setRating(10);
-        Course course2=new Course("PYTHON");
+        Course course2=new Course("PYTHON","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course2.setRating(1);
-        Course course3=new Course("RUBY");
+        Course course3=new Course("RUBY","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course3.setRating(6);
-        Course course4=new Course("GO");
+        Course course4=new Course("GO","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course4.setRating(8);
-        Course course5=new Course("photo");
+        Course course5=new Course("photo","Pyogramming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course5.setRating(9);
-        Course course6=new Course("camera");
+        Course course6=new Course("camera","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course6.setRating(7);
 
 
-        Course course7=new Course("ABAP");
+        Course course7=new Course("ABAP","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course7.setRating(1);
-        Course course8= new Course("HTML");
+        Course course8= new Course("HTML","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course8.setRating(4);
-        Course course9=new Course("CSS");
+        Course course9=new Course("CSS","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course9.setRating(4);
-        Course course10=new Course("JSS");
+        Course course10=new Course("JSS","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course10.setRating(6);
-        Course course11= new Course("TypeScript");
+        Course course11= new Course("TypeScript","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course11.setRating(7);
-        Course course12=new Course("pascal");
+        Course course12=new Course("pascal","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course12.setRating(9);
 
 
