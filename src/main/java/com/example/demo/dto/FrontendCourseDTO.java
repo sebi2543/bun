@@ -18,5 +18,6 @@ public class FrontendCourseDTO {
     private String title;
     private String instructorName;
     private int rating;
+
     private String description;
 }
