@@ -7,12 +7,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "instructors")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 
 public class Instructor {
 
@@ -28,23 +25,51 @@ public class Instructor {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn
-    private InstructorProfile instructorProfile;
+    private Profile profile;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Course> courses=new ArrayList<>();
+    @OneToMany(mappedBy = "instructor")
+    private List<Course>courses = new ArrayList<>();
 
     @Column
-    private int rating;
+    private float rating;
+
+    public Instructor(int rating) {
+        this.rating = rating;
+    }
+
+    public Instructor(String firstName, String lastName, int rating) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.rating = rating;
+    }
 
     public Instructor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.instructorProfile = instructorProfile;
     }
 
-    public Instructor(String firstName, String lastName, InstructorProfile instructorProfile) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Instructor(Long id) {
+        this.id = id;
     }
 
+    public float calculateRating(){
+        int sum=0;
+        for (Course course:courses){
+             sum+=course.getRating();
+        }
+        return (float)sum/courses.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", instructorProfile=" + profile +
+                ", courses=" + courses +
+                ", rating=" + rating +
+                '}';
+    }
 }
+

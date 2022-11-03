@@ -5,32 +5,76 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "courses")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-
-
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column
     private Long id;
 
     @Column
     private String title;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn()
     private Instructor instructor;
 
     @Column
-    private  int rating;
+    private  float rating;
+
+    @Column
+    private int headcount;
+
+    @Column
+    private long sum;
+
+    @Column
+    private String instructorName;
+
+    @Column
+    private String description;
 
     public Course(String title) {
         this.title = title;
+    }
+
+    public Course(String title, int rating) {
+        this.title = title;
+        this.rating = rating;
+    }
+
+    public Course(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Course(Long id) {
+        this.id = id;
+    }
+
+    public Course(int rating) {
+        this.rating = rating;
+    }
+
+    public void addGrade(long grade){
+        headcount++;
+        sum+=grade;
+        rating= (float)sum/headcount;
+    }
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+        this.instructorName=this.instructor.getFirstName()+" "+this.instructor.getLastName();
     }
 }

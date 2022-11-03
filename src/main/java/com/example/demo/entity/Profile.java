@@ -4,15 +4,11 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "instructorProfiles")
-@Getter
-@Setter
+@Table(name = "Profiles")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-
-public class InstructorProfile {
+public class Profile {
 
     @Id
     @Column
@@ -25,7 +21,7 @@ public class InstructorProfile {
     @Column
     private String youtube;
 
-    public InstructorProfile(String linkedin, String youtube) {
+    public Profile(String linkedin, String youtube) {
         this.linkedin = linkedin;
         this.youtube = youtube;
     }
