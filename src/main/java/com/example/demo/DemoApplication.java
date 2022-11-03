@@ -43,11 +43,11 @@ public class DemoApplication {
         instructorService.save(inst3);
         instructorService.save(inst4);
 //
-        Course course1=new Course("JAVA","oftogies ofg thir dediode on users' devices.");
+        Course course1=new Course("java","oftogies ofg thir dediode on users' devices.");
         course1.setRating(10);
-        Course course2=new Course("PYTHON","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
+        Course course2=new Course("javascript","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course2.setRating(1);
-        Course course3=new Course("RUBY","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
+        Course course3=new Course("javascriptbegginer","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course3.setRating(6);
         Course course4=new Course("GO","Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation");
         course4.setRating(8);
