@@ -49,4 +49,9 @@ public class Account {
     public  void updateUSer(@RequestBody String newUserName,@CurrentSecurityContext(expression="authentication?.name") String oldUsername){
         userService.updateUserName(newUserName,oldUsername);
     }
+
+    @GetMapping("/")
+    public String any(){
+        return "home";
+    }
 }
