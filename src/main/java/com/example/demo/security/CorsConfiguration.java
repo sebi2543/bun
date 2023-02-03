@@ -1,5 +1,4 @@
-package com.example.demo.config;
-
+package com.example.demo.security;
 import com.google.common.collect.ImmutableList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,14 +6,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class CorsConfiguration
-{
+public class CorsConfiguration {
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource()
     {
         final var configuration = new org.springframework.web.cors.CorsConfiguration().applyPermitDefaultValues();
 
-        configuration.setAllowedOrigins(ImmutableList.of("*"));
+        configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000/"));
 
         configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         //        configuration.setAllowedMethods(ImmutableList.of("*"));
@@ -27,10 +26,10 @@ public class CorsConfiguration
         // setAllowedHeaders is important! Without it, OPTIONS pre-flight request
         // will fail with 403 Invalid CORS request
         configuration.setAllowedHeaders(ImmutableList.of(
-            "AuthorizationToken",
-            "Cache-Control",
-            "Content-Type",
-            "Access-Control-Allow-Origin"
+                "AuthorizationToken",
+                "Cache-Control",
+                "Content-Type",
+                "Access-Control-Allow-Origin"
         ));
         //        configuration.setAllowedHeaders(ImmutableList.of("*"));
 
@@ -39,4 +38,5 @@ public class CorsConfiguration
 
         return source;
     }
+
 }
